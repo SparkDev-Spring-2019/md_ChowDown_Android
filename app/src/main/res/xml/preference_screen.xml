@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Notifications">
+    //uses a checkbox to persist a boolean (true when checked, false when unchecked)
+        <CheckBoxPreference
+            android:key="checkbox"
+            android:summary="Tap to check if on or off"
+            android:title="Checkbox Preference" />
+
+        //opens a dialog with an EditText view for typed input
+        <EditTextPreference
+            android:dialogTitle="Enter a text"
+            android:key="text"
+            android:summary="Click to show a text entry dialog"
+            android:title="EditText Preference" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="Display">
+    //opens dialog with a list of options
+
+    //uses a switch to persist a boolean (true when on, false when off)
+    <SwitchPreference
+        android:key="switch"
+        android:title="Night Mode"
+        android:summary="Click to switch on or off"
+        android:defaultValue="false"/>
+</PreferenceCategory>
+</PreferenceScreen>
