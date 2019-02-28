@@ -2,8 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="Notifications">
+    <PreferenceCategory android:title="Notifications">
     //uses a checkbox to persist a boolean (true when checked, false when unchecked)
         <CheckBoxPreference
             android:key="checkbox"
@@ -19,15 +18,14 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="Display">
+    <PreferenceCategory android:title="Display">
     //opens dialog with a list of options
 
     //uses a switch to persist a boolean (true when on, false when off)
-    <SwitchPreference
-        android:key="switch"
-        android:title="Night Mode"
-        android:summary="Click to switch on or off"
-        android:defaultValue="false"/>
-</PreferenceCategory>
+        <SwitchPreference
+            android:key="switch"
+            android:title="Night Mode"
+            android:summary="Click to switch on or off"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
 </PreferenceScreen>
