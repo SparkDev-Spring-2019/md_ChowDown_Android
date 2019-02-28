@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:background="@drawable/roundedwhite"
         android:drawableLeft="@drawable/ic_action_user"
-        android:hint=" Username"
+        android:hint=" Email"
         android:inputType="textPersonName"
         app:layout_constraintTop_toBottomOf="@id/guidelinelogin"
         app:layout_constraintLeft_toLeftOf="parent"

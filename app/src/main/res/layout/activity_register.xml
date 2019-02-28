@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundgradient"
+    tools:context=".registerscreen.RegisterActivity">
+
+    <EditText
+        android:id="@+id/fnamebox"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter first name..." />
+
+    <EditText
+        android:id="@+id/lnamebox"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter last name..."
+        app:layout_constraintLeft_toLeftOf="@+id/lastname"
+        app:layout_constraintTop_toBottomOf="@+id/lastname"/>
+
+    <EditText
+        android:id="@+id/emailbox"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter email here..."
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintLeft_toLeftOf="@id/email"/>
+
+    <EditText
+        android:id="@+id/passwordbox"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter password here..."
+        app:layout_constraintLeft_toLeftOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <TextView
+
+        android:id="@+id/lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Last Name:"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/fnamebox"
+        app:layout_constraintTop_toBottomOf="@id/fnamebox"/>
+
+    <TextView
+
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Email:"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/lnamebox"/>
+
+    <TextView
+
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Password:"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordbox"
+        app:layout_constraintLeft_toLeftOf="@+id/emailbox"
+        app:layout_constraintTop_toBottomOf="@+id/emailbox" />
+
+</android.support.constraint.ConstraintLayout>
