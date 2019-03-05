@@ -16,13 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/row_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="This is a 'sans' demo!"
             android:typeface="sans" />
 
         <EditText
-            android:id="@+id/et_simple"
+            android:id="@+id/row_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
