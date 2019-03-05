@@ -11,10 +11,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sparkdev.foodapp.models.User;
 import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCompletionListener;
+import com.sparkdev.foodapp.models.firebase.loginInterface.GetUserCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
 import java.util.HashMap;
@@ -25,7 +27,7 @@ public class FirebaseAPI {
   private static FirebaseAPI sFirebaseAPI;
 
   // constant to use as a tag for console log messages
-  private static final String TAG = "FIREBASE_API";
+  private static final String TAG = "FIREBASE";
 
   private FirebaseFirestore mFirestore;
 
@@ -65,14 +67,35 @@ public class FirebaseAPI {
           // set an local instance of the current user by using their Firebase ID
              User.setCurrentUID(userId);
 
+             // create the User object instance, refer to method getUserWithUID()
+          getUserWithUID(userId, new GetUserCompletionListener() {
+            @Override
+            public void onSuccess(User user) {
+
+              User.setCurrentUser(user);
+
+            }
+
+            @Override
+            public void onFailure() {
+
+              // do nothing
+
+            }
+          });
+
+
              // create a user document in the Users collection in Firestore
             CollectionReference usersRef = mFirestore.collection("Users");
             DocumentReference usersDocRef = usersRef.document(userId);
 
+            // create a HashMap data structure that will later be turned into a JSON object using
+          // Firebase's set() method
             HashMap<String, Object> user = new HashMap<>();
             user.put("email", email);
-            user.put("firstName", "");
-            user.put("lastName", "");
+            user.put("firstName", "");  // create a first name field, user can change it later
+            user.put("lastName", "");   // create a last name field, user can change it later
+            user.put("address", "");    // create an address field, user can change it later
 
             // create the document with the above HashMap
             usersDocRef.set(user);
@@ -91,16 +114,40 @@ public class FirebaseAPI {
     
   }
 
-  public void getMenu(final GetMenuCompletionListener listener) {
+  public void getUserWithUID(String userID, final GetUserCompletionListener userCompletionListener) {
+    // have a reference to the Users collection
+    CollectionReference userRef = mFirestore.collection("Users");
+    final DocumentReference userDoc = userRef.document(userID);
 
-    CollectionReference menuRef = mFirestore.collection("Menu");
-
-    menuRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    userDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
-      public void onComplete(@NonNull Task<QuerySnapshot> task) {
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
         if (task.isSuccessful()) {
 
+          // get User from the Firebase Firestore base and convert it into a User java object
+          User userObj = task.getResult().toObject(User.class);
+
+          // if registration was successful, implement listener in registerUser() to do what it
+          // needs to do when a user is NOT registered successfully
+
+          userCompletionListener.onSuccess(userObj);
+
+          // set the current User object instance
+          User.setCurrentUser(userObj);
+
+          // Log the current success
+          Log.d(TAG, "Current user is: " + userObj.getEmail());
+
         } else {
+
+          // if registration was unsuccessful, implement listener in registerUser() to do what it
+          // needs to do when a user is NOT registered successfully
+
+          userCompletionListener.onFailure();
+
+          // Log the error message
+          Log.d(TAG, task.getException().getMessage());
 
         }
       }
