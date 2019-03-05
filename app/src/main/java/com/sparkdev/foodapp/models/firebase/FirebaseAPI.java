@@ -10,10 +10,14 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sparkdev.foodapp.models.User;
 import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
+
+import java.util.HashMap;
 
 public class FirebaseAPI {
 
@@ -28,7 +32,7 @@ public class FirebaseAPI {
   private FirebaseAPI(Context context) {
     // initialize the default FirebaseApp instance
     FirebaseApp.initializeApp(context);
-    Log.d(TAG, "Firebase Database has been initialized");
+    Log.d(TAG, "Firebase Firestore has been initialized");
     // get the default FirebaseDatabase instance
     mFirestore = FirebaseFirestore.getInstance();
   }
@@ -58,10 +62,29 @@ public class FirebaseAPI {
           // Firestore database so get the created user's random generated ID
           String userId = task.getResult().getUser().getUid();
 
+          // set an local instance of the current user by using their Firebase ID
+             User.setCurrentUID(userId);
 
+             // create a user document in the Users collection in Firestore
+            CollectionReference usersRef = mFirestore.collection("Users");
+            DocumentReference usersDocRef = usersRef.document(userId);
+
+            HashMap<String, Object> user = new HashMap<>();
+            user.put("email", email);
+            user.put("firstName", "");
+            user.put("lastName", "");
+
+            // create the document with the above HashMap
+            usersDocRef.set(user);
+
+            // registration was successful, implement listener in activity to do what it needs to
+            // do when a user is registered successfully
+            listener.onSuccess();
 
         } else {
-
+            // if registration was unsuccessful, implement listener in activity to do what it needs
+            // to do when a user is NOT registered successfully
+            listener.onFailure();
         }
       }
     });
