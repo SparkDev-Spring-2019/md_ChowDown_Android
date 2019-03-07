@@ -1,9 +1,11 @@
 package com.sparkdev.foodapp.models;
 
 import java.util.ArrayList;
+import com.google.firebase.firestore.PropertyName;
 
 public class User {
 
+    @PropertyName("fName")
     private String firstName;
     private String lastName;
     private String email;
@@ -14,6 +16,10 @@ public class User {
     private String zipCode;
     private String fullAddress;
     private ArrayList<String> preferences;
+    private String profileImageUrl;
+
+    public static User currentUser;
+    public static String currentUID;
 
     public User(String email, String password, String address, String city, String state, String zipCode) {
         this.email = email;
@@ -67,5 +73,13 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        User.currentUser = currentUser;
+    }
+
+    public static void setCurrentUID(String currentUID) {
+        User.currentUID = currentUID;
     }
 }
