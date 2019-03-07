@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.text.TextUtils;
 import android.widget.Toast;
+import com.sparkdev.foodapp.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -16,4 +17,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
+
+
 }
