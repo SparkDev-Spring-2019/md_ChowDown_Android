@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Tab1", "Tab2", "Tab3" };
+    final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[] { "All", "Appetizers", "Breakfast", "Lunch" };
     private Context context;
 
     public MainscreenFragmentPagerAdapter(FragmentManager fm, Context context) {
