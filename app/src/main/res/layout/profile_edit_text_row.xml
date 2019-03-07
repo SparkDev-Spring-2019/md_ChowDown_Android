@@ -16,11 +16,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/row_text"
+            android:id="@+id/row_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is a 'sans' demo!"
-            android:typeface="sans" />
+            android:text="Text Field"
+            android:gravity="start|center_vertical"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
 
         <EditText
             android:id="@+id/row_edit"

@@ -18,7 +18,7 @@ public class ProfileSettings extends AppCompatActivity {
 
     private RecyclerView profileRecyclerView;
     private ProfileSettingsAdapter profileAdapter;
-    private ArrayList<String> text_rows = new ArrayList<>();
+    private ArrayList<String> row_titles = new ArrayList<>();
 
     // The ContactListActivity enters the created state when the activity is created for the first
     // time (i.e. when the user opens the application).
@@ -27,15 +27,17 @@ public class ProfileSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-        // Add contacts to the contacts ArrayList
-        for(int i = 0; i < 30; i++){
-            text_rows.add("Contact " + i);
-        }
+        // Add row titles to the row_titles ArrayList
+        row_titles.add("First Name");
+        row_titles.add("Last Name");
+        row_titles.add("Username");
+        row_titles.add("Email");
+        row_titles.add("Password");
 
         // Get access to the RecyclerView
         profileRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        profileAdapter = new ProfileSettingsAdapter(this,text_rows);
+        profileAdapter = new ProfileSettingsAdapter(this,row_titles);
         // Connect the adapter to the RecyclerView
         profileRecyclerView.setAdapter(profileAdapter);
         // Define the RecyclerView's default layout manager
