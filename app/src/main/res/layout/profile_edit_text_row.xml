@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".profileSettings.ProfileSettings">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/row_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="667dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:text="Row Title"
+        android:gravity="left"
+        android:textSize="20sp"
+        android:layout_margin="2dp"/>
 
-        <TextView
-            android:id="@+id/row_title"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Text Field"
-            android:gravity="start|center_vertical"
-            android:textSize="20sp"
-            android:layout_margin="10dp"/>
+            android:hint="User Input"
+            android:inputType="text"/>
 
-        <EditText
-            android:id="@+id/row_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -38,7 +38,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
             // Initialize the view holder's text view from the XML resources (activity_contact_list.xml)
             // Be sure to cast it to the View type that you need it to be (i.e TextView)
             nameTextView = (TextView) itemView.findViewById(R.id.row_title);
-            editTextView = (EditText) itemView.findViewById(R.id.row_edit);
+            editTextView = (EditText) itemView.findViewById(R.id.text_input);
             // Set up the adapter
             this.rowAdapter = adapter;
         }
@@ -59,8 +59,8 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     // The onBindViewHolder() connects your data to your view holder
     @Override
     public void onBindViewHolder(@NonNull ProfileViewHolder contactViewHolder, int i) {
-        String currentContact = textInputList.get(i);     // Hold the current text field
-        contactViewHolder.nameTextView.setText(currentContact); // Set text field at i position to TextView
+        String currentInput = textInputList.get(i);     // Hold the current text field
+        contactViewHolder.nameTextView.setText(currentInput); // Set text field at i position to TextView
     }
 
     @Override
