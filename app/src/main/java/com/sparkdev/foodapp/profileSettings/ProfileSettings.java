@@ -14,7 +14,6 @@ import com.sparkdev.foodapp.R;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-
 /*
 This class represents the ProfileSettingsActivity which will display all the row titles from an ArrayList.
  */
@@ -109,13 +108,5 @@ public class ProfileSettings extends AppCompatActivity {
             textInputPassword.setError(null);
             return true;
         }
-    }
-
-    public void confirmInput(View v) {
-        if(!validateEmail() | !validateUsername() | !validatePassword()) {
-            return;
-        }
-
-        Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
     }
 }

@@ -64,11 +64,7 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Confirm"
-                android:onClick="confirmInput"/>
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
