@@ -3,7 +3,7 @@ package com.sparkdev.foodapp.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FoodMenuItem {
+public class SingleMenuItem {
 
   private String foodId;
   private String foodName;

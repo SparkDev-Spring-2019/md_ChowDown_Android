@@ -1,18 +1,17 @@
 package com.sparkdev.foodapp.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MenuItems {
 
-  private ArrayList<FoodMenuItem> mFoodMenuItems;
+  private ArrayList<SingleMenuItem> mFoodMenuItems;
 
-  public MenuItems(ArrayList<FoodMenuItem> foodMenuItems) {
+  public MenuItems(ArrayList<SingleMenuItem> foodMenuItems) {
     mFoodMenuItems = foodMenuItems;
   }
 
-  public ArrayList<FoodMenuItem> getFoodMenuItems() {
+  public ArrayList<SingleMenuItem> getFoodMenuItems() {
     return mFoodMenuItems;
   }
 
@@ -20,7 +19,7 @@ public class MenuItems {
 
     ArrayList<Map<String, Object>> menuItemMap = new ArrayList<>();
 
-    for (FoodMenuItem foodMenuItem: mFoodMenuItems) {
+    for (SingleMenuItem foodMenuItem: mFoodMenuItems) {
       menuItemMap.add(foodMenuItem.convertToMap());
     }
 

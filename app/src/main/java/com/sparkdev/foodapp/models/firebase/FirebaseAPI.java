@@ -15,7 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sparkdev.foodapp.models.FoodMenuItem;
+import com.sparkdev.foodapp.models.SingleMenuItem;
 import com.sparkdev.foodapp.models.MenuCategory;
 import com.sparkdev.foodapp.models.MenuItems;
 import com.sparkdev.foodapp.models.Review;
@@ -283,7 +283,7 @@ public class FirebaseAPI {
   }
 
   // TODO
-  public void submitReview(FoodMenuItem foodItem, final Review rating) {
+  public void submitReview(SingleMenuItem foodItem, final Review rating) {
 
   }
 }
