@@ -13,13 +13,22 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sparkdev.foodapp.models.FoodMenuItem;
+import com.sparkdev.foodapp.models.MenuCategory;
+import com.sparkdev.foodapp.models.MenuItems;
+import com.sparkdev.foodapp.models.Review;
 import com.sparkdev.foodapp.models.User;
-import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCompletionListener;
+import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetCategoryMenuItemsCompletionListener;
+import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesCompletionListener;
 import com.sparkdev.foodapp.models.firebase.loginInterface.GetUserCompletionListener;
+import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FirebaseAPI {
 
@@ -37,6 +46,10 @@ public class FirebaseAPI {
     Log.d(TAG, "Firebase Firestore has been initialized");
     // get the default FirebaseDatabase instance
     mFirestore = FirebaseFirestore.getInstance();
+    FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+        .setTimestampsInSnapshotsEnabled(true)
+        .build();
+    mFirestore.setFirestoreSettings(settings);
   }
 
   public static FirebaseAPI getInstance(Context context) {
@@ -47,6 +60,41 @@ public class FirebaseAPI {
       sFirebaseAPI = new FirebaseAPI(context);
       return sFirebaseAPI;
     }
+  }
+
+  public void loginUser(String email, String password, final LoginCompletionListener listener) {
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+
+    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+      @Override
+      public void onComplete(@NonNull Task<AuthResult> task) {
+
+        if (task.isSuccessful()) {
+          AuthResult login = task.getResult();
+          String uid = login.getUser().getUid();
+
+          User.setCurrentUID(uid);
+
+          getUserWithUID(uid, new GetUserCompletionListener() {
+            @Override
+            public void onSuccess(User user) {
+              listener.onSuccess();
+            }
+
+            @Override
+            public void onFailure() {
+              listener.onFailure();
+            }
+          });
+
+        } else {
+          listener.onFailure();
+        }
+
+      }
+    });
+
   }
 
   public void registerUser(final String email, String password, final SignUpCompletionListener listener) {
@@ -152,5 +200,90 @@ public class FirebaseAPI {
         }
       }
     });
+  }
+
+  public void getMenuCategories(final GetMenuCategoriesCompletionListener listener) {
+
+    CollectionReference categoriesRef = mFirestore.collection("Categories");
+
+    categoriesRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+        if (task.isSuccessful()) {
+
+          List<MenuCategory> categories = new ArrayList<>();
+
+          List<DocumentSnapshot> docs = task.getResult().getDocuments();
+
+          for (DocumentSnapshot doc: docs) {
+
+            MenuCategory menuCategory = doc.toObject(MenuCategory.class);
+            categories.add(menuCategory);
+          }
+
+          listener.onSuccess(categories);
+
+        } else {
+
+          listener.onFailure();
+
+        }
+
+      }
+    });
+
+  }
+
+  // TODO
+  public void getAllFoodMenuItems(final GetAllMenuItemsCompletionListener listener) {
+
+    CollectionReference foodsRef = mFirestore.collection("Foods");
+
+    foodsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+        if (task.isSuccessful()) {
+
+        } else {
+
+        }
+
+      }
+    });
+
+  }
+
+  public void getMenuItems(MenuCategory menuCategory,
+                           final GetCategoryMenuItemsCompletionListener listener){
+
+    DocumentReference foodRef =
+        mFirestore.collection("Foods").document(menuCategory.getCategoryId());
+    foodRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+        if (task.isSuccessful()) {
+
+          DocumentSnapshot doc = task.getResult();
+
+          MenuItems menuItems = doc.toObject(MenuItems.class);
+
+          listener.onSuccess(menuItems.getFoodMenuItems());
+
+        } else {
+
+          listener.onFailure();
+
+        }
+
+      }
+    });
+  }
+
+  // TODO
+  public void submitReview(FoodMenuItem foodItem, final Review rating) {
+
   }
 }
