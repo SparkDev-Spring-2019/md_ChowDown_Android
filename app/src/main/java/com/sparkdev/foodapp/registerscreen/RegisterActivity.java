@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.registerscreen;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.loginscreen.Login;
 import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess() {
                                         Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RegisterActivity.this, Login.class));
                                     }
 
                                     @Override
