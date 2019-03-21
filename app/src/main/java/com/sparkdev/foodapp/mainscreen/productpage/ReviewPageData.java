@@ -11,8 +11,8 @@ public class ReviewPageData {
     };
 
     public static int[] picturePath = new int[] {
-            R.drawable.moonRising,
-            R.drawable.mountains_on_mars,
-            R.drawable.oragami_s
+            R.drawable.picture_1,
+            R.drawable.picture_2,
+            R.drawable.picture_3
     };
 }

@@ -1,8 +1,7 @@
 package com.sparkdev.foodapp.mainscreen.productpage;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,10 +17,10 @@ public class ProductPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_reviews);
 
-        ListFragment fragment = new ListFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        ReviewFragment fragment = new ReviewFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentReviews, fragment);
+        fragmentTransaction.replace(R.id.fragmentReviews, fragment);
         fragmentTransaction.commit();
 
     }
