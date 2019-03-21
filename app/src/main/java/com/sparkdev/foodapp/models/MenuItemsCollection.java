@@ -3,11 +3,13 @@ package com.sparkdev.foodapp.models;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MenuItems {
+public class MenuItemsCollection {
 
   private ArrayList<SingleMenuItem> mFoodMenuItems;
 
-  public MenuItems(ArrayList<SingleMenuItem> foodMenuItems) {
+  public MenuItemsCollection() {}
+
+  public MenuItemsCollection(ArrayList<SingleMenuItem> foodMenuItems) {
     mFoodMenuItems = foodMenuItems;
   }
 

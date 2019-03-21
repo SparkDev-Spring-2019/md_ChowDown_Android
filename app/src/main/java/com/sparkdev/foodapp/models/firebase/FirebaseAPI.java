@@ -15,9 +15,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sparkdev.foodapp.models.MenuItemsCollection;
+import com.sparkdev.foodapp.models.Order;
+import com.sparkdev.foodapp.models.ReviewsCollection;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 import com.sparkdev.foodapp.models.MenuCategory;
-import com.sparkdev.foodapp.models.MenuItems;
 import com.sparkdev.foodapp.models.Review;
 import com.sparkdev.foodapp.models.User;
 import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetCategoryMenuItemsCompletionListener;
@@ -235,32 +237,12 @@ public class FirebaseAPI {
 
   }
 
-  // TODO
-  public void getAllFoodMenuItems(final GetAllMenuItemsCompletionListener listener) {
-
-    CollectionReference foodsRef = mFirestore.collection("Foods");
-
-    foodsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-      @Override
-      public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-        if (task.isSuccessful()) {
-
-        } else {
-
-        }
-
-      }
-    });
-
-  }
-
   public void getMenuItems(MenuCategory menuCategory,
                            final GetCategoryMenuItemsCompletionListener listener){
 
-    DocumentReference foodRef =
-        mFirestore.collection("Foods").document(menuCategory.getCategoryId());
-    foodRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    DocumentReference menuItemsRef =
+        mFirestore.collection("MenuItems").document(menuCategory.getMenuItemsId());
+    menuItemsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
@@ -268,9 +250,9 @@ public class FirebaseAPI {
 
           DocumentSnapshot doc = task.getResult();
 
-          MenuItems menuItems = doc.toObject(MenuItems.class);
+          MenuItemsCollection menuItemsCollection = doc.toObject(MenuItemsCollection.class);
 
-          listener.onSuccess(menuItems.getFoodMenuItems());
+          listener.onSuccess(menuItemsCollection.getFoodMenuItems());
 
         } else {
 
@@ -282,8 +264,62 @@ public class FirebaseAPI {
     });
   }
 
+  public void submitReview(SingleMenuItem menuItem, final Review newReview,
+                           final UpdateMenuItemReviewsCompletionListener listener) {
+
+    DocumentReference menuItemRef =
+        mFirestore.collection("MenuItems").document(menuItem.getCategoryId());
+
+    DocumentReference menuItemReviewsRef =
+        mFirestore.collection("Reviews").document(menuItem.getLatestReviewId());
+
+    menuItemRef.update("latestReview", newReview.convertToMap());
+
+    final DocumentReference reviewsRef =
+        mFirestore.collection("Reviews").document(menuItem.getCategoryId());
+
+    reviewsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+        if (task.isSuccessful()) {
+
+          ReviewsCollection currReviews = task.getResult().toObject(ReviewsCollection.class);
+          currReviews.addReview(newReview);
+
+          reviewsRef.update("reviews", currReviews.convertToMap());
+
+          listener.onSuccess();
+
+        } else {
+
+          listener.onFailure();
+
+        }
+
+      }
+    });
+
+  }
+
+
   // TODO
-  public void submitReview(SingleMenuItem foodItem, final Review rating) {
+  public void updateReviews(SingleMenuItem menuItem, Review newReview,
+                            final UpdateMenuItemReviewsCompletionListener listener) {
+
+    DocumentReference menuItemRef =
+        mFirestore.collection("MenuItems").document(menuItem.getCategoryId());
+
+    DocumentReference menuItemReviewsRef =
+        mFirestore.collection("Reviews").document(menuItem.getLatestReviewId());
+
+    menuItemRef.update("latestReview", newReview.convertToMap());
+
+  }
+
+  // TODO
+  public void newOrder(SingleMenuItem currMenuItem, final Order newOrder,
+                       final NewOrderCompletionListener listener) {
 
   }
 }

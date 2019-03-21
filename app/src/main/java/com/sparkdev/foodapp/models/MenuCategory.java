@@ -1,25 +1,23 @@
 package com.sparkdev.foodapp.models;
 
-import java.util.HashMap;
-
 public class MenuCategory {
 
   private String categoryId;
-  private HashMap<String, Object> foodIds;
+  private String menuItemsId;
 
   public MenuCategory() {}
 
-  public MenuCategory(String categoryId, HashMap<String, Object> foodIds) {
+  public MenuCategory(String categoryId, String menuItemsId) {
     this.categoryId = categoryId;
-    this.foodIds = foodIds;
+    this.menuItemsId = menuItemsId;
   }
 
   public String getCategoryId() {
     return categoryId;
   }
 
-  public HashMap<String, Object> getFoodIds() {
-    return foodIds;
+  public String getMenuItemsId() {
+    return menuItemsId;
   }
 
 }
