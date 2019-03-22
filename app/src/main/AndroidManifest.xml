@@ -12,17 +12,18 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".registerscreen.RegisterActivity">
+
+        </activity>
+        <activity
+            android:name=".loginscreen.Login"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".loginscreen.Login"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-        </activity>
         <activity android:name=".mainscreen.TabLayoutActivity"
-            android:theme="@style/AppTheme.Noactionbar">
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".mainscreen.FoodMenu.FoodMenuActivity">
