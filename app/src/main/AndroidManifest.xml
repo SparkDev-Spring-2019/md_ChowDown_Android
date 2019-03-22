@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".mainscreen.TabLayoutActivity"
             android:theme="@style/AppTheme.Noactionbar">
-         </activity>
+
+        </activity>
     </application>
 
 </manifest>
