@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Food App</string>
+    <string name="app_name">Chow Down</string>
+    <string name="textview">TextView</string>
 </resources>
