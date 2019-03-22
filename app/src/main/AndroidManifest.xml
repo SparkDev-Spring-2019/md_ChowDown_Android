@@ -25,6 +25,10 @@
             android:theme="@style/AppTheme.Noactionbar">
 
         </activity>
-    </application>
+        <activity android:name=".mainscreen.FoodMenu.FoodMenuActivity">
+
+        </activity>
+
+  </application>
 
 </manifest>
