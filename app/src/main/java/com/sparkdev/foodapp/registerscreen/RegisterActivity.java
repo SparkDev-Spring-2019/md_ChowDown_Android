@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         firebaseAPI = FirebaseAPI.getInstance(this);
+        signUpButton();
     }
 
     public void signUpButton(){
@@ -43,7 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
                                     @Override
                                     public void onSuccess() {
-                                        Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(RegisterActivity.this, Login.class));
                                     }
 
