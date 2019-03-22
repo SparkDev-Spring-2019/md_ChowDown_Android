@@ -40,11 +40,14 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                            if(email.getText().toString().contains("@") && (pass1 == pass2)){
+                            if(email.getText().toString().contains("@") && (pass1.getText().toString().equals(pass2.getText().toString()))){
                                 firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
                                     @Override
                                     public void onSuccess() {
-                                        startActivity(new Intent(RegisterActivity.this, Login.class));
+                                        Intent i = new Intent(getApplicationContext(),Login.class);
+                                        startActivity(i);
+                                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+
                                     }
 
                                     @Override
