@@ -5,7 +5,6 @@ import com.google.firebase.firestore.PropertyName;
 
 public class User {
 
-    @PropertyName("fName")
     private String firstName;
     private String lastName;
     private String email;
