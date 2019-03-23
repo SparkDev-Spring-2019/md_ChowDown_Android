@@ -47,15 +47,17 @@ public class RegisterActivity extends AppCompatActivity {
                                         Intent i = new Intent(getApplicationContext(),Login.class);
                                         startActivity(i);
                                         Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-
+                                        Toast.makeText(getApplicationContext(), pass1.getText().toString(), Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onFailure() {
                                         Toast.makeText(getApplicationContext(), "Please verify that you have entered a valid email and password.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), pass1.getText().toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
+
                     }
                 }
         );
