@@ -6,9 +6,11 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_background"/>
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_background"
+        android:padding="10dp"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -19,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contact Name"
-            android:textSize="25dp"
-            android:layout_margin_left="10dp"
+            android:textSize="15dp"
+           android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"/>
 
         <TextView
