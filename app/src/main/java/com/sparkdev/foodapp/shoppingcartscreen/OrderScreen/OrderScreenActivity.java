@@ -13,7 +13,7 @@ public class OrderScreenActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private OrderScreenAdapter adapter;
-    private ArrayList<String> itemList;
+    private ArrayList<String> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
