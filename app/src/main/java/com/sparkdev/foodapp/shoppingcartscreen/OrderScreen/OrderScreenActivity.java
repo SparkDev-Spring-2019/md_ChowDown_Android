@@ -2,6 +2,7 @@ package com.sparkdev.foodapp.shoppingcartscreen.OrderScreen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,9 +12,11 @@ import java.util.ArrayList;
 
 public class OrderScreenActivity extends AppCompatActivity {
 
+    private LinearLayoutManager llm;
     private RecyclerView recyclerView;
     private OrderScreenAdapter adapter;
     private ArrayList<String> itemList = new ArrayList<>();
+    private DividerItemDecoration itemDecoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class OrderScreenActivity extends AppCompatActivity {
             itemList.add("Contact " + i);
         }
 
+        llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
 
         // Get access to the RecyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -34,6 +40,11 @@ public class OrderScreenActivity extends AppCompatActivity {
         // Connect the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
         // Define the RecyclerView's default layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(llm);
+
+        // Add the line divider between each row
+        itemDecoration = new DividerItemDecoration(recyclerView.getContext()
+                , llm.getOrientation());
+        recyclerView.addItemDecoration(itemDecoration);
     }
 }

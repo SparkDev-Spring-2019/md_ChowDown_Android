@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/foodImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher_background"
-        android:padding="10dp"/>
+        android:src="@drawable/ic_launcher_background"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/foodImage"
+        android:layout_alignTop="@id/foodImage">
 
         <TextView
-            android:id="@+id/contact_name"
+            android:id="@+id/foodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact Name"
-            android:textSize="15dp"
-           android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"/>
+            android:text="Food Name"
+            android:textSize="17dp"
+            android:layout_marginTop="5dp"
+           android:layout_marginStart="20dp"/>
 
         <TextView
-            android:id="@+id/t2"
+            android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="description"
+            android:text="Quantity"
             android:textAlignment="center"
-            android:textSize="15dp"
-            android:layout_alignStart="@id/contact_name"
-            android:layout_below="@id/contact_name"
-            android:layout_marginBottom="5dp"/>
+            android:textSize="10dp"
+            android:layout_below="@id/foodName"
+            android:layout_alignLeft="@id/foodName"
+            android:layout_marginBottom="0dp"/>
 
         <TextView
-            android:id="@+id/t3"
+            android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="time"
+            android:text="Size"
             android:textAlignment="center"
-            android:textSize="15dp"
-            android:layout_alignStart="@id/contact_name"
-            android:layout_below="@id/t2"
+            android:textSize="10dp"
+            android:layout_alignLeft="@id/quantity"
+            android:layout_below="@id/quantity"
             android:layout_marginBottom="5dp"/>
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/foodImage"
+        android:layout_alignBottom="@id/foodImage"
+        android:gravity="center"
+        android:layout_marginEnd="20dp"
+        android:textSize="17sp"
+        android:text="$2.99"/>
 
-</LinearLayout>
+</RelativeLayout>

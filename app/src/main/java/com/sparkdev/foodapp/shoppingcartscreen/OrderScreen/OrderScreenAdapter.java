@@ -34,7 +34,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
             super(itemView);
             // Initialize the view holder's text view from the XML resources (activity_order_screen.xml)
             // Be sure to cast it to the View type that you need it to be (i.e TextView)
-            nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+            nameTextView = (TextView) itemView.findViewById(R.id.foodName);
             // Set up the adapter
             this.rowAdapter = adapter;
         }
