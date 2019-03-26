@@ -1,3 +1,14 @@
 <resources>
-  <string name="app_name">Food App</string>
+    <string name="app_name">Food App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="hours">
+        <item>1:00 PM</item>
+        <item>2:00 PM</item>
+        <item>3:00 PM</item>
+        <item>4:00 PM</item>
+        <item>5:00 PM</item>
+    </string-array>
 </resources>
