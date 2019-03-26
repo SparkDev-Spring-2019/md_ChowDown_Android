@@ -67,7 +67,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
-        View customView = contactInflater.inflate(R.layout.single_item, viewGroup, false);
+        View customView = contactInflater.inflate(R.layout.shopping_cart_single_item, viewGroup, false);
         // Return the new view holder
         return new ContactViewHolder(customView, this);
     }

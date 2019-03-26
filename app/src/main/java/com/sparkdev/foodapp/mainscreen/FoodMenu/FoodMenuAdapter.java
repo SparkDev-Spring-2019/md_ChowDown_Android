@@ -61,8 +61,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         // parameter is to associate the ContactViewHolder with its adapter
         public ContactViewHolder(View itemView, FoodMenuAdapter adapter) {
             super(itemView);
-            // Initialize the view holder's text view from the XML resources (activity_contact_list.xml)
-            // Be sure to cast it to the View type that you need it to be (i.e TextView)
+            // Initialize the view holder's text view from the XML resources (fragment_foodmenu.xml          // Be sure to cast it to the View type that you need it to be (i.e TextView)
             nameTextView = (TextView) itemView.findViewById(R.id.menuItem_name);
             itemPrice = (TextView) itemView.findViewById(R.id.price_textView);
             itemRate = (TextView) itemView.findViewById(R.id.rate_textView);
@@ -85,7 +84,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
-        View customView = menuInflater.inflate(R.layout.single_contact_layout, viewGroup, false);
+        View customView = menuInflater.inflate(R.layout.fragment_foodmenu_single_item, viewGroup, false);
         // Return the new view holder
         return new ContactViewHolder(customView, this);
     }
