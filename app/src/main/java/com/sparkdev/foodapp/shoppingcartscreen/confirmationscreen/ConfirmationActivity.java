@@ -34,24 +34,9 @@ public class ConfirmationActivity extends AppCompatActivity  {
         fragmentTransaction.replace(R.id.fragmentLayout, deliveryFragment);
         fragmentTransaction.commit();
 
-//implements AdapterView.OnItemSelectedListener
-//        Spinner spinner = (Spinner)findViewById(R.id.timeSpinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.hours, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
 
     }
 
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text = parent.getItemAtPosition(position).toString();
-//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT);
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
 
     public void ChangeFragment(View view)
