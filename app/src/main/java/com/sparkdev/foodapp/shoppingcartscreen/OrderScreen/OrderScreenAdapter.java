@@ -44,7 +44,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
         final OrderScreenAdapter rowAdapter;
 
         // Constructor where the first parameter is to inflate the layout and the second
-        // parameter is to associate the ContactViewHolder with its adapter
+        // parameter is to associate the FoodItemViewHolder with its adapter
         public ContactViewHolder(View itemView, OrderScreenAdapter adapter) {
             super(itemView);
             // Initialize the view holder's text view from the XML resources (activity_order_screen.xml)
