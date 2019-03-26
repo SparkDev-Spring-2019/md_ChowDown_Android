@@ -3,6 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="red">#FF0000</color>
+    <color name="navy">#000080</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="white">#FFFF</color>
+    <color name="colorPrimaryRed">#ff0000</color>
+    <color name="colorPrimaryOrange">#ff3300</color>
     <color name="orange">#F4A142</color>
     <color name="grey">#F2F2F2</color>
 </resources>
