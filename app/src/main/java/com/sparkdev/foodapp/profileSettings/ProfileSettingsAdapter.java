@@ -3,6 +3,8 @@ package com.sparkdev.foodapp.profileSettings;
 import com.sparkdev.foodapp.R;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
         // The following variables are for the text view and the adapter for each row
         public final TextView nameTextView;
-        public final EditText editTextView;
+        public final TextInputLayout editTextView;
         final ProfileSettingsAdapter rowAdapter;
 
         // Constructor where the first parameter is to inflate the layout and the second
@@ -38,7 +40,8 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
             // Initialize the view holder's text view from the XML resources (activity_contact_list.xml)
             // Be sure to cast it to the View type that you need it to be (i.e TextView)
             nameTextView = (TextView) itemView.findViewById(R.id.row_title);
-            editTextView = (EditText) itemView.findViewById(R.id.text_input);
+            editTextView = (TextInputLayout) itemView.findViewById(R.id.text_input);
+
             // Set up the adapter
             this.rowAdapter = adapter;
         }
@@ -52,6 +55,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public ProfileViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
         View customView = profileInflater.inflate(R.layout.profile_edit_text_row, viewGroup, false);
+
         // Return the new view holder
         return new ProfileViewHolder(customView, this);
     }
@@ -61,6 +65,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public void onBindViewHolder(@NonNull ProfileViewHolder contactViewHolder, int i) {
         String currentInput = textInputList.get(i);     // Hold the current text field
         contactViewHolder.nameTextView.setText(currentInput); // Set text field at i position to TextView
+        contactViewHolder.editTextView.getEditText().setText("Guirdelle");
     }
 
     @Override
@@ -68,4 +73,3 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         return textInputList.size();
     }
 }
-

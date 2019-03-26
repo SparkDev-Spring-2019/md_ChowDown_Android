@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class ProfileSettings extends AppCompatActivity {
     private RecyclerView profileRecyclerView;
     private ProfileSettingsAdapter profileAdapter;
     private ArrayList <String> row_titles = new ArrayList<>();
+    private Toolbar myToolbar;
 
     // The ContactListActivity enters the created state when the activity is created for the first
     // time (i.e. when the user opens the application).
@@ -62,7 +65,18 @@ public class ProfileSettings extends AppCompatActivity {
         profileRecyclerView.setAdapter(profileAdapter);
         // Define the RecyclerView's default layout manager
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu_main; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     private boolean validateEmail() {
         String emailInput = textInputEmail.getEditText().getText().toString().trim();
