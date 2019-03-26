@@ -36,6 +36,9 @@
             android:theme="@style/AppTheme">
 
         </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity">
+
+        </activity>
 
   </application>
 
