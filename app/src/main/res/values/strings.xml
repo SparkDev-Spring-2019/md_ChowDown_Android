@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">Food App</string>
+    <string name="app_name">Food App</string>
+    <string name="thank_you_for_order">Thank you for order!</string>
 </resources>
