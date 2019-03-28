@@ -13,7 +13,7 @@ import com.sparkdev.foodapp.R;
 
 import java.util.ArrayList;
 
-public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
+public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.FoodItemViewHolder>{
 
     private final ArrayList<String> menuItem;    // This will hold your data
     private final ArrayList<Integer>pictures;
@@ -45,7 +45,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     }
 
     // Inner class to the FoodMenuAdapter and extends
-    public class ContactViewHolder extends RecyclerView.ViewHolder{
+    public class FoodItemViewHolder extends RecyclerView.ViewHolder{
         // The following variables are for the text view and the adapter for each row
         public final TextView nameTextView;
         public final TextView itemPrice;
@@ -58,11 +58,10 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         final FoodMenuAdapter rowAdapter;
 
         // Constructor where the first parameter is to inflate the layout and the second
-        // parameter is to associate the ContactViewHolder with its adapter
-        public ContactViewHolder(View itemView, FoodMenuAdapter adapter) {
+        // parameter is to associate the FoodItemViewHolder with its adapter
+        public FoodItemViewHolder(View itemView, FoodMenuAdapter adapter) {
             super(itemView);
-            // Initialize the view holder's text view from the XML resources (activity_contact_list.xml)
-            // Be sure to cast it to the View type that you need it to be (i.e TextView)
+            // Initialize the view holder's text view from the XML resources (fragment_foodmenu.xml          // Be sure to cast it to the View type that you need it to be (i.e TextView)
             nameTextView = (TextView) itemView.findViewById(R.id.menuItem_name);
             itemPrice = (TextView) itemView.findViewById(R.id.price_textView);
             itemRate = (TextView) itemView.findViewById(R.id.rate_textView);
@@ -83,27 +82,27 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     // the LAYOUT will be inflated and it will return a view holder with the specified layout
     // and the corresponding adapter
     @Override
-    public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public FoodItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
-        View customView = menuInflater.inflate(R.layout.single_contact_layout, viewGroup, false);
+        View customView = menuInflater.inflate(R.layout.fragment_foodmenu_single_item, viewGroup, false);
         // Return the new view holder
-        return new ContactViewHolder(customView, this);
+        return new FoodItemViewHolder(customView, this);
     }
 
     // The onBindViewHolder() connects your data to your view holder
     @Override
-    public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, int i) {
+    public void onBindViewHolder(@NonNull FoodItemViewHolder foodItemViewHolder, int i) {
         String currentContact = menuItem.get(i);     // Hold the current contact name
         String currentItemPrice = itemPrice.get(i);
         String currentRate = Double.toString(ratings.get(i));
         int currentImage = pictures.get(i);
         String currentCategory = categories.get(i);
 
-        contactViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        contactViewHolder.foodImage.setImageResource(currentImage);
-        contactViewHolder.itemPrice.setText(currentItemPrice);
-        contactViewHolder.itemRate.setText(currentRate);
-        contactViewHolder.itemCategory.setText(currentCategory);
+        foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
+        foodItemViewHolder.foodImage.setImageResource(currentImage);
+        foodItemViewHolder.itemPrice.setText(currentItemPrice);
+        foodItemViewHolder.itemRate.setText(currentRate);
+        foodItemViewHolder.itemCategory.setText(currentCategory);
     }
 
     @Override

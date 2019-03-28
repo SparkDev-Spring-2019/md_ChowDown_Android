@@ -44,7 +44,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
         final OrderScreenAdapter rowAdapter;
 
         // Constructor where the first parameter is to inflate the layout and the second
-        // parameter is to associate the ContactViewHolder with its adapter
+        // parameter is to associate the FoodItemViewHolder with its adapter
         public ContactViewHolder(View itemView, OrderScreenAdapter adapter) {
             super(itemView);
             // Initialize the view holder's text view from the XML resources (activity_order_screen.xml)
@@ -67,7 +67,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
-        View customView = contactInflater.inflate(R.layout.single_item, viewGroup, false);
+        View customView = contactInflater.inflate(R.layout.order_single_item, viewGroup, false);
         // Return the new view holder
         return new ContactViewHolder(customView, this);
     }

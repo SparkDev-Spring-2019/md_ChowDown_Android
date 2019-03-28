@@ -26,9 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".mainscreen.FoodMenu.FoodMenuActivity">
 
-        </activity>
         <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -38,6 +36,11 @@
 
         </activity>
         <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.ThankYouScreen.ThankYouScreen"
             android:theme="@style/AppTheme.NoActionBar">
 
 

@@ -22,7 +22,7 @@ public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+        return FoodMenuFragment.newInstance(position + 1);
     }
 
     @Override
