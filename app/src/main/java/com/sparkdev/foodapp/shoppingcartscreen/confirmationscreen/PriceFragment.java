@@ -9,15 +9,23 @@ import android.view.ViewGroup;
 import com.sparkdev.foodapp.R;
 
 
-
 public class PriceFragment extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_price, container, false);
     }
+
+//    Button btn = (Button)findViewById(R.id.open_activity_button);
+//
+//btn.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View v) {
+//        startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
+//    }
+//});
+
 
 
 }

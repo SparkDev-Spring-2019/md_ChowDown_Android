@@ -1,12 +1,16 @@
 package com.sparkdev.foodapp.shoppingcartscreen.OrderScreen;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
 
 import java.util.ArrayList;
 
@@ -82,5 +86,14 @@ public class OrderScreenActivity extends AppCompatActivity {
         itemDecoration = new DividerItemDecoration(recyclerView.getContext()
                 , llm.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
+
+        Button button = findViewById(R.id.reviewButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
