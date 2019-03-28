@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.loginscreen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,13 +24,14 @@ public class Login extends AppCompatActivity {
     private static Button login;
     private static TextView register;
     private FirebaseAPI firebase;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        firebase = FirebaseAPI.getInstance(this);
+        firebase = FirebaseAPI.getInstance(context);
 
         loginButton();
 

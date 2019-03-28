@@ -11,17 +11,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".registerscreen.RegisterActivity"></activity>
+        <activity android:name=".registerscreen.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".loginscreen.Login"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize">
+
+
+        </activity>
+        <activity android:name=".mainscreen.TabLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"
+            android:theme="@style/AppTheme">
+
+
+
+        </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+        <activity
+            android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN">
-
-                </action>
-                <category android:name="android.intent.category.LAUNCHER">
-
-                </category>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
