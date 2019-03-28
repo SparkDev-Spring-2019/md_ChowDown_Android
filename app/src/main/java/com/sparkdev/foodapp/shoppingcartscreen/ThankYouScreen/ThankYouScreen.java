@@ -52,8 +52,6 @@ public class ThankYouScreen extends AppCompatActivity {
             });
             //progress bar
             mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
-            mLoadingText = (TextView) findViewById(R.id.LoadingCompleteTextView);
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -70,7 +68,7 @@ public class ThankYouScreen extends AppCompatActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mLoadingText.setVisibility(View.VISIBLE);
+                           dateTimeDisplay.setText("Your order is ready.");
                         }
                     });
                 }
