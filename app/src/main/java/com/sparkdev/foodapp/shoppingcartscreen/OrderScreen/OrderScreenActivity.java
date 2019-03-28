@@ -27,7 +27,33 @@ public class OrderScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_screen);
 
+        //Set action bar title
+        getSupportActionBar().setTitle("Your Order");
 
+        populateList();
+
+        llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+
+        // Get access to the RecyclerView
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setNestedScrollingEnabled(false);
+        // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
+        adapter = new OrderScreenAdapter(this, quantity, prices, images, sizeOfItem,foodItemName);
+        // Connect the adapter to the RecyclerView
+        recyclerView.setAdapter(adapter);
+        // Define the RecyclerView's default layout manager
+        recyclerView.setLayoutManager(llm);
+
+        // Add the line divider between each row
+        itemDecoration = new DividerItemDecoration(recyclerView.getContext()
+                , llm.getOrientation());
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    public void populateList()
+    {
         String [] foodNameArray = {"Rice and Beans", "Tiramisu", "Pizza","Cake", "Arroz con leche"};
         for(int i = 0; i < foodNameArray.length; i++)
         {
@@ -63,24 +89,5 @@ public class OrderScreenActivity extends AppCompatActivity {
         {
             sizeOfItem.add(sizeArray[i]);
         }
-
-        llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-
-
-        // Get access to the RecyclerView
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setNestedScrollingEnabled(false);
-        // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        adapter = new OrderScreenAdapter(this, quantity, prices, images, sizeOfItem,foodItemName);
-        // Connect the adapter to the RecyclerView
-        recyclerView.setAdapter(adapter);
-        // Define the RecyclerView's default layout manager
-        recyclerView.setLayoutManager(llm);
-
-        // Add the line divider between each row
-        itemDecoration = new DividerItemDecoration(recyclerView.getContext()
-                , llm.getOrientation());
-        recyclerView.addItemDecoration(itemDecoration);
     }
 }
