@@ -10,6 +10,7 @@
       android:layout_width="50dp"
       android:layout_height="50dp"
       tools:src="@tools:sample/avatars"/>
+
   <TextView
       android:id="@+id/item_text"
       android:layout_width="wrap_content"
@@ -17,4 +18,11 @@
       android:layout_gravity="center"
       android:padding="5dp"
       tools:text="@tools:sample/lorem" />
+
+  <TextView
+      android:id="@+id/item_review"
+      android:layout_width="292dp"
+      android:layout_height="54dp"
+      android:layout_weight="1"
+      android:text="TextView" />
 </LinearLayout>
