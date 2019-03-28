@@ -61,7 +61,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="20sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_date_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,17 +106,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/LoadingCompleteTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/progressbar"
-            android:layout_marginTop="16dp"
-            android:text="You're order is ready."
-            android:textSize="24sp"
-            android:visibility="invisible"
 
-            />
+
+
+
 
 
     </RelativeLayout>
