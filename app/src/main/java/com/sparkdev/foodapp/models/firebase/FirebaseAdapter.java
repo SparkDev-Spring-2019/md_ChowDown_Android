@@ -32,17 +32,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FirebaseAPI {
+public class FirebaseAdapter {
 
   // refer to a single instance of this class
-  private static FirebaseAPI sFirebaseAPI;
+  private static FirebaseAdapter sFirebaseAdapter;
 
   // constant to use as a tag for console log messages
   private static final String TAG = "FIREBASE";
 
   private FirebaseFirestore mFirestore;
 
-  private FirebaseAPI(Context context) {
+  private FirebaseAdapter(Context context) {
     // initialize the default FirebaseApp instance
     FirebaseApp.initializeApp(context);
     Log.d(TAG, "Firebase Firestore has been initialized");
@@ -54,13 +54,13 @@ public class FirebaseAPI {
     mFirestore.setFirestoreSettings(settings);
   }
 
-  public static FirebaseAPI getInstance(Context context) {
+  public static FirebaseAdapter getInstance(Context context) {
 
-    if (sFirebaseAPI != null) {
-      return sFirebaseAPI;
+    if (sFirebaseAdapter != null) {
+      return sFirebaseAdapter;
     } else {
-      sFirebaseAPI = new FirebaseAPI(context);
-      return sFirebaseAPI;
+      sFirebaseAdapter = new FirebaseAdapter(context);
+      return sFirebaseAdapter;
     }
   }
 
