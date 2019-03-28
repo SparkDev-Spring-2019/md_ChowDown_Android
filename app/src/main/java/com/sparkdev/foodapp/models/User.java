@@ -30,6 +30,8 @@ public class User {
         this.fullAddress = address + city + state + zipCode;
     }
 
+    public User(){}
+
     public void setEmail(String email){
         this.email = email;
     }

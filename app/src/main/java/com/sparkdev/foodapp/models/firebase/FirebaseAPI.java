@@ -73,6 +73,7 @@ public class FirebaseAPI {
       public void onComplete(@NonNull Task<AuthResult> task) {
 
         if (task.isSuccessful()) {
+          Log.d(TAG,"TRUE");
           AuthResult login = task.getResult();
           String uid = login.getUser().getUid();
 
