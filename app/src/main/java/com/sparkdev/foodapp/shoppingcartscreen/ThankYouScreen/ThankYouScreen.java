@@ -34,8 +34,9 @@ public class ThankYouScreen extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_thank_you_screen);
 
+            //receive information from previous activity
             Intent intent = getIntent();
-            String name = intent.getStringExtra("name");
+            String name = intent.getStringExtra("name" + ", we received your order.");
             TextView textView = findViewById(R.id.userName);
             textView.setText(name);
 
@@ -46,13 +47,14 @@ public class ThankYouScreen extends AppCompatActivity {
             dateTimeDisplay = (TextView) findViewById(R.id.text_date_display);
             dateTimeDisplay.setText(date);
 
-
+            //button to go to mainscreen
             final Button button = findViewById(R.id.button_id);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
                 }
             });
+
             //progress bar
             mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
             new Thread(new Runnable() {
@@ -71,7 +73,7 @@ public class ThankYouScreen extends AppCompatActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                           dateTimeDisplay.setText("Your order is ready.");
+                           dateTimeDisplay.setText("Your order is ready!");
                         }
                     });
                 }
