@@ -36,9 +36,9 @@ public class ThankYouScreen extends AppCompatActivity {
 
             //receive information from previous activity
             Intent intent = getIntent();
-            String name = intent.getStringExtra("name" + ", we received your order.");
+            String name = intent.getStringExtra("name");
             TextView textView = findViewById(R.id.userName);
-            textView.setText(name);
+            textView.setText(name + ", we received your order.");
 
             //sets current time
             calendar = Calendar.getInstance();
