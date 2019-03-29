@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.shoppingcartscreen.ThankYouScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,6 @@ import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
 
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -35,6 +33,11 @@ public class ThankYouScreen extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_thank_you_screen);
+
+            Intent intent = getIntent();
+            String name = intent.getStringExtra("name");
+            TextView textView = findViewById(R.id.userName);
+            textView.setText(name);
 
             //sets current time
             calendar = Calendar.getInstance();
@@ -73,6 +76,8 @@ public class ThankYouScreen extends AppCompatActivity {
                     });
                 }
             }).start();
+
+
         }
 
         }

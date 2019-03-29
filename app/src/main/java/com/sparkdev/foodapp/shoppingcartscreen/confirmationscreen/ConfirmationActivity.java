@@ -12,17 +12,22 @@ import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
 
+    boolean isDelivery;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        PriceFragment priceFragment = new PriceFragment();
+        String name = "Reiner";
+
+        PriceFragment priceFragment = PriceFragment.newInstance(isDelivery, name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
                 .commit();
+
 
         Button button = findViewById(R.id.DButton);
         button.setBackgroundColor(getResources().getColor(R.color.btColor));
@@ -60,6 +65,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            isDelivery = true;
         }
 
         if (view == findViewById(R.id.TObutton))
@@ -78,6 +85,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            isDelivery = false;
 
         }
 

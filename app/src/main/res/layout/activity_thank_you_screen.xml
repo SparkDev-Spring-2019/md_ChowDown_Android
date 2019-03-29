@@ -43,6 +43,7 @@
         android:layout_height="14dp" />
 
     <TextView
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="[User's FName], we received your order."
