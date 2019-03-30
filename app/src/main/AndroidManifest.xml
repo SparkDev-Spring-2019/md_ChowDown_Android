@@ -19,10 +19,7 @@
             android:name=".loginscreen.Login"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
 
         </activity>
         <activity android:name=".mainscreen.TabLayoutActivity"
@@ -30,6 +27,10 @@
 
         </activity>
         <activity android:name=".mainscreen.FoodMenu.FoodMenuActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
 
         </activity>
         <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"

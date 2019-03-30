@@ -10,38 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.SingleMenuItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
 
-    private final ArrayList<String> menuItem;    // This will hold your data
-    private final ArrayList<Integer>pictures;
-    private final ArrayList<String> itemPrice;
-    private final ArrayList<String> categories;
-    private final ArrayList<Double> ratings;
-    private final int clockIcon;
-    private final int starIcon;
-    private final int leafIcon;
-
-
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
+    List<SingleMenuItem> menuItems;
 
 
     // FoodMenuAdapter Constructor
-    public FoodMenuAdapter(Context context, ArrayList<String> foodItem, ArrayList<Integer> pictures,
-                           ArrayList<String> itemPrice,ArrayList<String> categories, ArrayList<Double> ratings,
-                           int clockIcon,int starIcon, int leafIcon)
+    public FoodMenuAdapter(Context context, List<SingleMenuItem> menuItems)
     {
         menuInflater = LayoutInflater.from(context); // Initialize the layout inflator
-        this.menuItem = foodItem; // Initialize the arraylist
-        this.pictures = pictures;
-        this.itemPrice = itemPrice;
-        this.categories = categories;
-        this.ratings = ratings;
-        this.clockIcon = clockIcon;
-        this.starIcon = starIcon;
-        this.leafIcon = leafIcon;
+        this.menuItems = menuItems;
+
     }
 
     // Inner class to the FoodMenuAdapter and extends
@@ -93,14 +77,14 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     // The onBindViewHolder() connects your data to your view holder
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, int i) {
-        String currentContact = menuItem.get(i);     // Hold the current contact name
-        String currentItemPrice = itemPrice.get(i);
-        String currentRate = Double.toString(ratings.get(i));
-        int currentImage = pictures.get(i);
-        String currentCategory = categories.get(i);
+        String currentContact = menuItems.get(i).getFoodName();     // Hold the current contact name
+        String currentItemPrice = menuItems.get(i).getFoodPrice();
+        String currentRate = Double.toString(menuItems.get(i).getRating());
+        //int currentImage = menuItems.get(i).getFoodImgUrl();
+        String currentCategory = menuItems.get(i).getCategoryId();
 
         contactViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        contactViewHolder.foodImage.setImageResource(currentImage);
+        //contactViewHolder.foodImage.setImageResource(currentImage);
         contactViewHolder.itemPrice.setText(currentItemPrice);
         contactViewHolder.itemRate.setText(currentRate);
         contactViewHolder.itemCategory.setText(currentCategory);
@@ -108,6 +92,6 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
 
     @Override
     public int getItemCount() {
-        return menuItem.size();
+        return menuItems.size();
     }
 }

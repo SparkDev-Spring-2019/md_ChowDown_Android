@@ -8,6 +8,7 @@ public class SingleMenuItem {
   private String categoryId;
   private String foodId;
   private String foodName;
+  private String foodPrice;
   private String description;
   private String foodImgUrl;
   private Double rating;
@@ -18,10 +19,11 @@ public class SingleMenuItem {
 
   public SingleMenuItem() {}
 
-  public SingleMenuItem(String categoryId, String foodId, String foodName, String description, String foodImgUrl, Double rating, Integer completionTime, Boolean isVegan, String latestReviewId, HashMap<String, Review> reviewIds) {
+  public SingleMenuItem(String categoryId, String foodId, String foodName,String foodPrice ,String description, String foodImgUrl, Double rating, Integer completionTime, Boolean isVegan, String latestReviewId, HashMap<String, Review> reviewIds) {
     this.categoryId = categoryId;
     this.foodId = foodId;
     this.foodName = foodName;
+    this.foodPrice = foodPrice;
     this.description = description;
     this.foodImgUrl = foodImgUrl;
     this.rating = rating;
@@ -42,6 +44,8 @@ public class SingleMenuItem {
   public String getFoodName() {
     return foodName;
   }
+
+  public String getFoodPrice() { return foodPrice;}
 
   public String getDescription() {
     return description;
@@ -78,6 +82,7 @@ public class SingleMenuItem {
     singleMenuItemMap.put("categoryId", categoryId);
     singleMenuItemMap.put("foodId", foodId);
     singleMenuItemMap.put("foodName", foodName);
+    singleMenuItemMap.put("foodPrice", foodPrice);
     singleMenuItemMap.put("description", description);
     singleMenuItemMap.put("foodImageUrl", foodImgUrl);
     singleMenuItemMap.put("rating", rating);

@@ -1,11 +1,18 @@
 package com.sparkdev.foodapp.mainscreen.FoodMenu;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.MenuCategory;
+import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
+import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetCategoryMenuItemsCompletionListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 This class represents the FoodMenuActivity which will display all the contacts from an ArrayList.
@@ -24,6 +31,10 @@ public class FoodMenuActivity extends AppCompatActivity {
     int starIcon = R.drawable.star_icon;
     int leafIcon = R.drawable.leaf_icon;
 
+    private static FirebaseAPI fireBase;
+    MenuCategory menuCategories = new MenuCategory("Lunch", "EZW2eoJs7xH2B0Uvpnhl");
+    List<SingleMenuItem> newMenuList;
+
 
 
     // The FoodMenuActivity enters the created state when the activity is created for the first
@@ -32,49 +43,28 @@ public class FoodMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+        fireBase = FirebaseAPI.getInstance(this);
+        fireBase.getMenuItems(menuCategories, new GetCategoryMenuItemsCompletionListener() {
+            @Override
+            public void onSuccess(List<SingleMenuItem> menuItems) {
+                for(int i = 0; i < menuItems.size(); i++ )
+                {
+                   newMenuList.add(i, menuItems.get(i));
+                }
+            }
 
-        // Filling foodItem ArrayList
-        String [] foodNameArray = {"Rice and Beans", "Tiramisu", "Pizza","Cake", "Arroz con leche"};
-        for(int i = 0; i < foodNameArray.length; i++)
-        {
-            foodItem.add(foodNameArray[i]);
-        }
+            @Override
+            public void onFailure() {
 
-        //Filling categories ArrayList
-        String [] categoryArray = {"Category", "Category", "Category","Category","Category"};
-        for(int i = 0; i < categoryArray.length; i++)
-        {
-            categories.add(categoryArray[i]);
-        }
-
-        //Filling ratings ArrayList
-        double [] rateArray = {4.3, 4.8, 1.4, 3.6, 5.0};
-        for(int i = 0; i < rateArray.length; i++)
-        {
-            ratings.add(rateArray[i]);
-        }
-
-        // Filling images ArrayList
-        int [] imageArray = {R.drawable.riceandbeans, R.drawable.tiramisu, R.drawable.pizza,
-                             R.drawable.cake, R.drawable.arrozconleche};
-        for(int i = 0; i < imageArray.length; i++)
-        {
-            images.add(imageArray[i]);
-        }
-
-        //Fill prices ArrayList
-        String [] pricesArray = {"$4.55", "$8.65", "$2.34", "$3.87", "$7.45"};
-        for(int i = 0; i < pricesArray.length; i++)
-        {
-            prices.add(pricesArray[i]);
-        }
+            }
+        });
 
 
 
         // Get access to the RecyclerView
         foodMenuRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        foodMenuAdapter = new FoodMenuAdapter(this,foodItem, images, prices, categories , ratings,clockIcon, starIcon, leafIcon);
+        foodMenuAdapter = new FoodMenuAdapter(this, newMenuList);
         // Connect the adapter to the RecyclerView
         foodMenuRecyclerView.setAdapter(foodMenuAdapter);
         // Define the RecyclerView's default layout manager
