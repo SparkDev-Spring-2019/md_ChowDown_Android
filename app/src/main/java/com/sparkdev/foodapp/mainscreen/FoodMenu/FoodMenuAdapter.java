@@ -10,42 +10,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.SingleMenuItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.FoodItemViewHolder>{
+public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
 
-    private final ArrayList<String> menuItem;    // This will hold your data
-    private final ArrayList<Integer>pictures;
-    private final ArrayList<String> itemPrice;
-    private final ArrayList<String> categories;
-    private final ArrayList<Double> ratings;
-    private final int clockIcon;
-    private final int starIcon;
-    private final int leafIcon;
+//    private final ArrayList<String> menuItem;    // This will hold your data
+//    private final ArrayList<Integer>pictures;
+//    private final ArrayList<String> itemPrice;
+//    private final ArrayList<String> categories;
+//    private final ArrayList<Double> ratings;
+    private final List<SingleMenuItem> itemsList;
+//    private final int clockIcon;
+//    private final int starIcon;
+//    private final int leafIcon;
 
 
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
+    List<SingleMenuItem> menuItems;
 
 
     // FoodMenuAdapter Constructor
-    public FoodMenuAdapter(Context context, ArrayList<String> foodItem, ArrayList<Integer> pictures,
-                           ArrayList<String> itemPrice,ArrayList<String> categories, ArrayList<Double> ratings,
-                           int clockIcon,int starIcon, int leafIcon)
+    public FoodMenuAdapter(Context context, List <SingleMenuItem> itemsList)
     {
         menuInflater = LayoutInflater.from(context); // Initialize the layout inflator
-        this.menuItem = foodItem; // Initialize the arraylist
-        this.pictures = pictures;
-        this.itemPrice = itemPrice;
-        this.categories = categories;
-        this.ratings = ratings;
-        this.clockIcon = clockIcon;
-        this.starIcon = starIcon;
-        this.leafIcon = leafIcon;
+        this.itemsList = itemsList;
+
     }
 
     // Inner class to the FoodMenuAdapter and extends
-    public class FoodItemViewHolder extends RecyclerView.ViewHolder{
+    public class ContactViewHolder extends RecyclerView.ViewHolder{
         // The following variables are for the text view and the adapter for each row
         public final TextView nameTextView;
         public final TextView itemPrice;
@@ -58,10 +53,11 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.FoodIt
         final FoodMenuAdapter rowAdapter;
 
         // Constructor where the first parameter is to inflate the layout and the second
-        // parameter is to associate the FoodItemViewHolder with its adapter
-        public FoodItemViewHolder(View itemView, FoodMenuAdapter adapter) {
+        // parameter is to associate the ContactViewHolder with its adapter
+        public ContactViewHolder(View itemView, FoodMenuAdapter adapter) {
             super(itemView);
-            // Initialize the view holder's text view from the XML resources (fragment_foodmenu.xml          // Be sure to cast it to the View type that you need it to be (i.e TextView)
+            // Initialize the view holder's text view from the XML resources (activity_contact_list.xml)
+            // Be sure to cast it to the View type that you need it to be (i.e TextView)
             nameTextView = (TextView) itemView.findViewById(R.id.menuItem_name);
             itemPrice = (TextView) itemView.findViewById(R.id.price_textView);
             itemRate = (TextView) itemView.findViewById(R.id.rate_textView);
@@ -82,24 +78,23 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.FoodIt
     // the LAYOUT will be inflated and it will return a view holder with the specified layout
     // and the corresponding adapter
     @Override
-    public FoodItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
         View customView = menuInflater.inflate(R.layout.fragment_foodmenu_single_item, viewGroup, false);
         // Return the new view holder
-        return new FoodItemViewHolder(customView, this);
+        return new ContactViewHolder(customView, this);
     }
 
     // The onBindViewHolder() connects your data to your view holder
     @Override
-    public void onBindViewHolder(@NonNull FoodItemViewHolder foodItemViewHolder, int i) {
-        String currentContact = menuItem.get(i);     // Hold the current contact name
-        String currentItemPrice = itemPrice.get(i);
-        String currentRate = Double.toString(ratings.get(i));
-        int currentImage = pictures.get(i);
-        String currentCategory = categories.get(i);
+    public void onBindViewHolder(@NonNull ContactViewHolder foodItemViewHolder, int i) {
+        String currentContact = itemsList.get(i).getName();     // Hold the current contact name
+        String currentItemPrice = Double.toString(itemsList.get(i).getPrice());
+        String currentRate = Double.toString(itemsList.get(i).getRating());
+        String currentCategory = itemsList.get(i).getCategory().get(0);
 
         foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        foodItemViewHolder.foodImage.setImageResource(currentImage);
+        //foodItemViewHolder.foodImage.setImageResource(currentImage);
         foodItemViewHolder.itemPrice.setText(currentItemPrice);
         foodItemViewHolder.itemRate.setText(currentRate);
         foodItemViewHolder.itemCategory.setText(currentCategory);
@@ -107,6 +102,6 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.FoodIt
 
     @Override
     public int getItemCount() {
-        return menuItem.size();
+        return itemsList.size();
     }
 }
