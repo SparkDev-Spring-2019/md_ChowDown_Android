@@ -68,14 +68,14 @@ public class ThankYouScreen extends AppCompatActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                           dateTimeDisplay.setText("Your order is ready.");
+                            dateTimeDisplay.setText("Your order is ready.");
                         }
                     });
                 }
             }).start();
         }
 
-        }
+}
 
 
 
