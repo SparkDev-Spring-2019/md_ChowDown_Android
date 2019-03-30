@@ -11,7 +11,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.loginscreen.Login;
-import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -20,13 +20,13 @@ public class RegisterActivity extends AppCompatActivity {
     private static EditText pass1;
     private static EditText pass2;
     private static Button signUp;
-    private static FirebaseAPI firebaseAPI;
+    private static FirebaseAdapter firebaseAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        firebaseAPI = FirebaseAPI.getInstance(this);
+        firebaseAPI = FirebaseAdapter.getInstance(this);
         signUpButton();
     }
 

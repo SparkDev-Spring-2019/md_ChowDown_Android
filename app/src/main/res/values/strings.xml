@@ -1,17 +1,17 @@
 <resources>
-    <string name="app_name">Chow Down</string>
-    <string name="textview">TextView</string>
+  <string name="app_name">Chow Down</string>
+  <string name="textview">TextView</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="hours">
-        <item>1:00 PM</item>
-        <item>2:00 PM</item>
-        <item>3:00 PM</item>
-        <item>4:00 PM</item>
-        <item>5:00 PM</item>
-    </string-array>
+  <string-array name="hours">
+    <item>1:00 PM</item>
+    <item>2:00 PM</item>
+    <item>3:00 PM</item>
+    <item>4:00 PM</item>
+    <item>5:00 PM</item>
+  </string-array>
 
-    <string name="thank_you_for_order">Thank you for order!</string>
+  <string name="thank_you_for_order">Thank you for order!</string>
 </resources>

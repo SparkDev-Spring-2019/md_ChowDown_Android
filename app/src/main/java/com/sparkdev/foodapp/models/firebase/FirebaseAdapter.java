@@ -12,10 +12,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sparkdev.foodapp.models.MenuItemsCollection;
 import com.sparkdev.foodapp.models.Order;
 import com.sparkdev.foodapp.models.ReviewsCollection;
 import com.sparkdev.foodapp.models.SingleMenuItem;
@@ -31,6 +33,8 @@ import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionList
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class FirebaseAdapter {
 
@@ -238,45 +242,68 @@ public class FirebaseAdapter {
   }
 
   public void getMenuItems(MenuCategory menuCategory,
-                           final GetCategoryMenuItemsCompletionListener listener){
+                              final GetCategoryMenuItemsCompletionListener listener) {
 
-    DocumentReference menuItemsRef =
-        mFirestore.collection("MenuItems").document(menuCategory.getMenuItemsId());
-    menuItemsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-      @Override
-      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+    CollectionReference menuItemsRef = mFirestore.collection("Foods");
 
-        if (task.isSuccessful()) {
+    if (menuCategory.getCategoryId().matches("All")) {
 
-          DocumentSnapshot doc = task.getResult();
+      Task<QuerySnapshot> allMenuItems = menuItemsRef
+          .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-          MenuItemsCollection menuItemsCollection = doc.toObject(MenuItemsCollection.class);
+              if (task.isSuccessful()) {
+                List<SingleMenuItem> menuItems = new ArrayList<>();
 
-          listener.onSuccess(menuItemsCollection.getFoodMenuItems());
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                  menuItems.add(document.toObject(SingleMenuItem.class));
+                }
 
-        } else {
+                listener.onSuccess(menuItems);
 
-          listener.onFailure();
+              } else {
+                listener.onFailure();
+              }
+            }
+          });
 
-        }
+    } else {
+      Task<QuerySnapshot> allMenuItems = menuItemsRef
+          .whereArrayContains("category", menuCategory.getCategoryId())
+          .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-      }
-    });
+              if (task.isSuccessful()) {
+                List<SingleMenuItem> menuItems = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                  menuItems.add(document.toObject(SingleMenuItem.class));
+                }
+
+                listener.onSuccess(menuItems);
+
+              } else {
+                listener.onFailure();
+              }
+            }
+          });
+    }
   }
 
-  public void submitReview(SingleMenuItem menuItem, final Review newReview,
+  public void submitReview(final SingleMenuItem menuItem, final Review newReview,
                            final UpdateMenuItemReviewsCompletionListener listener) {
 
-    DocumentReference menuItemRef =
-        mFirestore.collection("MenuItems").document(menuItem.getCategoryId());
-
-    DocumentReference menuItemReviewsRef =
-        mFirestore.collection("Reviews").document(menuItem.getLatestReviewId());
+    // Update the menu item's rating
+    final DocumentReference menuItemRef =
+        mFirestore.collection("Foods").document(menuItem.getId());
 
     menuItemRef.update("latestReview", newReview.convertToMap());
 
+
     final DocumentReference reviewsRef =
-        mFirestore.collection("Reviews").document(menuItem.getCategoryId());
+        mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
 
     reviewsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
@@ -284,8 +311,19 @@ public class FirebaseAdapter {
 
         if (task.isSuccessful()) {
 
+          double sum = 0;
+          double newRating = 0;
+
           ReviewsCollection currReviews = task.getResult().toObject(ReviewsCollection.class);
           currReviews.addReview(newReview);
+
+          for (Review review: currReviews.getReviews()) {
+            sum += review.getRating();
+          }
+
+          newRating = sum / currReviews.getReviews().size();
+
+          menuItemRef.update("rating", newRating);
 
           reviewsRef.update("reviews", currReviews.convertToMap());
 
@@ -294,7 +332,6 @@ public class FirebaseAdapter {
         } else {
 
           listener.onFailure();
-
         }
 
       }
@@ -302,24 +339,57 @@ public class FirebaseAdapter {
 
   }
 
-
-  // TODO
-  public void updateReviews(SingleMenuItem menuItem, Review newReview,
-                            final UpdateMenuItemReviewsCompletionListener listener) {
+  public void menuItemsListener(final SingleMenuItem menuItem) {
 
     DocumentReference menuItemRef =
-        mFirestore.collection("MenuItems").document(menuItem.getCategoryId());
+        mFirestore.collection("MenuItems").document(menuItem.getId());
 
-    DocumentReference menuItemReviewsRef =
-        mFirestore.collection("Reviews").document(menuItem.getLatestReviewId());
 
-    menuItemRef.update("latestReview", newReview.convertToMap());
+    menuItemRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+      @Override
+      public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+        if (e != null) {
+          Log.w(TAG, "Listener error", e);
+        }
+
+        Log.d(TAG,
+            "Menu item: " + menuItem.getName() + " reviews updated: " + documentSnapshot.getData());
+
+      }
+    });
 
   }
+
+
+  public void reviewsListener(final SingleMenuItem menuItem) {
+
+    DocumentReference menuItemReviewsRef =
+        mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
+
+
+    menuItemReviewsRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+      @Override
+      public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+        if (e != null) {
+          Log.w(TAG, "Listener error", e);
+        }
+
+        Log.d(TAG, "Reviews updated: " + documentSnapshot.getData());
+
+      }
+
+    });
+
+  }
+
 
   // TODO
   public void newOrder(SingleMenuItem currMenuItem, final Order newOrder,
                        final NewOrderCompletionListener listener) {
 
   }
+
+
 }
