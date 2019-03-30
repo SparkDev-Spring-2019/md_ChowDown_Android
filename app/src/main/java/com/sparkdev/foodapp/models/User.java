@@ -3,8 +3,6 @@ package com.sparkdev.foodapp.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.firebase.firestore.PropertyName;
-
 public class User {
 
     private String firstName;
@@ -18,10 +16,14 @@ public class User {
     private String fullAddress;
     private ArrayList<String> preferences;
     private String profileImageUrl;
+    private String ordersRef;
+
+    private String userId;
 
     public static User currentUser;
     public static String currentUID;
-    public static List<Order> currentOrder;
+    public static List<OrderItem> currentOrder;
+
 
     public User(String email, String password, String address, String city, String state, String zipCode) {
         this.email = email;
@@ -34,6 +36,12 @@ public class User {
     }
 
   public User() {}
+
+  public User(String userId, String ordersRef)
+  {
+      this.userId = userId;
+      this.ordersRef = ordersRef;
+  }
 
   public void setEmail(String email){
         this.email = email;
@@ -79,11 +87,29 @@ public class User {
         return lastName;
     }
 
+    public void setOrdersRef(String newOrderRef)
+    {
+        this.ordersRef = newOrderRef;
+    }
+
+    public String getOrdersRef()
+    {
+        return ordersRef;
+    }
+
     public static void setCurrentUser(User currentUser) {
         User.currentUser = currentUser;
     }
 
     public static void setCurrentUID(String currentUID) {
         User.currentUID = currentUID;
+    }
+
+    public static List<OrderItem> getCurrentOrder(){
+        return currentOrder;
+    }
+
+    public static void setCurrentOrder(List<OrderItem> orderItems){
+        orderItems = currentOrder;
     }
 }

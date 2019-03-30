@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sparkdev.foodapp.models.Order;
+import com.sparkdev.foodapp.models.OrdersCollection;
 import com.sparkdev.foodapp.models.ReviewsCollection;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 import com.sparkdev.foodapp.models.MenuCategory;
@@ -53,8 +54,8 @@ public class FirebaseAdapter {
     // get the default FirebaseDatabase instance
     mFirestore = FirebaseFirestore.getInstance();
     FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-        .setTimestampsInSnapshotsEnabled(true)
-        .build();
+            .setTimestampsInSnapshotsEnabled(true)
+            .build();
     mFirestore.setFirestoreSettings(settings);
   }
 
@@ -110,62 +111,62 @@ public class FirebaseAdapter {
     // call the createUserWithEmailAndPassword from the FirebaseAuth class and add a
     // listener to execute the argument after the user is registered in the Firebase Authentication
     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-        new OnCompleteListener<AuthResult>() {
-      @Override
-      public void onComplete(@NonNull Task<AuthResult> task) {
-        if (task.isSuccessful()) {
-          // the user was successfully created in the Firebase Authentication area, BUT NOT in the
-          // Firestore database so get the created user's random generated ID
-          String userId = task.getResult().getUser().getUid();
+            new OnCompleteListener<AuthResult>() {
+              @Override
+              public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                  // the user was successfully created in the Firebase Authentication area, BUT NOT in the
+                  // Firestore database so get the created user's random generated ID
+                  String userId = task.getResult().getUser().getUid();
 
-          // set an local instance of the current user by using their Firebase ID
-             User.setCurrentUID(userId);
+                  // set an local instance of the current user by using their Firebase ID
+                  User.setCurrentUID(userId);
 
-             // create the User object instance, refer to method getUserWithUID()
-          getUserWithUID(userId, new GetUserCompletionListener() {
-            @Override
-            public void onSuccess(User user) {
+                  // create the User object instance, refer to method getUserWithUID()
+                  getUserWithUID(userId, new GetUserCompletionListener() {
+                    @Override
+                    public void onSuccess(User user) {
 
-              User.setCurrentUser(user);
+                      User.setCurrentUser(user);
 
-            }
+                    }
 
-            @Override
-            public void onFailure() {
+                    @Override
+                    public void onFailure() {
 
-              // do nothing
+                      // do nothing
 
-            }
-          });
+                    }
+                  });
 
 
-             // create a user document in the Users collection in Firestore
-            CollectionReference usersRef = mFirestore.collection("Users");
-            DocumentReference usersDocRef = usersRef.document(userId);
+                  // create a user document in the Users collection in Firestore
+                  CollectionReference usersRef = mFirestore.collection("Users");
+                  DocumentReference usersDocRef = usersRef.document(userId);
 
-            // create a HashMap data structure that will later be turned into a JSON object using
-          // Firebase's set() method
-            HashMap<String, Object> user = new HashMap<>();
-            user.put("email", email);
-            user.put("firstName", "");  // create a first name field, user can change it later
-            user.put("lastName", "");   // create a last name field, user can change it later
-            user.put("address", "");    // create an address field, user can change it later
+                  // create a HashMap data structure that will later be turned into a JSON object using
+                  // Firebase's set() method
+                  HashMap<String, Object> user = new HashMap<>();
+                  user.put("email", email);
+                  user.put("firstName", "");  // create a first name field, user can change it later
+                  user.put("lastName", "");   // create a last name field, user can change it later
+                  user.put("address", "");    // create an address field, user can change it later
 
-            // create the document with the above HashMap
-            usersDocRef.set(user);
+                  // create the document with the above HashMap
+                  usersDocRef.set(user);
 
-            // registration was successful, implement listener in activity to do what it needs to
-            // do when a user is registered successfully
-            listener.onSuccess();
+                  // registration was successful, implement listener in activity to do what it needs to
+                  // do when a user is registered successfully
+                  listener.onSuccess();
 
-        } else {
-            // if registration was unsuccessful, implement listener in activity to do what it needs
-            // to do when a user is NOT registered successfully
-            listener.onFailure();
-        }
-      }
-    });
-    
+                } else {
+                  // if registration was unsuccessful, implement listener in activity to do what it needs
+                  // to do when a user is NOT registered successfully
+                  listener.onFailure();
+                }
+              }
+            });
+
   }
 
   public void getUserWithUID(String userID, final GetUserCompletionListener userCompletionListener) {
@@ -222,7 +223,7 @@ public class FirebaseAdapter {
 
           List<DocumentSnapshot> docs = task.getResult().getDocuments();
 
-          for (DocumentSnapshot doc: docs) {
+          for (DocumentSnapshot doc : docs) {
 
             MenuCategory menuCategory = doc.toObject(MenuCategory.class);
             categories.add(menuCategory);
@@ -242,53 +243,53 @@ public class FirebaseAdapter {
   }
 
   public void getMenuItems(MenuCategory menuCategory,
-                              final GetCategoryMenuItemsCompletionListener listener) {
+                           final GetCategoryMenuItemsCompletionListener listener) {
 
     CollectionReference menuItemsRef = mFirestore.collection("Foods");
 
     if (menuCategory.getCategoryId().matches("All")) {
 
       Task<QuerySnapshot> allMenuItems = menuItemsRef
-          .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+              .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-              if (task.isSuccessful()) {
-                List<SingleMenuItem> menuItems = new ArrayList<>();
+                  if (task.isSuccessful()) {
+                    List<SingleMenuItem> menuItems = new ArrayList<>();
 
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                  menuItems.add(document.toObject(SingleMenuItem.class));
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                      menuItems.add(document.toObject(SingleMenuItem.class));
+                    }
+
+                    listener.onSuccess(menuItems);
+
+                  } else {
+                    listener.onFailure();
+                  }
                 }
-
-                listener.onSuccess(menuItems);
-
-              } else {
-                listener.onFailure();
-              }
-            }
-          });
+              });
 
     } else {
       Task<QuerySnapshot> allMenuItems = menuItemsRef
-          .whereArrayContains("category", menuCategory.getCategoryId())
-          .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+              .whereArrayContains("category", menuCategory.getCategoryId())
+              .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-              if (task.isSuccessful()) {
-                List<SingleMenuItem> menuItems = new ArrayList<>();
+                  if (task.isSuccessful()) {
+                    List<SingleMenuItem> menuItems = new ArrayList<>();
 
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                  menuItems.add(document.toObject(SingleMenuItem.class));
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                      menuItems.add(document.toObject(SingleMenuItem.class));
+                    }
+
+                    listener.onSuccess(menuItems);
+
+                  } else {
+                    listener.onFailure();
+                  }
                 }
-
-                listener.onSuccess(menuItems);
-
-              } else {
-                listener.onFailure();
-              }
-            }
-          });
+              });
     }
   }
 
@@ -297,13 +298,13 @@ public class FirebaseAdapter {
 
     // Update the menu item's rating
     final DocumentReference menuItemRef =
-        mFirestore.collection("Foods").document(menuItem.getId());
+            mFirestore.collection("Foods").document(menuItem.getId());
 
     menuItemRef.update("latestReview", newReview.convertToMap());
 
 
     final DocumentReference reviewsRef =
-        mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
+            mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
 
     reviewsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
@@ -317,7 +318,7 @@ public class FirebaseAdapter {
           ReviewsCollection currReviews = task.getResult().toObject(ReviewsCollection.class);
           currReviews.addReview(newReview);
 
-          for (Review review: currReviews.getReviews()) {
+          for (Review review : currReviews.getReviews()) {
             sum += review.getRating();
           }
 
@@ -342,7 +343,7 @@ public class FirebaseAdapter {
   public void menuItemsListener(final SingleMenuItem menuItem) {
 
     DocumentReference menuItemRef =
-        mFirestore.collection("MenuItems").document(menuItem.getId());
+            mFirestore.collection("MenuItems").document(menuItem.getId());
 
 
     menuItemRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -354,7 +355,7 @@ public class FirebaseAdapter {
         }
 
         Log.d(TAG,
-            "Menu item: " + menuItem.getName() + " reviews updated: " + documentSnapshot.getData());
+                "Menu item: " + menuItem.getName() + " reviews updated: " + documentSnapshot.getData());
 
       }
     });
@@ -365,7 +366,7 @@ public class FirebaseAdapter {
   public void reviewsListener(final SingleMenuItem menuItem) {
 
     DocumentReference menuItemReviewsRef =
-        mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
+            mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
 
 
     menuItemReviewsRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -386,8 +387,30 @@ public class FirebaseAdapter {
 
 
   // TODO
-  public void newOrder(SingleMenuItem currMenuItem, final Order newOrder,
-                       final NewOrderCompletionListener listener) {
+  public void newOrder(final Order newOrder, final User currentUser, final NewOrderCompletionListener listener) {
+
+    final DocumentReference ordersRef =
+            mFirestore.collection("Orders").document(currentUser.getOrdersRef());
+
+    ordersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        if (task.isSuccessful()) {
+
+          //Add the order to firebase
+          OrdersCollection currOrders = task.getResult().toObject(OrdersCollection.class);
+          currOrders.addOrder(newOrder);
+
+          ordersRef.update("orders", currOrders.convertToMap());
+
+          listener.onSuccess();
+
+        } else {
+          listener.onFailure();
+        }
+      }
+    });
+
 
   }
 

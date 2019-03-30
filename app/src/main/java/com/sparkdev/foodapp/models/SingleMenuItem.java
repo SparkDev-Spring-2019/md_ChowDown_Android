@@ -24,6 +24,13 @@ public class SingleMenuItem{
     this.reviewsRefId = reviewsRefId;
   }
 
+  public SingleMenuItem(String foodImageUrl, double price, String name)
+  {
+    this.foodImageUrl = foodImageUrl;
+    this.price = price;
+    this.name = name;
+  }
+
   public SingleMenuItem(String id, ArrayList<String> category, String name, String description, String foodImageUrl, Double rating, Double price, Integer completionTime, Boolean isVegan, String reviewsRefId, HashMap<String, Object> reviewIds) {
     this.id = id;
     this.category = category;
@@ -136,4 +143,12 @@ public class SingleMenuItem{
     return singleMenuItemMap;
   }
 
+  public Map<String, Object> shortConvertToMap(){
+    HashMap<String, Object> singleMenuItemMap = new HashMap<>();
+    singleMenuItemMap.put("foodImageUrl", foodImageUrl);
+    singleMenuItemMap.put("price", price);
+    singleMenuItemMap.put("name", name);
+
+    return singleMenuItemMap;
+  }
 }
