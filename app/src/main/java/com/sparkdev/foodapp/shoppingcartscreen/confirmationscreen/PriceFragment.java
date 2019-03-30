@@ -14,6 +14,7 @@ import com.sparkdev.foodapp.shoppingcartscreen.ThankYouScreen.ThankYouScreen;
 
 public class PriceFragment extends Fragment
 {
+    boolean isDelivery;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class PriceFragment extends Fragment
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ThankYouScreen.class);
                 Bundle args = getArguments();
-                boolean isDelivery = args.getBoolean("isDelivery");
+
                 String name = args.getString("name");
                 intent.putExtra("isDelivery", isDelivery);
                 intent.putExtra("name", name);
@@ -36,6 +37,11 @@ public class PriceFragment extends Fragment
         return view;
 
 
+    }
+
+    public void setDelivery(boolean isDelivery)
+    {
+        this.isDelivery = isDelivery;
     }
 
     public static PriceFragment newInstance(boolean isDelivery, String name) {

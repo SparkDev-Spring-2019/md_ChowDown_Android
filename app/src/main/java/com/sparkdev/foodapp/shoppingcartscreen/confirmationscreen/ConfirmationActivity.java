@@ -11,8 +11,8 @@ import android.widget.Button;
 import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
-
-    boolean isDelivery;
+    private PriceFragment priceFragment;
+    private boolean isDelivery = true;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,7 +22,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
         String name = "Reiner";
 
-        PriceFragment priceFragment = PriceFragment.newInstance(isDelivery, name);
+        priceFragment = PriceFragment.newInstance(isDelivery, name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
@@ -66,7 +66,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
 
-            isDelivery = true;
+            priceFragment.setDelivery(true);
         }
 
         if (view == findViewById(R.id.TObutton))
@@ -86,7 +86,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
 
-            isDelivery = false;
+            priceFragment.setDelivery(false);
 
         }
 
