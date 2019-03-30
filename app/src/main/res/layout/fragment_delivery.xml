@@ -11,16 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="25dp"
         android:text="Address" />
 
     <EditText
         android:id="@+id/addressInput"
-        android:layout_width="325dp"
+        android:layout_width="345dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/addressText"
         android:layout_marginTop="0dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
         android:ems="10"
         android:inputType="textPostalAddress" />
 
@@ -31,7 +31,7 @@
         android:layout_below="@id/addressInput"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="25dp"
         android:text="Appt/Suite" />
 
 
@@ -43,16 +43,16 @@
         android:layout_below="@id/addressInput"
         android:layout_toRightOf="@id/ASText"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="105dp"
+        android:layout_marginLeft="115dp"
         android:text="Zip Code" />
 
     <EditText
         android:id="@+id/ASInput"
-        android:layout_width="150dp"
+        android:layout_width="155dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/ASText"
         android:layout_marginTop="0dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/ASInput"
         android:layout_below="@id/zipText"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
         android:ems="10"

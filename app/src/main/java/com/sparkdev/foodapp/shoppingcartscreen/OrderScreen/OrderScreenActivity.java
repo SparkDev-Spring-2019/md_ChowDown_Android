@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.Order;
@@ -31,7 +32,9 @@ public class OrderScreenActivity extends AppCompatActivity {
 
 
     private OrderItem orderItem;
+    private OrderItem orderItem2;
     private SingleMenuItem menuItem;
+    private SingleMenuItem menuItem2;
     private ArrayList<OrderItem> orderList;
 
 
@@ -47,11 +50,17 @@ public class OrderScreenActivity extends AppCompatActivity {
         menuItem = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fcheesecake.jpg?alt=media&token=8f66127f-fe59-4f16-816d-d93af9ffc605",
                 2.30,"cheescake");
         orderItem = new OrderItem(menuItem,5,"medium");
+        menuItem2 = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fpasta.jpg?alt=media&token=8fe8925d-c940-4c8b-8f48-fa3f1bd4f9ce",
+                1.00,"pasta");
+        orderItem2 = new OrderItem(menuItem2,5,"large");
+
+        //create order list
         orderList = new ArrayList<>();
 
 
         //add item to list
         orderList.add(orderItem);
+        orderList.add(orderItem2);
 
 
 
@@ -80,16 +89,35 @@ public class OrderScreenActivity extends AppCompatActivity {
                 , llm.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
 
+        //setting total text view to the calculated total sum
+        double total = addTotal();
+        TextView totalText = findViewById(R.id.totalnumberTextview);
+        totalText.setText("$" + String.format("%.2f", total));
+
+
         Button button = findViewById(R.id.reviewButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                intent.putExtra("total", addTotal());
                 startActivity(intent);
             }
         });
     }
 
 
+    public double addTotal()
+    {
+        double total = 0;
+
+        //looping price arraylist to calculate total
+        for (int i = 0; i < orderList.size(); i++)
+        {
+             total += orderList.get(i).getFoodItem().getPrice() * orderList.get(i).getQuantity();
+
+        }
+        return total;
+    }
 
 }

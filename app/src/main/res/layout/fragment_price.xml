@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/taxnumberTextview"
-        android:layout_width="57dp"
+        android:layout_width="64dp"
         android:layout_height="27dp"
         android:layout_above="@id/feenumberTextview"
         android:layout_alignParentRight="true"
@@ -28,7 +28,7 @@
         tools:text="$0.00" />
     <TextView
         android:id="@+id/tipTextView"
-        android:layout_width="57dp"
+        android:layout_width="64dp"
         android:layout_height="27dp"
         android:layout_above="@id/totalTextView"
         android:layout_alignParentLeft="true"
@@ -65,7 +65,7 @@
 
     <TextView
         android:id="@+id/feenumberTextview"
-        android:layout_width="57dp"
+        android:layout_width="64dp"
         android:layout_height="27dp"
         android:layout_above="@id/tipnumberTextview"
         android:layout_alignParentRight="true"
@@ -138,7 +138,7 @@
 
     <TextView
         android:id="@+id/taxesTextview"
-        android:layout_width="57dp"
+        android:layout_width="64dp"
         android:layout_height="27dp"
         android:layout_above="@id/feesTextview"
         android:layout_alignParentLeft="true"
@@ -177,7 +177,8 @@
         android:layout_above="@id/taxesTextview"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal|numberSigned"
+        android:gravity="center"
         tools:layout_editor_absoluteX="149dp"
         tools:layout_editor_absoluteY="126dp" />
 
@@ -194,11 +195,11 @@
 
     <Button
         android:id="@+id/zeroButton"
-        android:layout_above="@id/tipAmountText"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="30dp"
         android:layout_width="70dp"
         android:layout_height="40dp"
+        android:layout_above="@id/tipAmountText"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/btn_border"
         android:text="0%"
         tools:layout_editor_absoluteX="59dp" />
@@ -207,9 +208,9 @@
         android:id="@+id/tenButton"
         android:layout_width="70dp"
         android:layout_height="40dp"
-        android:layout_toRightOf="@id/zeroButton"
         android:layout_above="@id/tipAmountText"
         android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/zeroButton"
         android:background="@drawable/btn_border"
         android:text="10%"
         tools:layout_editor_absoluteX="114dp" />
