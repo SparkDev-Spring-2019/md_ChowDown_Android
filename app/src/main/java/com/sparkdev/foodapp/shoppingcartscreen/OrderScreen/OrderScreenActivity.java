@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.SingleMenuItem;
 import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class OrderScreenActivity extends AppCompatActivity {
     private ArrayList<Double> prices = new ArrayList<>();
     private ArrayList<Integer> images = new ArrayList<>();
     private DividerItemDecoration itemDecoration;
+
+    private ArrayList<SingleMenuItem> mItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,10 @@ public class OrderScreenActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         // Define the RecyclerView's default layout manager
         recyclerView.setLayoutManager(llm);
+
+        // Swipe gestures
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         // Add the line divider between each row
         itemDecoration = new DividerItemDecoration(recyclerView.getContext()
@@ -82,6 +90,8 @@ public class OrderScreenActivity extends AppCompatActivity {
         {
             foodItemName.add(foodNameArray[i]);
         }
+
+
 
         //Filling quantity ArrayList
         int [] quantityArray = {4, 2, 1, 1, 2};
