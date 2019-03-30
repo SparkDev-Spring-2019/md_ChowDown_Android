@@ -15,14 +15,14 @@ import java.util.ArrayList;
 public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.ContactViewHolder>{
 
     private final ArrayList<String> foodName;    // This will hold your data
-    private final ArrayList<String> prices;
+    private final ArrayList<Double> prices;
     private final ArrayList<Integer> images;
     private final ArrayList<String> sizeOfItem;
     private final ArrayList<Integer> quantity;
     private LayoutInflater contactInflater;       // This will be the inflater for OrderScreenAdapter
 
     // OrderScreenAdapter Constructor
-    public OrderScreenAdapter(Context context, ArrayList<Integer> quantity, ArrayList<String> prices,
+    public OrderScreenAdapter(Context context, ArrayList<Integer> quantity, ArrayList<Double> prices,
                               ArrayList<Integer>images, ArrayList<String> sizeOfItem, ArrayList<String> foodItemName) {
 
         contactInflater = LayoutInflater.from(context); // Initialize the layout inflator
@@ -79,7 +79,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
         contactViewHolder.nameTextView.setText(foodName.get(i)); // Set contact name at i position to TextView
         contactViewHolder.imageview.setImageResource(images.get(i));
         contactViewHolder.sizeTextView.setText("Size: " +sizeOfItem.get(i));
-        contactViewHolder.priceTextView.setText(prices.get(i));
+        contactViewHolder.priceTextView.setText("$" + String.format("%.2f",prices.get(i)));
         contactViewHolder.quantityTextView.setText("Quantity: " + Integer.toString(quantity.get(i)));
     }
 

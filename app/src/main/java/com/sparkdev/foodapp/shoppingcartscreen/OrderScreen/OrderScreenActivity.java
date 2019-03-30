@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
@@ -22,7 +23,7 @@ public class OrderScreenActivity extends AppCompatActivity {
     private ArrayList<String> foodItemName = new ArrayList<>();
     private ArrayList<String> sizeOfItem = new ArrayList<>();
     private ArrayList<Integer> quantity = new ArrayList<>();
-    private ArrayList<String> prices = new ArrayList<>();
+    private ArrayList<Double> prices = new ArrayList<>();
     private ArrayList<Integer> images = new ArrayList<>();
     private DividerItemDecoration itemDecoration;
 
@@ -57,11 +58,18 @@ public class OrderScreenActivity extends AppCompatActivity {
                 , llm.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
 
+        //setting total text view to the calculated total sum
+        double total = addTotal();
+        TextView totalText = findViewById(R.id.totalnumberTextview);
+        totalText.setText("$" + String.format("%.2f", total));
+
+
         Button button = findViewById(R.id.reviewButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                intent.putExtra("total", addTotal());
                 startActivity(intent);
             }
         });
@@ -74,8 +82,6 @@ public class OrderScreenActivity extends AppCompatActivity {
         {
             foodItemName.add(foodNameArray[i]);
         }
-
-
 
         //Filling quantity ArrayList
         int [] quantityArray = {4, 2, 1, 1, 2};
@@ -93,7 +99,7 @@ public class OrderScreenActivity extends AppCompatActivity {
         }
 
         //Fill prices ArrayList
-        String [] pricesArray = {"$4.55", "$8.65", "$2.34", "$3.87", "$3.00"};
+        Double [] pricesArray = {4.55, 8.65, 2.34, 3.87, 3.00};
         for(int i = 0; i < pricesArray.length; i++)
         {
             prices.add(pricesArray[i]);
@@ -105,4 +111,18 @@ public class OrderScreenActivity extends AppCompatActivity {
             sizeOfItem.add(sizeArray[i]);
         }
     }
+
+    public double addTotal()
+    {
+        double total = 0;
+
+        //looping price arraylist to calculate total
+        for (int i = 0; i < prices.size(); i++)
+        {
+             total += prices.get(i) * quantity.get(i);
+
+        }
+        return total;
+    }
+
 }

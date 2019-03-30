@@ -22,6 +22,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
         String name = "Reiner";
 
+        //replacing price and place order button container with fragment
         PriceFragment priceFragment = PriceFragment.newInstance(isDelivery, name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
@@ -29,10 +30,12 @@ public class ConfirmationActivity extends AppCompatActivity  {
                 .commit();
 
 
+        //setting delivery button to clicked color
         Button button = findViewById(R.id.DButton);
         button.setBackgroundColor(getResources().getColor(R.color.btColor));
         button.setTextColor(getResources().getColor(R.color.white));
 
+        //adding delivery fragment as default in the pop up container
         DeliveryFragment deliveryFragment = new DeliveryFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
