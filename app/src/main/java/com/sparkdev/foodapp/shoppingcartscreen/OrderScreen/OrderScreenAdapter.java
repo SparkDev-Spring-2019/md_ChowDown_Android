@@ -9,17 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.SingleMenuItem;
 
 import java.util.ArrayList;
 
 public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.ContactViewHolder>{
 
-    private final ArrayList<String> foodName;    // This will hold your data
+    private final ArrayList<String> foodName;    // Thims will hold your data
     private final ArrayList<String> prices;
     private final ArrayList<Integer> images;
     private final ArrayList<String> sizeOfItem;
     private final ArrayList<Integer> quantity;
     private LayoutInflater contactInflater;       // This will be the inflater for OrderScreenAdapter
+    private ArrayList<SingleMenuItem> cartItems;
+    private SingleMenuItem mDeletedItem;
+    private Integer mDeletedItemPosition;
 
     // OrderScreenAdapter Constructor
     public OrderScreenAdapter(Context context, ArrayList<Integer> quantity, ArrayList<String> prices,
@@ -86,5 +90,15 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
     @Override
     public int getItemCount() {
         return foodName.size();
+    }
+
+    public void deleteView(int position) {
+      mDeletedItem = cartItems.get(position);
+      mDeletedItemPosition = position;
+      cartItems.remove(position);
+      notifyDataSetChanged();
+
+      // TODO
+//      showUndoSnackbar();
     }
 }
