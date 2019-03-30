@@ -12,17 +12,22 @@ import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
 
+    boolean isDelivery;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        PriceFragment priceFragment = new PriceFragment();
+        String name = "Reiner";
+
+        PriceFragment priceFragment = PriceFragment.newInstance(isDelivery, name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
                 .commit();
+
 
         Button button = findViewById(R.id.DButton);
         button.setBackgroundColor(getResources().getColor(R.color.btColor));
@@ -34,24 +39,9 @@ public class ConfirmationActivity extends AppCompatActivity  {
         fragmentTransaction.replace(R.id.fragmentLayout, deliveryFragment);
         fragmentTransaction.commit();
 
-//implements AdapterView.OnItemSelectedListener
-//        Spinner spinner = (Spinner)findViewById(R.id.timeSpinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.hours, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
 
     }
 
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text = parent.getItemAtPosition(position).toString();
-//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT);
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
 
     public void ChangeFragment(View view)
@@ -75,6 +65,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            isDelivery = true;
         }
 
         if (view == findViewById(R.id.TObutton))
@@ -93,6 +85,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            isDelivery = false;
 
         }
 

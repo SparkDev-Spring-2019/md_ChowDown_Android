@@ -17,8 +17,16 @@ public class ReviewsCollection {
     return mReviews;
   }
 
+  public void setReviews(ArrayList<Review> reviews) {
+    mReviews = reviews;
+  }
+
   public void addReview(Review newReview) {
     mReviews.add(newReview);
+  }
+
+  public void calculateRating(Review newReview) {
+
   }
 
   public ArrayList<Map<String, Object>> convertToMap() {
