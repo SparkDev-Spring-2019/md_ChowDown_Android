@@ -16,15 +16,26 @@ import java.util.List;
 
 public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
 
+//    private final ArrayList<String> menuItem;    // This will hold your data
+//    private final ArrayList<Integer>pictures;
+//    private final ArrayList<String> itemPrice;
+//    private final ArrayList<String> categories;
+//    private final ArrayList<Double> ratings;
+    private final List<SingleMenuItem> itemsList;
+//    private final int clockIcon;
+//    private final int starIcon;
+//    private final int leafIcon;
+
+
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
     List<SingleMenuItem> menuItems;
 
 
     // FoodMenuAdapter Constructor
-    public FoodMenuAdapter(Context context, List<SingleMenuItem> menuItems)
+    public FoodMenuAdapter(Context context, List <SingleMenuItem> itemsList)
     {
         menuInflater = LayoutInflater.from(context); // Initialize the layout inflator
-        this.menuItems = menuItems;
+        this.itemsList = itemsList;
 
     }
 
@@ -69,29 +80,28 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // Inflate the layout
-        View customView = menuInflater.inflate(R.layout.single_contact_layout, viewGroup, false);
+        View customView = menuInflater.inflate(R.layout.fragment_foodmenu_single_item, viewGroup, false);
         // Return the new view holder
         return new ContactViewHolder(customView, this);
     }
 
     // The onBindViewHolder() connects your data to your view holder
     @Override
-    public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, int i) {
-        String currentContact = menuItems.get(i).getFoodName();     // Hold the current contact name
-        String currentItemPrice = menuItems.get(i).getFoodPrice();
-        String currentRate = Double.toString(menuItems.get(i).getRating());
-        //int currentImage = menuItems.get(i).getFoodImgUrl();
-        String currentCategory = menuItems.get(i).getCategoryId();
+    public void onBindViewHolder(@NonNull ContactViewHolder foodItemViewHolder, int i) {
+        String currentContact = itemsList.get(i).getName();     // Hold the current contact name
+        String currentItemPrice = Double.toString(itemsList.get(i).getPrice());
+        String currentRate = Double.toString(itemsList.get(i).getRating());
+        String currentCategory = itemsList.get(i).getCategory().get(0);
 
-        contactViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        //contactViewHolder.foodImage.setImageResource(currentImage);
-        contactViewHolder.itemPrice.setText(currentItemPrice);
-        contactViewHolder.itemRate.setText(currentRate);
-        contactViewHolder.itemCategory.setText(currentCategory);
+        foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
+        //foodItemViewHolder.foodImage.setImageResource(currentImage);
+        foodItemViewHolder.itemPrice.setText(currentItemPrice);
+        foodItemViewHolder.itemRate.setText(currentRate);
+        foodItemViewHolder.itemCategory.setText(currentCategory);
     }
 
     @Override
     public int getItemCount() {
-        return menuItems.size();
+        return itemsList.size();
     }
 }

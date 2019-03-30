@@ -1,12 +1,20 @@
 package com.sparkdev.foodapp.shoppingcartscreen.OrderScreen;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+import android.widget.Button;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
 
 import java.util.ArrayList;
 
@@ -22,12 +30,55 @@ public class OrderScreenActivity extends AppCompatActivity {
     private ArrayList<Integer> images = new ArrayList<>();
     private DividerItemDecoration itemDecoration;
 
+    private ArrayList<SingleMenuItem> mItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_screen);
 
+        //Set action bar title
+        getSupportActionBar().setTitle("Your Order");
 
+        populateList();
+
+
+
+        llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+
+        // Get access to the RecyclerView
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setNestedScrollingEnabled(false);
+        // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
+        adapter = new OrderScreenAdapter(this, quantity, prices, images, sizeOfItem,foodItemName);
+        // Connect the adapter to the RecyclerView
+        recyclerView.setAdapter(adapter);
+        // Define the RecyclerView's default layout manager
+        recyclerView.setLayoutManager(llm);
+
+        // Swipe gestures
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        // Add the line divider between each row
+        itemDecoration = new DividerItemDecoration(recyclerView.getContext()
+                , llm.getOrientation());
+        recyclerView.addItemDecoration(itemDecoration);
+
+        Button button = findViewById(R.id.reviewButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void populateList()
+    {
         String [] foodNameArray = {"Rice and Beans", "Tiramisu", "Pizza","Cake", "Arroz con leche"};
         for(int i = 0; i < foodNameArray.length; i++)
         {
@@ -63,24 +114,6 @@ public class OrderScreenActivity extends AppCompatActivity {
         {
             sizeOfItem.add(sizeArray[i]);
         }
-
-        llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-
-
-        // Get access to the RecyclerView
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setNestedScrollingEnabled(false);
-        // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        adapter = new OrderScreenAdapter(this, quantity, prices, images, sizeOfItem,foodItemName);
-        // Connect the adapter to the RecyclerView
-        recyclerView.setAdapter(adapter);
-        // Define the RecyclerView's default layout manager
-        recyclerView.setLayoutManager(llm);
-
-        // Add the line divider between each row
-        itemDecoration = new DividerItemDecoration(recyclerView.getContext()
-                , llm.getOrientation());
-        recyclerView.addItemDecoration(itemDecoration);
     }
+
 }

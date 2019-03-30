@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shoppingcartscreen.confirmationscreen.TakeoutFragment">
+
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Pickup Location"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Pickup Time"
+        android:layout_below="@id/locationText"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"/>
+
+    <Spinner
+        android:id="@+id/locationSpinner"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
+        android:layout_toRightOf="@id/locationText"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:spinnerMode="dropdown"
+        style="@android:style/Widget.Holo.Light.Spinner"/>
+    <Spinner
+        android:id="@+id/timeSpinner"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
+        android:layout_toRightOf="@id/timeText"
+        android:layout_below="@id/locationSpinner"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="20dp"
+        android:spinnerMode="dropdown"
+        style="@android:style/Widget.Holo.Light.Spinner"/>
+</RelativeLayout>

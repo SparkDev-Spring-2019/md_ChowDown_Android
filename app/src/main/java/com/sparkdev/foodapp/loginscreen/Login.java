@@ -13,7 +13,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
-import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.registerscreen.RegisterActivity;
 
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private static EditText password;
     private static Button login;
     private static TextView register;
-    private FirebaseAPI firebase;
+    private FirebaseAdapter firebase;
     private Context context = this;
 
     @Override
@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        firebase = FirebaseAPI.getInstance(context);
+        firebase = FirebaseAdapter.getInstance(context);
 
         loginButton();
 
