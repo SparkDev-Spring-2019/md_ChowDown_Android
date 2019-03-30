@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundgradient"
+    tools:context=".registerscreen.RegisterActivity">
+
+
+    <EditText
+        android:id="@+id/emailbox"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter email here..."
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/passwordbox1"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter password here..."
+        app:layout_constraintLeft_toLeftOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <EditText
+        android:id="@+id/passwordbox2"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/roundedwhite"
+        android:hint=" Enter password again..."
+        app:layout_constraintLeft_toLeftOf="@+id/password2"
+        app:layout_constraintTop_toBottomOf="@+id/password2" />
+
+    <TextView
+
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/emailbox"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <TextView
+
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Password:"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordbox1"
+        app:layout_constraintLeft_toLeftOf="@+id/emailbox"
+        app:layout_constraintTop_toBottomOf="@+id/emailbox" />
+
+    <TextView
+
+        android:id="@+id/password2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Re-type Password:"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/passwordbox1"
+        app:layout_constraintTop_toBottomOf="@+id/passwordbox1" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_margin="18dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded"
+        android:text="Sign up"
+        android:textColor="@android:color/white"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordbox2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTRATION"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="57dp" />
+
+</android.support.constraint.ConstraintLayout>
