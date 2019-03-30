@@ -59,8 +59,14 @@ public class PriceFragment extends Fragment
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ThankYouScreen.class);
                 Bundle args = getArguments();
-
+                DeliveryFragment deliveryFragment = new DeliveryFragment();
                 String name = args.getString("name");
+                String address = ((ConfirmationActivity)getActivity()).getAddress();
+                String zip = ((ConfirmationActivity)getActivity()).getZip();
+                String AS = ((ConfirmationActivity)getActivity()).getAS();
+                intent.putExtra("address", address);
+                intent.putExtra("zip", zip);
+                intent.putExtra("AS", AS);
                 intent.putExtra("isDelivery", isDelivery);
                 intent.putExtra("name", name);
                 startActivity(intent);

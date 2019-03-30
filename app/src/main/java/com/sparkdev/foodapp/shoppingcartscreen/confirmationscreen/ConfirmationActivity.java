@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.sparkdev.foodapp.R;
 
@@ -14,6 +15,9 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
     private  boolean isDelivery = true;
     private PriceFragment priceFragment;
+    public EditText addressInput;
+    public EditText ASInput;
+    public EditText zipInput;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,7 +51,26 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
     }
 
+    public String getAddress()
+    {
+        addressInput = findViewById(R.id.addressInput);
+        String address = addressInput.getText().toString();
+        return address;
+    }
 
+    public String getZip()
+    {
+        zipInput = findViewById(R.id.zipInput);
+        String zip = zipInput.getText().toString();
+        return zip;
+    }
+
+    public String getAS()
+    {
+        ASInput = findViewById(R.id.ASInput);
+        String AS = ASInput.getText().toString();
+        return AS;
+    }
 
     public void ChangeFragment(View view)
     {
