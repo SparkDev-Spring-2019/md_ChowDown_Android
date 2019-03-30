@@ -9,15 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 
 import java.util.Date;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
+    FirebaseAdapter firebaseAdapter;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
+
+//        firebaseAdapter = new FirebaseAdapter.getInstance();
 
         return new ListViewHolder(view);
     }
@@ -50,10 +55,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
         public void bindView(int position){
 
-//            if(allReviews.getReviews() != null){
-//                mItemText.setText(allReviews.getReviews().get(position).getReviewerName());
-//                mItemImage.setImageResource(ReviewPageData.picturePath[position]);
-//                mReviewText.setText(allReviews.getReviews().get(position).getReviewMsg());
+//            if( != null){
+//                mItemText.setText();
+//                mItemImage.setImageResource();
+//                mReviewText.setText();
 //            }
 
         }

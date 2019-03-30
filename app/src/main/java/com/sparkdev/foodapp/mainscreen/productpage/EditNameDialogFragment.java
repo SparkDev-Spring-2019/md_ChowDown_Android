@@ -15,12 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.Review;
+import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.UpdateMenuItemReviewsCompletionListener;
 
 import java.util.Date;
 
 public class EditNameDialogFragment extends DialogFragment {
 
-    private String userName = ReviewPageData.names[1]; //TODO: need a user object to define the creation of a review
+    FirebaseAdapter firebaseAdapter;
+    private String userName = "Jack"; //TODO: need a user object to define the creation of a review
     private EditText mEditText;
     private RatingBar mRatingBar;
     private Date timestamp;
@@ -43,6 +48,8 @@ public class EditNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        firebaseAdapter =  FirebaseAdapter.getInstance(getActivity());
         return inflater.inflate(R.layout.fragment_popup_dialog, container);
     }
 
@@ -78,24 +85,34 @@ public class EditNameDialogFragment extends DialogFragment {
 
     }
 
-    public ReviewsCollection allReviews = new ReviewsCollection();
-    public Review review;
-
     // Defines the listener interface
     public interface EditNameDialogListener {
         void onFinishEditDialog(String inputText);
     }
 
+    Review review;
+    SingleMenuItem menuItem = new SingleMenuItem("1IbdZYYiA7llReOqMuxW" ,"BnOiwQZVvkawpT8aCpSP"); //TODO: empty need an actual item
+
     // Call this method to send the data back to the parent fragment
     public void sendBackResult() {
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
-        review = new Review(timestamp, mEditText.getText().toString(), userName, userName, foodId, (double) mRatingBar.getRating());  //user name and name being passed as the same need to differ? need a user object
 
-        allReviews.addReview(review);
+        review = new Review(timestamp, mEditText.getText().toString(), userName, userName, menuItem.getId(), (double) mRatingBar.getRating());
+        firebaseAdapter.submitReview(menuItem, review, new UpdateMenuItemReviewsCompletionListener() {
+            @Override
+            public void onSuccess() {
+                Toast ts = Toast.makeText(getActivity(), mEditText.getText().toString(), Toast.LENGTH_LONG );
+                ts.show();
+                dismiss();
+            }
 
-        Toast ts = Toast.makeText(getActivity(), mEditText.getText().toString(), Toast.LENGTH_LONG );
-        ts.show();
+            @Override
+            public void onFailure() {
 
-        dismiss();
+            }
+        });
+
     }
+
+
 }

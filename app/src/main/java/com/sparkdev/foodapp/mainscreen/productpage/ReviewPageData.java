@@ -25,6 +25,5 @@ public class ReviewPageData {
             R.drawable.picture_3
     };
 
-    public static ReviewsCollection allReviews;
 
 }
