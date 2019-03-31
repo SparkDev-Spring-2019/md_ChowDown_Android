@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 
@@ -16,15 +17,8 @@ import java.util.List;
 
 public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
 
-//    private final ArrayList<String> menuItem;    // This will hold your data
-//    private final ArrayList<Integer>pictures;
-//    private final ArrayList<String> itemPrice;
-//    private final ArrayList<String> categories;
-//    private final ArrayList<Double> ratings;
+    private Context context;
     private final List<SingleMenuItem> itemsList;
-//    private final int clockIcon;
-//    private final int starIcon;
-//    private final int leafIcon;
 
 
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
@@ -34,6 +28,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     // FoodMenuAdapter Constructor
     public FoodMenuAdapter(Context context, List <SingleMenuItem> itemsList)
     {
+        this.context = context;
         menuInflater = LayoutInflater.from(context); // Initialize the layout inflator
         this.itemsList = itemsList;
 
@@ -95,9 +90,10 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         String currentRate = Double.toString(itemsList.get(i).getRating());
         String currentCategory = itemsList.get(i).getCategory().get(0);
         String currentTime = String.valueOf(itemsList.get(i).getCompletionTime());
+        String imageUrl = itemsList.get(i).getFoodImageUrl();
 
         foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        //foodItemViewHolder.foodImage.setImageResource(currentImage);
+        Glide.with(context).load(imageUrl).into(foodItemViewHolder.foodImage);
         foodItemViewHolder.itemPrice.setText("$" + currentItemPrice);
         foodItemViewHolder.itemRate.setText(currentRate);
         foodItemViewHolder.itemCategory.setText(currentCategory);

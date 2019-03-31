@@ -14,15 +14,17 @@
             android:name=".registerscreen.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".mainscreen.productpage.ProductPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"></action>
-            <category android:name="android.intent.category.LAUNCHER"></category>
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".loginscreen.Login"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>v
+        </activity>
         <activity
             android:name=".mainscreen.TabLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -30,10 +32,7 @@
         <activity
             android:name=".shoppingcartscreen.OrderScreen.OrderScreenActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".shoppingcartscreen.confirmationscreen.ConfirmationActivity"
@@ -42,40 +41,6 @@
             android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-    </application>
-=======
-        <activity android:name=".mainscreen.TabLayoutActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".loginscreen.Login"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-        </activity>
-        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"
-            android:theme="@style/AppTheme">
-
-
-
-        </activity>
-        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-
-        <activity
-            android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true">
-
-        </activity>
     </application>
 
 </manifest>
