@@ -32,15 +32,15 @@ public class MainActivity extends Activity {
                 This class is just for testing some firebase things
          */
         fb = FirebaseAdapter.getInstance(this);
-        currentUser = new User("thisisanID","1234");
+        currentUser = new User("121212","1234");
 
         menuItem = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fcheesecake.jpg?alt=media&token=8f66127f-fe59-4f16-816d-d93af9ffc605",
                                     2.3,"cheescake");
         orderItem = new OrderItem(menuItem,5,"medium");
-        ArrayList<OrderItem> orderList = new ArrayList<>();
-        orderList.add(orderItem);
+        ArrayList<OrderItem> orderItems = new ArrayList<>();
+        orderItems.add(orderItem);
 
-        newOrder = new Order("thisisanID", orderList,"2");
+        newOrder = new Order("121212", orderItems,"2");
 
         fb.newOrder(newOrder, currentUser, new NewOrderCompletionListener() {
             @Override
@@ -53,6 +53,9 @@ public class MainActivity extends Activity {
                 Log.d(TAG, "order failed to add");
             }
         });
+
+
+
 
     }
 

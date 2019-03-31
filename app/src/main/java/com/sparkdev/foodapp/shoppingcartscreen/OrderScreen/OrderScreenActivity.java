@@ -1,9 +1,7 @@
 package com.sparkdev.foodapp.shoppingcartscreen.OrderScreen;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,14 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
-import com.sparkdev.foodapp.models.Order;
 import com.sparkdev.foodapp.models.OrderItem;
 import com.sparkdev.foodapp.models.SingleMenuItem;
-import com.sparkdev.foodapp.models.User;
 import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderScreenActivity extends AppCompatActivity {
 
@@ -35,7 +30,7 @@ public class OrderScreenActivity extends AppCompatActivity {
     private OrderItem orderItem2;
     private SingleMenuItem menuItem;
     private SingleMenuItem menuItem2;
-    private ArrayList<OrderItem> orderList;
+    private ArrayList<OrderItem> orderItems;
 
 
     @Override
@@ -55,12 +50,12 @@ public class OrderScreenActivity extends AppCompatActivity {
         orderItem2 = new OrderItem(menuItem2,5,"large");
 
         //create order list
-        orderList = new ArrayList<>();
+        orderItems = new ArrayList<>();
 
 
         //add item to list
-        orderList.add(orderItem);
-        orderList.add(orderItem2);
+        orderItems.add(orderItem);
+        orderItems.add(orderItem2);
 
 
 
@@ -73,7 +68,7 @@ public class OrderScreenActivity extends AppCompatActivity {
         recyclerView.setNestedScrollingEnabled(false);
         // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
 
-        adapter = new OrderScreenAdapter(this, orderList);
+        adapter = new OrderScreenAdapter(this, orderItems);
 
         // Connect the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
@@ -112,9 +107,9 @@ public class OrderScreenActivity extends AppCompatActivity {
         double total = 0;
 
         //looping price arraylist to calculate total
-        for (int i = 0; i < orderList.size(); i++)
+        for (int i = 0; i < orderItems.size(); i++)
         {
-             total += orderList.get(i).getFoodItem().getPrice() * orderList.get(i).getQuantity();
+             total += orderItems.get(i).getFoodItem().getPrice() * orderItems.get(i).getQuantity();
 
         }
         return total;
