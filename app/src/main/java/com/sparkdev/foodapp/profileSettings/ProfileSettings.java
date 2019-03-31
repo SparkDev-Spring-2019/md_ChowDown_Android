@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,9 +35,14 @@ public class ProfileSettings extends AppCompatActivity   {
     //private User u = new User();
     private Toolbar myToolbar;
     private CircleImageView circleImageView;
-    private Menu menuItem;
+    private MenuItem menuItem;
     private View view;
     private EditText editText;
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    ".{6,}" +               //at least 6 characters
+                    "$");
 
     // The ProfileSettingsActivity enters the created state when the activity is created for the first
     // time (i.e. when the user opens the application).
@@ -73,7 +79,7 @@ public class ProfileSettings extends AppCompatActivity   {
         circleImageView = (CircleImageView) findViewById(R.id.profile_image);
         circleImageView.setImageResource(R.mipmap.g1321);
 
-        menuItem = (Menu) findViewById(R.id.action_save);
+        menuItem = (MenuItem) findViewById(R.id.action_save);
     }
 
     @Override
@@ -83,19 +89,102 @@ public class ProfileSettings extends AppCompatActivity   {
         return true;
     }
 
-    /*public void confirmInput(View v) {
-        if (!validateEmail() | !validateUsername() | !validatePassword()) {
-            return;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(R.id.action_save == item.getItemId())
+        {
+            if(profileAdapter.getIsAllValidated())
+            {
+                Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "ERROR!", Toast.LENGTH_SHORT).show();
+            }
+            //do something
+            return true;
         }
 
-        String input = "Email: " + textInputEmail.getEditText().getText().toString();
-        input += "\n";
-        input += "Username: " + textInputUsername.getEditText().getText().toString();
-        input += "\n";
-        input += "Password: " + textInputPassword.getEditText().getText().toString();
+        return super.onOptionsItemSelected(item);
+    }
 
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
-    }*/
+    public static boolean validateFirstName(EditText editText)
+    {
+        String firstNameInput = editText.getText().toString().trim();
 
+        if (firstNameInput.isEmpty()) {
+            editText.setError("Field cannot be empty");
+            return false;
+        } else if (!firstNameInput.matches("[a-zA-Z]*")) {
+            editText.setError("Field can only contain letters");
+            return false;
+        } else {
+            editText.setError(null);
+            return true;
+        }
+    }
+
+    public static boolean validateLastName(EditText editText)
+    {
+        String firstNameInput = editText.getText().toString().trim();
+
+        if (firstNameInput.isEmpty()) {
+            editText.setError("Field cannot be empty");
+            return false;
+        } else if (!firstNameInput.matches("[a-zA-Z]*")) {
+            editText.setError("Field can only contain letters");
+            return false;
+        } else {
+            editText.setError(null);
+            return true;
+        }
+    }
+
+    public static boolean validateUsername(EditText editText)
+    {
+        String usernameInput = editText.getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
+            editText.setError("Field cannot be empty");
+            return false;
+        } else if (usernameInput.length() > 15) {
+            editText.setError("Username must be 15 characters or less");
+            return false;
+        } else {
+            editText.setError(null);
+            return true;
+        }
+    }
+
+    public static boolean validateEmail(EditText editText)
+    {
+        String emailInput = editText.getText().toString().trim();
+
+        if(emailInput.isEmpty()) {
+            editText.setError("Field cannot be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            editText.setError("Please enter a valid email address");
+            return false;
+        } else {
+            editText.setError(null);
+            return true;
+        }
+    }
+
+    public static boolean validatePassword(EditText editText)
+    {
+        String passwordInput = editText.getText().toString().trim();
+
+        if(passwordInput.isEmpty()) {
+            editText.setError("Password must be at least 6 characters");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            editText.setError("Password too weak");
+            return false;
+        } else {
+            editText.setError(null);
+            return true;
+        }
+    }
 
 }

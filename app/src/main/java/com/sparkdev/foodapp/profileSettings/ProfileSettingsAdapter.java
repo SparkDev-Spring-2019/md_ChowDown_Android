@@ -26,11 +26,8 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
     private final ArrayList<String> textInputList;    // This will hold your data
     private LayoutInflater profileInflater;       // This will be the inflater for ContactListAdapter
+    private boolean isAllValidated = true;
 
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    ".{6,}" +               //at least 6 characters
-                    "$");
 
 
 
@@ -38,7 +35,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public ProfileSettingsAdapter(Context context, ArrayList<String> textInputList) {
         profileInflater = LayoutInflater.from(context); // Initialize the layout inflator
         this.textInputList = textInputList; // Initialize the arraylist
-        
+
     }
 
     // Inner class to the ContactListAdapter and extends
@@ -98,67 +95,27 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
                 if (i == 0) {
 
                     //first name
-                    String firstNameInput = contactViewHolder.editTextView.getEditText().getText().toString().trim();
-
-                    if (firstNameInput.isEmpty()) {
-                        contactViewHolder.editTextView.setError("Field cannot be empty");
-                    } else if (!firstNameInput.matches("[a-zA-Z]*")) {
-                        contactViewHolder.editTextView.setError("Field can only contain letters");
-                    } else {
-                        contactViewHolder.editTextView.setError(null);
-                    }
+                    isAllValidated = ProfileSettings.validateFirstName(contactViewHolder.editTextView.getEditText());
 
                 } else if (i == 1) {
 
                     //last name
-                    String lastNameInput = contactViewHolder.editTextView.getEditText().getText().toString().trim();
-
-                    if (lastNameInput.isEmpty()) {
-                        contactViewHolder.editTextView.setError("Field cannot be empty");
-                    } else if (!lastNameInput.matches("[a-zA-Z]*")) {
-                        contactViewHolder.editTextView.setError("Field can only contain letters");
-                    } else {
-                        contactViewHolder.editTextView.setError(null);
-                    }
+                    isAllValidated =ProfileSettings.validateLastName(contactViewHolder.editTextView.getEditText());
 
                 } else if (i == 2) {
 
                     //username
-                    String usernameInput = contactViewHolder.editTextView.getEditText().getText().toString().trim();
-
-                    if (usernameInput.isEmpty()) {
-                        contactViewHolder.editTextView.setError("Field cannot be empty");
-                    } else if (usernameInput.length() > 15) {
-                        contactViewHolder.editTextView.setError("Username must be 15 characters or less");
-                    } else {
-                        contactViewHolder.editTextView.setError(null);
-                    }
+                    isAllValidated = ProfileSettings.validateUsername(contactViewHolder.editTextView.getEditText());
 
                 } else if (i == 3) {
 
                     //email
-                    String emailInput = contactViewHolder.editTextView.getEditText().getText().toString().trim();
-
-                    if(emailInput.isEmpty()) {
-                        contactViewHolder.editTextView.setError("Field cannot be empty");
-                    } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-                        contactViewHolder.editTextView.setError("Please enter a valid email address");
-                    } else {
-                        contactViewHolder.editTextView.setError(null);
-                    }
+                    isAllValidated = ProfileSettings.validateEmail(contactViewHolder.editTextView.getEditText());
 
                 } else if (i == 4) {
 
                     //password
-                    String passwordInput = contactViewHolder.editTextView.getEditText().getText().toString().trim();
-
-                    if(passwordInput.isEmpty()) {
-                        contactViewHolder.editTextView.setError("Password must be at least 6 characters");
-                    } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-                        contactViewHolder.editTextView.setError("Password too weak");
-                    } else {
-                        contactViewHolder.editTextView.setError(null);
-                    }
+                    isAllValidated = ProfileSettings.validatePassword(contactViewHolder.editTextView.getEditText());
                 }
             }
 
@@ -174,5 +131,11 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public int getItemCount() {
         return textInputList.size();
     }
+
+    public boolean getIsAllValidated()
+    {
+        return isAllValidated;
+    }
+
 
 }
