@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sparkdev.foodapp">
 
-<manifest package="com.sparkdev.foodapp"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".welcomescreen.welcome_page_three"></activity>
+        <activity android:name=".welcomescreen.welcome_page_two" />
+        <activity android:name=".welcomescreen.welcome_page_one" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".registerscreen.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".loginscreen.Login"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".mainscreen.TabLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".shoppingcartscreen.OrderScreen.OrderScreenActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-  <application
-      android:allowBackup="true"
-      android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:supportsRtl="true"
-      android:theme="@style/AppTheme"
-      tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".MainActivity">
-    </activity>
-    <activity
-        android:name=".registerscreen.RegisterActivity"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-        android:name=".loginscreen.Login"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:windowSoftInputMode="stateVisible|adjustResize">
-    </activity>
-    <activity
-        android:name=".mainscreen.TabLayoutActivity"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-        android:name=".shoppingcartscreen.OrderScreen.OrderScreenActivity"
-        android:theme="@style/AppTheme">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
-    <activity
-        android:name=".shoppingcartscreen.confirmationscreen.ConfirmationActivity"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-        android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-  </application>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".shoppingcartscreen.confirmationscreen.ConfirmationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
 
 </manifest>
