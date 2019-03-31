@@ -8,12 +8,12 @@
     android:id="@+id/linearLayout">
 
 
-    <StackView
+    <ImageView
         android:id="@+id/product_stack_view"
         android:layout_width="424dp"
         android:layout_height="331dp">
 
-    </StackView>
+    </ImageView>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"

@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:id = "@+id/menu_item">
 
 
     <!-- Make sure your layout_height is set to wrap_content, to avoid each row to be on top of one

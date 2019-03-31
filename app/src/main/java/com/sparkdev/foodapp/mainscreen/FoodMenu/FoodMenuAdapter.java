@@ -1,15 +1,19 @@
 package com.sparkdev.foodapp.mainscreen.FoodMenu;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.mainscreen.productpage.ProductPageActivity;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 
 import java.util.List;
@@ -22,6 +26,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
 //    private final ArrayList<String> categories;
 //    private final ArrayList<Double> ratings;
     private final List<SingleMenuItem> itemsList;
+    private final Context context;
 //    private final int clockIcon;
 //    private final int starIcon;
 //    private final int leafIcon;
@@ -34,6 +39,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     // FoodMenuAdapter Constructor
     public FoodMenuAdapter(Context context, List <SingleMenuItem> itemsList)
     {
+        this.context = context;
         menuInflater = LayoutInflater.from(context); // Initialize the layout inflator
         this.itemsList = itemsList;
 
@@ -52,6 +58,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         public final ImageView leafPic;
         public final ImageView starPic;
         final FoodMenuAdapter rowAdapter;
+        public final RelativeLayout rowLayout;
 
         // Constructor where the first parameter is to inflate the layout and the second
         // parameter is to associate the ContactViewHolder with its adapter
@@ -69,6 +76,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
             leafPic = (ImageView) itemView.findViewById(R.id.leaf_icon);
             starPic = (ImageView) itemView.findViewById(R.id.star_icon);
             time = (TextView) itemView.findViewById(R.id.time_textView);
+            rowLayout = (RelativeLayout)itemView.findViewById(R.id.menu_item);
 
              //Set up the adapter
             this.rowAdapter = adapter;
@@ -90,6 +98,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     // The onBindViewHolder() connects your data to your view holder
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder foodItemViewHolder, int i) {
+        final SingleMenuItem item = itemsList.get(i);
         String currentContact = itemsList.get(i).getName();     // Hold the current contact name
         String currentItemPrice = String.format("%.2f", itemsList.get(i).getPrice());
         String currentRate = Double.toString(itemsList.get(i).getRating());
@@ -102,6 +111,14 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         foodItemViewHolder.itemRate.setText(currentRate);
         foodItemViewHolder.itemCategory.setText(currentCategory);
         foodItemViewHolder.time.setText(currentTime );
+        foodItemViewHolder.rowLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductPageActivity.class);
+                intent.putExtra("menu_item_detail", (Parcelable)item);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
