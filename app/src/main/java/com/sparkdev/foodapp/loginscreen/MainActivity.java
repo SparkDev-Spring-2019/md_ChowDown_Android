@@ -28,6 +28,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        /*
+                This class is just for testing some firebase things
+         */
         fb = FirebaseAdapter.getInstance(this);
         currentUser = new User("thisisanID","1234");
 

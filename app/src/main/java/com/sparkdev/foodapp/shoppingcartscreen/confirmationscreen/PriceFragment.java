@@ -16,7 +16,7 @@ import com.sparkdev.foodapp.shoppingcartscreen.ThankYouScreen.ThankYouScreen;
 
 public class PriceFragment extends Fragment
 {
-    boolean isDelivery ;
+    boolean isDelivery = true;  //default is true
     private final double  fees = 3.00;
     double tipAmount;
     double passedTotal;
@@ -106,12 +106,10 @@ public class PriceFragment extends Fragment
         this.isDelivery = isDelivery;
     }
 
-    public static PriceFragment newInstance(boolean isDelivery, String name) {
-
+    public static PriceFragment newInstance(String name) {
         PriceFragment f = new PriceFragment();
         // Supply index input as an argument.
         Bundle args = new Bundle();
-        args.putBoolean("isDelivery", isDelivery);
         args.putString("name", name);
 
         f.setArguments(args);

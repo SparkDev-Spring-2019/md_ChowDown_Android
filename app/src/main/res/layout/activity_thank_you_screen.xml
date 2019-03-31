@@ -55,7 +55,7 @@
         android:layout_height="20dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/deliveryAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delivery Address:"
@@ -63,7 +63,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/postalAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -75,7 +75,7 @@
         android:layout_height="34dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/expectedDelivery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Expected Delivery:"

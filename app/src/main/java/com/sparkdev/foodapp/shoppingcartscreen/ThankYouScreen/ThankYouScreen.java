@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +41,29 @@ public class ThankYouScreen extends AppCompatActivity {
             TextView textView = findViewById(R.id.userName);
             textView.setText(name + ", we received your order.");
 
+
+
+            Boolean delivery = intent.getBooleanExtra("isDelivery", false);
+            TextView textView2 = findViewById(R.id.deliveryAddress);
+            TextView textView3 = findViewById(R.id.expectedDelivery);
+
+            if (delivery == true){
+                textView2.setText("Delivery Address: ");
+
+            }
+            else {
+                textView2.setText("Pickup Address: ");
+            }
+
+            if (delivery == true){
+                textView3.setText("Expected Delivery: ");
+            }
+            else {
+                textView3.setText("Order is ready for pickup at: ");
+            }
+
+
+
             //sets current time
             calendar = Calendar.getInstance();
             dateFormat = new SimpleDateFormat("h:mm a");
@@ -51,7 +75,8 @@ public class ThankYouScreen extends AppCompatActivity {
             final Button button = findViewById(R.id.button_id);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
+                    Intent intent = new Intent (ThankYouScreen.this, TabLayoutActivity.class);
+                    startActivity(intent);
                 }
             });
 
