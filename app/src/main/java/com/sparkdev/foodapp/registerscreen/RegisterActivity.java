@@ -11,7 +11,9 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.loginscreen.Login;
-import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
+import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -20,13 +22,13 @@ public class RegisterActivity extends AppCompatActivity {
     private static EditText pass1;
     private static EditText pass2;
     private static Button signUp;
-    private static FirebaseAPI firebaseAPI;
+    private static FirebaseAdapter firebaseAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        firebaseAPI = FirebaseAPI.getInstance(this);
+        firebaseAPI = FirebaseAdapter.getInstance(this);
         signUpButton();
     }
 
@@ -44,8 +46,20 @@ public class RegisterActivity extends AppCompatActivity {
                                 firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
                                     @Override
                                     public void onSuccess() {
-                                        Intent i = new Intent(getApplicationContext(),Login.class);
-                                        startActivity(i);
+                                        firebaseAPI.loginUser(email.getText().toString(), pass1.getText().toString(), new LoginCompletionListener() {
+                                            @Override
+                                            public void onSuccess() {
+                                                Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                                                Intent i = new Intent(getApplicationContext(), TabLayoutActivity.class);
+                                                startActivity(i);
+                                            }
+
+                                            @Override
+                                            public void onFailure() {
+
+                                            }
+                                        });
+
                                     }
 
                                     @Override
