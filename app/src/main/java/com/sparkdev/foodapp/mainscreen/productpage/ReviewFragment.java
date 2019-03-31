@@ -10,12 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
 
 
-public class ReviewFragment extends Fragment implements EditNameDialogFragment.EditNameDialogListener {
+public class ReviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +36,7 @@ public class ReviewFragment extends Fragment implements EditNameDialogFragment.E
             @Override
             public void onClick(View v) {
 
-                showEditDialog();
+                openReviewSubmissionPage();
             }
         });
 
@@ -46,18 +45,10 @@ public class ReviewFragment extends Fragment implements EditNameDialogFragment.E
 
     }
 
-    private void showEditDialog() {
-        FragmentManager fm = getFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
-        // SETS the target fragment for use later when sending results
-        editNameDialogFragment.setTargetFragment(ReviewFragment.this, 300);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
-
+    private void openReviewSubmissionPage() {
+        Intent intent = new Intent(getActivity(), ReviewSubmissionPage.class);
+        startActivity(intent);
     }
 
-    @Override
-    public void onFinishEditDialog(String inputText) {
-        //Toast.makeText(this, inputText, Toast.LENGTH_SHORT).show();
 
-    }
 }

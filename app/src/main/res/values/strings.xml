@@ -13,6 +13,6 @@
         <item>4:00 PM</item>
         <item>5:00 PM</item>
     </string-array>
-
-    <string name="thank_you_for_order">Thank you for order!</string>
+  <string name="thank_you_for_order">Thank you for order!</string>
+    <string name="submit">Submit</string>
 </resources>

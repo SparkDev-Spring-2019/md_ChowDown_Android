@@ -46,8 +46,13 @@ public class OrderFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedOption = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), selectedOption, Toast.LENGTH_SHORT).show();
+        if(position == 0){
+
+        }else{
+            String selectedOption = parent.getItemAtPosition(position).toString();
+            Toast.makeText(parent.getContext(), selectedOption, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
