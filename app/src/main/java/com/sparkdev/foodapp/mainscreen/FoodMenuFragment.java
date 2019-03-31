@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.mainscreen.FoodMenu.FoodMenuAdapter;
@@ -52,46 +53,38 @@ public class FoodMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_foodmenu, container, false);
+        final View view = inflater.inflate(R.layout.fragment_foodmenu, container, false);
 
         fireBase = FirebaseAdapter.getInstance(getActivity());
-
-        populateArrays();
-
-        // Get access to the RecyclerView
-        foodMenuRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        foodMenuAdapter = new FoodMenuAdapter(getActivity(), newMenuList);
-        // Connect the adapter to the RecyclerView
-        foodMenuRecyclerView.setAdapter(foodMenuAdapter);
-        // Define the RecyclerView's default layout manager
-        foodMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        return view;
-    }
-
-    public void populateArrays()
-    {
-
         fireBase.getMenuItems(menuCategories, new GetCategoryMenuItemsCompletionListener() {
             @Override
             public void onSuccess(List<SingleMenuItem> menuItems) {
                 for(int i = 0; i < menuItems.size(); i++ )
                 {
-                    newMenuList.add(i, menuItems.get(i));
+                    newMenuList.add(menuItems.get(i));
                 }
+
+                // Get access to the RecyclerView
+                foodMenuRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+                // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
+                foodMenuAdapter = new FoodMenuAdapter(getActivity(), newMenuList);
+                // Connect the adapter to the RecyclerView
+                foodMenuRecyclerView.setAdapter(foodMenuAdapter);
+                // Define the RecyclerView's default layout manager
+                foodMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
 
             @Override
             public void onFailure() {
-
+                Toast.makeText(getActivity(), "Unable to load menu items!", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-
-
+        return view;
     }
+
+
 }
 
 //, prices, categories , ratings,clockIcon, starIcon, leafIcon

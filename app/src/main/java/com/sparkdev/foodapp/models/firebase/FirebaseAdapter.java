@@ -31,6 +31,7 @@ import com.sparkdev.foodapp.models.firebase.loginInterface.GetUserCompletionList
 import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -283,7 +284,10 @@ public class FirebaseAdapter {
                       menuItems.add(document.toObject(SingleMenuItem.class));
                     }
 
-                    listener.onSuccess(menuItems);
+                    if(!menuItems.isEmpty())
+                        listener.onSuccess(menuItems);
+
+                    listener.onFailure();
 
                   } else {
                     listener.onFailure();

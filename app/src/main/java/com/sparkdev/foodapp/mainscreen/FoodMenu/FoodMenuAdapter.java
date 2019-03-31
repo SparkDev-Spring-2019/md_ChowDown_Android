@@ -46,6 +46,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         public final TextView itemPrice;
         public final ImageView foodImage;
         public final TextView itemRate;
+        public final TextView time;
         public final TextView itemCategory;
         public final ImageView clockPic;
         public final ImageView leafPic;
@@ -67,6 +68,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
             clockPic = (ImageView) itemView.findViewById(R.id.clock_icon);
             leafPic = (ImageView) itemView.findViewById(R.id.leaf_icon);
             starPic = (ImageView) itemView.findViewById(R.id.star_icon);
+            time = (TextView) itemView.findViewById(R.id.time_textView);
 
              //Set up the adapter
             this.rowAdapter = adapter;
@@ -89,15 +91,17 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder foodItemViewHolder, int i) {
         String currentContact = itemsList.get(i).getName();     // Hold the current contact name
-        String currentItemPrice = Double.toString(itemsList.get(i).getPrice());
+        String currentItemPrice = String.format("%.2f", itemsList.get(i).getPrice());
         String currentRate = Double.toString(itemsList.get(i).getRating());
         String currentCategory = itemsList.get(i).getCategory().get(0);
+        String currentTime = String.valueOf(itemsList.get(i).getCompletionTime());
 
         foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
         //foodItemViewHolder.foodImage.setImageResource(currentImage);
-        foodItemViewHolder.itemPrice.setText(currentItemPrice);
+        foodItemViewHolder.itemPrice.setText("$" + currentItemPrice);
         foodItemViewHolder.itemRate.setText(currentRate);
         foodItemViewHolder.itemCategory.setText(currentCategory);
+        foodItemViewHolder.time.setText(currentTime );
     }
 
     @Override
