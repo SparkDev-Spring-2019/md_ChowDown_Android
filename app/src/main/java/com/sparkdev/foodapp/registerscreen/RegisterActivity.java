@@ -11,7 +11,9 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.loginscreen.Login;
+import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
 import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -44,18 +46,30 @@ public class RegisterActivity extends AppCompatActivity {
                                 firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
                                     @Override
                                     public void onSuccess() {
-                                        Intent i = new Intent(getApplicationContext(),Login.class);
-                                        startActivity(i);
-                                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                        firebaseAPI.loginUser(email.getText().toString(), pass1.getText().toString(), new LoginCompletionListener() {
+                                            @Override
+                                            public void onSuccess() {
+                                                Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                                                Intent i = new Intent(getApplicationContext(), TabLayoutActivity.class);
+                                                startActivity(i);
+                                            }
+
+                                            @Override
+                                            public void onFailure() {
+
+                                            }
+                                        });
 
                                     }
 
                                     @Override
                                     public void onFailure() {
                                         Toast.makeText(getApplicationContext(), "Please verify that you have entered a valid email and password.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), pass1.getText().toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
+
                     }
                 }
         );

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sparkdev.foodapp">
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,13 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".registerscreen.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".mainscreen.productpage.ProductPageActivity"
-
-            >
+        <activity android:name=".mainscreen.productpage.ProductPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
             <category android:name="android.intent.category.LAUNCHER"></category>
@@ -48,6 +43,39 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
+=======
+        <activity android:name=".mainscreen.TabLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
+        </activity>
+        <activity
+            android:name=".loginscreen.Login"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"
+            android:theme="@style/AppTheme">
+
+
+
+        </activity>
+        <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+        <activity
+            android:name=".shoppingcartscreen.ThankYouScreen.ThankYouScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
+
+        </activity>
+    </application>
 
 </manifest>

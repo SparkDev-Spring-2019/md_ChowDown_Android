@@ -1,10 +1,13 @@
 package com.sparkdev.foodapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SingleMenuItem{
+public class SingleMenuItem implements Parcelable {
 
   private String id;
   private ArrayList<String> category;
@@ -24,6 +27,13 @@ public class SingleMenuItem{
     this.reviewsRefId = reviewsRefId;
   }
 
+  public SingleMenuItem(String foodImageUrl, double price, String name)
+  {
+    this.foodImageUrl = foodImageUrl;
+    this.price = price;
+    this.name = name;
+  }
+
   public SingleMenuItem(String id, ArrayList<String> category, String name, String description, String foodImageUrl, Double rating, Double price, Integer completionTime, Boolean isVegan, String reviewsRefId, HashMap<String, Object> reviewIds) {
     this.id = id;
     this.category = category;
@@ -36,6 +46,44 @@ public class SingleMenuItem{
     this.isVegan = isVegan;
     this.reviewsRefId = reviewsRefId;
   }
+
+  protected SingleMenuItem(Parcel in) {
+    id = in.readString();
+    category = in.createStringArrayList();
+    name = in.readString();
+    description = in.readString();
+    foodImageUrl = in.readString();
+    if (in.readByte() == 0) {
+      rating = null;
+    } else {
+      rating = in.readDouble();
+    }
+    if (in.readByte() == 0) {
+      price = null;
+    } else {
+      price = in.readDouble();
+    }
+    if (in.readByte() == 0) {
+      completionTime = null;
+    } else {
+      completionTime = in.readInt();
+    }
+    byte tmpIsVegan = in.readByte();
+    isVegan = tmpIsVegan == 0 ? null : tmpIsVegan == 1;
+    reviewsRefId = in.readString();
+  }
+
+  public static final Creator<SingleMenuItem> CREATOR = new Creator<SingleMenuItem>() {
+    @Override
+    public SingleMenuItem createFromParcel(Parcel in) {
+      return new SingleMenuItem(in);
+    }
+
+    @Override
+    public SingleMenuItem[] newArray(int size) {
+      return new SingleMenuItem[size];
+    }
+  };
 
   public String getId() {
     return id;
@@ -136,4 +184,38 @@ public class SingleMenuItem{
     return singleMenuItemMap;
   }
 
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(id);
+    parcel.writeStringList(category);
+    parcel.writeString(name);
+    parcel.writeString(description);
+    parcel.writeString(foodImageUrl);
+    if (rating == null) {
+      parcel.writeByte((byte) 0);
+    } else {
+      parcel.writeByte((byte) 1);
+      parcel.writeDouble(rating);
+    }
+    if (price == null) {
+      parcel.writeByte((byte) 0);
+    } else {
+      parcel.writeByte((byte) 1);
+      parcel.writeDouble(price);
+    }
+    if (completionTime == null) {
+      parcel.writeByte((byte) 0);
+    } else {
+      parcel.writeByte((byte) 1);
+      parcel.writeInt(completionTime);
+    }
+    parcel.writeByte((byte) (isVegan == null ? 0 : isVegan ? 1 : 2));
+    parcel.writeString(reviewsRefId);
+  }
 }

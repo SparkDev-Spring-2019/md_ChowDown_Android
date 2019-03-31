@@ -11,8 +11,8 @@ import android.widget.Button;
 import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
+    private PriceFragment priceFragment;
 
-    boolean isDelivery;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,17 +22,20 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
         String name = "Reiner";
 
-        PriceFragment priceFragment = PriceFragment.newInstance(isDelivery, name);
+        //replacing price and place order button container with fragment
+        priceFragment = PriceFragment.newInstance(name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
                 .commit();
 
 
+        //setting delivery button to clicked color
         Button button = findViewById(R.id.DButton);
         button.setBackgroundColor(getResources().getColor(R.color.btColor));
         button.setTextColor(getResources().getColor(R.color.white));
 
+        //adding delivery fragment as default in the pop up container
         DeliveryFragment deliveryFragment = new DeliveryFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -66,7 +69,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
 
-            isDelivery = true;
+            priceFragment.setDelivery(true);
         }
 
         if (view == findViewById(R.id.TObutton))
@@ -86,7 +89,7 @@ public class ConfirmationActivity extends AppCompatActivity  {
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
 
-            isDelivery = false;
+            priceFragment.setDelivery(false);
 
         }
 
