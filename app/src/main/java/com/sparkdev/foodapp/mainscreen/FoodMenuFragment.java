@@ -60,10 +60,7 @@ public class FoodMenuFragment extends Fragment {
         fireBase.getMenuItems(menuCategories, new GetCategoryMenuItemsCompletionListener() {
             @Override
             public void onSuccess(List<SingleMenuItem> menuItems) {
-                for(int i = 0; i < menuItems.size(); i++ )
-                {
-                    newMenuList.add(menuItems.get(i));
-                }
+                    newMenuList = menuItems;
 
                 // Get access to the RecyclerView
                 foodMenuRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
