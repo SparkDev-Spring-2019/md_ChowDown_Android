@@ -1,6 +1,5 @@
 package com.sparkdev.foodapp.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MenuCategory {
