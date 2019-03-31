@@ -30,6 +30,11 @@ public class User {
         this.fullAddress = address + city + state + zipCode;
     }
 
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void setEmail(String email){
         this.email = email;
     }
@@ -80,5 +85,13 @@ public class User {
 
     public static void setCurrentUID(String currentUID) {
         User.currentUID = currentUID;
+    }
+
+    public String getFullAddress() {
+        return fullAddress;
+    }
+
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
     }
 }

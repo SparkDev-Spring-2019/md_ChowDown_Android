@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.mainscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.profileSettings.ProfileSettings;
 
 
 public class TabLayoutActivity extends AppCompatActivity {
@@ -66,6 +68,11 @@ public class TabLayoutActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_settings:
+                drawerLayout.openDrawer(GravityCompat.START);
+                Intent intent = new Intent(TabLayoutActivity.this, ProfileSettings.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -32,7 +32,8 @@ public class ProfileSettings extends AppCompatActivity   {
     private ProfileSettingsAdapter profileAdapter;
     private ArrayList <String> row_titles = new ArrayList<>();
     private ArrayList <String> user_input = new ArrayList<>();
-    //private User u = new User();
+
+
     private Toolbar myToolbar;
     private CircleImageView circleImageView;
     private MenuItem menuItem;
@@ -51,21 +52,68 @@ public class ProfileSettings extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-        //textInputEmail = findViewById(R.id.text_input_email);
-        //textInputUsername = findViewById(R.id.text_input_username);
-        //textInputPassword = findViewById(R.id.text_input_password);
-
         // Add row titles
         row_titles.add("First Name");
         row_titles.add("Last Name");
-        row_titles.add("Username");
+        row_titles.add("Address");
         row_titles.add("Email");
         row_titles.add("Password");
+
+
+        User u = User.currentUser;
+
+
+
+        // add user input
+        if (u.getFirstName() != null)
+        {
+            user_input.add(u.getFirstName());
+        }
+        else
+        {
+            user_input.add("");
+        }
+
+        if (u.getLastName() != null)
+        {
+            user_input.add(u.getLastName());
+        }
+        else
+        {
+            user_input.add("");
+        }
+
+        if (u.getFullAddress() != null)
+        {
+            user_input.add(u.getFullAddress());
+        }
+        else
+        {
+            user_input.add("");
+        }
+
+        if (u.getEmail() != null)
+        {
+            user_input.add(u.getEmail());
+        }
+        else
+        {
+            user_input.add("");
+        }
+
+        if (u.getPassword() != null)
+        {
+            user_input.add(u.getPassword());
+        }
+        else
+        {
+            user_input.add("");
+        }
 
         // Get access to the RecyclerView
         profileRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        profileAdapter = new ProfileSettingsAdapter(this,row_titles);
+        profileAdapter = new ProfileSettingsAdapter(this,row_titles, user_input);
         // Connect the adapter to the RecyclerView
         profileRecyclerView.setAdapter(profileAdapter);
         // Define the RecyclerView's default layout manager
@@ -139,21 +187,19 @@ public class ProfileSettings extends AppCompatActivity   {
         }
     }
 
-    public static boolean validateUsername(EditText editText)
+    public static boolean validateAddress(EditText editText)
     {
-        String usernameInput = editText.getText().toString().trim();
+        String addressInput = editText.getText().toString().trim();
 
-        if (usernameInput.isEmpty()) {
+        if(addressInput.isEmpty()) {
             editText.setError("Field cannot be empty");
-            return false;
-        } else if (usernameInput.length() > 15) {
-            editText.setError("Username must be 15 characters or less");
             return false;
         } else {
             editText.setError(null);
             return true;
         }
     }
+
 
     public static boolean validateEmail(EditText editText)
     {

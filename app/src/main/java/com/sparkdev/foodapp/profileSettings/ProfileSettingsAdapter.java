@@ -1,6 +1,8 @@
 package com.sparkdev.foodapp.profileSettings;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.User;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -27,15 +29,14 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     private final ArrayList<String> textInputList;    // This will hold your data
     private LayoutInflater profileInflater;       // This will be the inflater for ContactListAdapter
     private boolean isAllValidated = true;
-
-
-
+    private User user = User.currentUser;
+    private final ArrayList<String> userInput;
 
     // ContactListAdapter Constructor
-    public ProfileSettingsAdapter(Context context, ArrayList<String> textInputList) {
+    public ProfileSettingsAdapter(Context context, ArrayList<String> textInputList, ArrayList<String> userInput) {
         profileInflater = LayoutInflater.from(context); // Initialize the layout inflator
         this.textInputList = textInputList; // Initialize the arraylist
-
+        this.userInput = userInput;
     }
 
     // Inner class to the ContactListAdapter and extends
@@ -80,7 +81,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
         String currentInput = textInputList.get(i);     // Hold the current text field
         contactViewHolder.nameTextView.setText(currentInput); // Set text field at i position to TextView
-        contactViewHolder.editTextView.getEditText().setText("Guirdelle"); //previous user input
+        contactViewHolder.editTextView.getEditText().setText(userInput.get(i)); // previous user input
 
         contactViewHolder.editTextView.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,8 +105,8 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
                 } else if (i == 2) {
 
-                    //username
-                    isAllValidated = ProfileSettings.validateUsername(contactViewHolder.editTextView.getEditText());
+                    //adress
+                    isAllValidated = ProfileSettings.validateAddress(contactViewHolder.editTextView.getEditText());
 
                 } else if (i == 3) {
 
