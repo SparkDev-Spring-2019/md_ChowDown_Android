@@ -39,16 +39,13 @@
                 android:padding="50dp"
                 android:background="@color/grey">
 
-
-                    <ImageView
-                        android:id="@+id/profile_picture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/todo"
-                        android:scaleType="center"
-                        android:src="@mipmap/ic_launcher" />
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/g1321"/>
             </LinearLayout>
 
             <LinearLayout
