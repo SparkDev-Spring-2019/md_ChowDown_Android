@@ -5,19 +5,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.sparkdev.foodapp.models.MenuCategory;
+
+import java.util.List;
+
 public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] { "All", "Appetizers", "Breakfast", "Lunch" };
+
+    private List<MenuCategory> tabTitles;
     private Context context;
 
-    public MainscreenFragmentPagerAdapter(FragmentManager fm, Context context) {
+
+    public MainscreenFragmentPagerAdapter(FragmentManager fm, Context context, List<MenuCategory> tabTitles) {
         super(fm);
         this.context = context;
+        this.tabTitles = tabTitles;
     }
 
     @Override
     public int getCount() {
-        return PAGE_COUNT;
+        return tabTitles.size();
     }
 
     @Override
@@ -28,6 +34,6 @@ public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         // Generate title based on item position
-        return tabTitles[position];
+        return tabTitles.get(position).getCategoryId();
     }
 }

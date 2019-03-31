@@ -12,16 +12,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.MenuCategory;
+import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
+import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesCompletionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TabLayoutActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    private static FirebaseAPI firebaseAPI;
+    private List<MenuCategory> categories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_draw);
+        firebaseAPI = FirebaseAPI.getInstance(this);
+        firebaseAPI.getMenuCategories(new GetMenuCategoriesCompletionListener() {
+            @Override
+            public void onSuccess(List<MenuCategory> menuCategories) {
+
+                System.out.println("TAB MENU!!!!!" + menuCategories.size());
+                System.out.println("FIRST ITEM" + menuCategories.get(0).getCategoryId());
+
+                for(int i = 0; i < menuCategories.size(); i++) {
+                    System.out.println(menuCategories.get(i).getCategoryId());
+                    categories.add(menuCategories.get(i));
+                    System.out.println(categories.size());
+                    System.out.println(categories.get(i).getCategoryId());
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -50,11 +79,14 @@ public class TabLayoutActivity extends AppCompatActivity {
        ActionBar actionbar = getSupportActionBar();
        actionbar.setDisplayHomeAsUpEnabled(true);
        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+       
 
        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        MainscreenFragmentPagerAdapter pagerAdapter = new MainscreenFragmentPagerAdapter(getSupportFragmentManager(),
+                TabLayoutActivity.this, categories);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MainscreenFragmentPagerAdapter(getSupportFragmentManager(),
-                TabLayoutActivity.this));
+        viewPager.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

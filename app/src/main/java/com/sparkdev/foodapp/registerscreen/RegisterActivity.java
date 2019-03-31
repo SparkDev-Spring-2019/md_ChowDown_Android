@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.loginscreen.Login;
+import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
 import com.sparkdev.foodapp.models.firebase.FirebaseAPI;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
 
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
                                     @Override
                                     public void onSuccess() {
-                                        Intent i = new Intent(getApplicationContext(),Login.class);
+                                        Intent i = new Intent(getApplicationContext(), TabLayoutActivity.class);
                                         startActivity(i);
                                         Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
 

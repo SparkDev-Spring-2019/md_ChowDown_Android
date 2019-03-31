@@ -47,6 +47,6 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/drawer_view"
         app:headerLayout="@layout/nav_header"
-        android:background="@color/colorPrimaryRed"/>
+        android:background="@android:color/white"/>
 
 </android.support.v4.widget.DrawerLayout>
