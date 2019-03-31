@@ -26,6 +26,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/roundedwhite"
         android:hint=" Enter password here..."
+        android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -36,6 +37,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/roundedwhite"
         android:hint=" Enter password again..."
+        android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="@+id/password2"
         app:layout_constraintTop_toBottomOf="@+id/password2" />
 

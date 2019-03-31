@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/order_options"
+        android:layout_width="381dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/top_order_options_tag"
+
+        />
+
+    <TextView
+        android:id="@+id/top_order_options_tag"
+        android:layout_width="378dp"
+        android:layout_height="44dp"
+
+        />
+
+
+    <Spinner
+        android:id="@+id/order_quantity"
+        android:layout_width="385dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/bottom_order_quantity_tag"
+        />
+
+    <TextView
+        android:id="@+id/bottom_order_quantity_tag"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="monospace"
+        android:layout_below="@+id/order_options"
+        />
+
+
+</RelativeLayout>

@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <android.support.v7.widget.RecyclerView
@@ -15,17 +15,55 @@
                 android:layout_height="wrap_content">
             </android.support.v7.widget.RecyclerView>
 
+            <Button
+                android:id="@+id/reviewButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/totalnumberTextview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="Review Order"
+                android:textStyle="bold" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@+id/recycler_view"
-                android:layout_alignParentBottom="true"
-                android:text="Price totals here"
-                android:textSize="30dp"
-                android:textAlignment="center"
-                android:background="#fff"
-                android:gravity="center" />
+                android:id="@+id/totalTextView"
+                android:layout_marginTop="15dp"
+                android:layout_width="64dp"
+                android:layout_height="27dp"
+                android:layout_below="@id/recycler_view"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="sans-serif"
+                android:text="Total"
+                android:textAlignment="textStart"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/totalnumberTextview"
+                android:layout_width="64dp"
+                android:layout_height="27dp"
+                android:layout_below="@id/recycler_view"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="sans-serif"
+                android:text="$20.00"
+                android:textColor="@color/btColor"
+                android:textSize="20sp"
+                android:typeface="normal" />
+
         </RelativeLayout>
+
+
+
+
     </ScrollView>
 
 

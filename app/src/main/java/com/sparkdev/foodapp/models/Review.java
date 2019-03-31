@@ -13,6 +13,8 @@ public class Review {
   private String foodId;
   private Double rating;
 
+  public Review() {}
+
   public Review(Date timestamp, String reviewMsg, String reviewerId, String reviewerName, String foodId, Double rating) {
     this.timestamp = timestamp;
     this.reviewMsg = reviewMsg;

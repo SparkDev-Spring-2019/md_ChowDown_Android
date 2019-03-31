@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#FF5E01</color>
+    <color name="colorPrimaryDark">#030303</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="btColor">#F15122</color>
     <color name="red">#FF0000</color>
     <color name="navy">#000080</color>
     <color name="aqua">#00FFFF</color>
@@ -11,4 +12,6 @@
     <color name="colorPrimaryOrange">#ff3300</color>
     <color name="orange">#F4A142</color>
     <color name="grey">#F2F2F2</color>
+    <color name="black">#000</color>
+    <color name="Orange">#FF5722</color>
 </resources>

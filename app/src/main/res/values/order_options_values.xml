@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="order_options">Spinner</string>
+
+    <string-array name="options">
+        <item></item>
+        <item>Large</item>
+        <item>Medium</item>
+        <item>Small</item>
+    </string-array>
+</resources>
