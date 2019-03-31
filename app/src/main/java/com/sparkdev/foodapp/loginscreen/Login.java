@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
         login = (Button) findViewById(R.id.login);
         register = (TextView) findViewById(R.id.register);
 
-        //registerButton();
+
 
         login.setOnClickListener(
                 new View.OnClickListener() {
@@ -90,24 +90,14 @@ public class Login extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(Login.this, RegisterActivity.class));
+
                 Intent i = new Intent(getApplicationContext(),RegisterActivity.class);
-                Log.d("Login", "Before");
                 startActivity(i);
-                Log.d("postLogin","After");
-                Toast.makeText(getApplicationContext(), "Yaga Yeet Skurt My bones hurt", Toast.LENGTH_SHORT).show();
+
             }
         });
 
     }
 
-    public void registerButton(){
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(Login.this, RegisterActivity.class));
-                Toast.makeText(getApplicationContext(), "Yaga Yeet Skurt My bones hurt", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
 }
