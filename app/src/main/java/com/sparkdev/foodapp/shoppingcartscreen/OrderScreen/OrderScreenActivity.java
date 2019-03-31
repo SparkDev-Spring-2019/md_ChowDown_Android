@@ -1,12 +1,20 @@
 package com.sparkdev.foodapp.shoppingcartscreen.OrderScreen;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.OrderItem;
+import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.shoppingcartscreen.confirmationscreen.ConfirmationActivity;
 
 import java.util.ArrayList;
 
@@ -15,54 +23,41 @@ public class OrderScreenActivity extends AppCompatActivity {
     private LinearLayoutManager llm;
     private RecyclerView recyclerView;
     private OrderScreenAdapter adapter;
-    private ArrayList<String> foodItemName = new ArrayList<>();
-    private ArrayList<String> sizeOfItem = new ArrayList<>();
-    private ArrayList<Integer> quantity = new ArrayList<>();
-    private ArrayList<String> prices = new ArrayList<>();
-    private ArrayList<Integer> images = new ArrayList<>();
     private DividerItemDecoration itemDecoration;
+
+
+    private OrderItem orderItem;
+    private OrderItem orderItem2;
+    private SingleMenuItem menuItem;
+    private SingleMenuItem menuItem2;
+    private ArrayList<OrderItem> orderItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_screen);
 
+        //Set action bar title
+        getSupportActionBar().setTitle("Your Order");
 
-        String [] foodNameArray = {"Rice and Beans", "Tiramisu", "Pizza","Cake", "Arroz con leche"};
-        for(int i = 0; i < foodNameArray.length; i++)
-        {
-            foodItemName.add(foodNameArray[i]);
-        }
+       //populate data
+        menuItem = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fcheesecake.jpg?alt=media&token=8f66127f-fe59-4f16-816d-d93af9ffc605",
+                2.30,"cheescake");
+        orderItem = new OrderItem(menuItem,5,"medium");
+        menuItem2 = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fpasta.jpg?alt=media&token=8fe8925d-c940-4c8b-8f48-fa3f1bd4f9ce",
+                1.00,"pasta");
+        orderItem2 = new OrderItem(menuItem2,5,"large");
+
+        //create order list
+        orderItems = new ArrayList<>();
 
 
+        //add item to list
+        orderItems.add(orderItem);
+        orderItems.add(orderItem2);
 
-        //Filling quantity ArrayList
-        int [] quantityArray = {4, 2, 1, 1, 2};
-        for(int i = 0; i < quantityArray.length; i++)
-        {
-            quantity.add(quantityArray[i]);
-        }
 
-        // Filling images ArrayList
-        int [] imageArray = {R.drawable.riceandbeans, R.drawable.tiramisu, R.drawable.pizza,
-                R.drawable.cake, R.drawable.arrozconleche};
-        for(int i = 0; i < imageArray.length; i++)
-        {
-            images.add(imageArray[i]);
-        }
-
-        //Fill prices ArrayList
-        String [] pricesArray = {"$4.55", "$8.65", "$2.34", "$3.87", "$3.00"};
-        for(int i = 0; i < pricesArray.length; i++)
-        {
-            prices.add(pricesArray[i]);
-        }
-
-        String [] sizeArray = {"small", "large", "medium", "small", "medium"};
-        for(int i = 0; i < pricesArray.length; i++)
-        {
-            sizeOfItem.add(sizeArray[i]);
-        }
 
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -72,15 +67,52 @@ public class OrderScreenActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setNestedScrollingEnabled(false);
         // Create the adapter and supply the adapter with the data (i.e from an arraylist or database)
-        adapter = new OrderScreenAdapter(this, quantity, prices, images, sizeOfItem,foodItemName);
+
+        adapter = new OrderScreenAdapter(this, orderItems);
+
         // Connect the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
         // Define the RecyclerView's default layout manager
         recyclerView.setLayoutManager(llm);
 
+        // Swipe gestures
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         // Add the line divider between each row
         itemDecoration = new DividerItemDecoration(recyclerView.getContext()
                 , llm.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
+
+        //setting total text view to the calculated total sum
+        double total = addTotal();
+        TextView totalText = findViewById(R.id.totalnumberTextview);
+        totalText.setText("$" + String.format("%.2f", total));
+
+
+        Button button = findViewById(R.id.reviewButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ConfirmationActivity.class);
+                intent.putExtra("total", addTotal());
+                startActivity(intent);
+            }
+        });
     }
+
+
+    public double addTotal()
+    {
+        double total = 0;
+
+        //looping price arraylist to calculate total
+        for (int i = 0; i < orderItems.size(); i++)
+        {
+             total += orderItems.get(i).getFoodItem().getPrice() * orderItems.get(i).getQuantity();
+
+        }
+        return total;
+    }
+
 }

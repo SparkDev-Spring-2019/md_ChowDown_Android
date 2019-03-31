@@ -28,7 +28,7 @@ public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+        return FoodMenuFragment.newInstance(tabTitles.get(position));
     }
 
     @Override
@@ -36,4 +36,6 @@ public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
         // Generate title based on item position
         return tabTitles.get(position).getCategoryId();
     }
+
+
 }

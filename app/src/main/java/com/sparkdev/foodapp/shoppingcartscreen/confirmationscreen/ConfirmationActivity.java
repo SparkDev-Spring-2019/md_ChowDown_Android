@@ -11,47 +11,40 @@ import android.widget.Button;
 import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
+    private PriceFragment priceFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        PriceFragment priceFragment = new PriceFragment();
+        String name = "Reiner";
+
+        //replacing price and place order button container with fragment
+        priceFragment = PriceFragment.newInstance(name);
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
                 .commit();
 
+
+        //setting delivery button to clicked color
         Button button = findViewById(R.id.DButton);
         button.setBackgroundColor(getResources().getColor(R.color.btColor));
         button.setTextColor(getResources().getColor(R.color.white));
 
+        //adding delivery fragment as default in the pop up container
         DeliveryFragment deliveryFragment = new DeliveryFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentLayout, deliveryFragment);
         fragmentTransaction.commit();
 
-//implements AdapterView.OnItemSelectedListener
-//        Spinner spinner = (Spinner)findViewById(R.id.timeSpinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.hours, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
 
     }
 
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text = parent.getItemAtPosition(position).toString();
-//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT);
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
 
     public void ChangeFragment(View view)
@@ -75,6 +68,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            priceFragment.setDelivery(true);
         }
 
         if (view == findViewById(R.id.TObutton))
@@ -93,6 +88,8 @@ public class ConfirmationActivity extends AppCompatActivity  {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
+
+            priceFragment.setDelivery(false);
 
         }
 

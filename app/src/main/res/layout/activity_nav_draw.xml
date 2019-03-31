@@ -25,8 +25,8 @@
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryRed"
-            app:tabMode="fixed"/>
+            android:background="@android:color/white"
+            app:tabMode="scrollable"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
