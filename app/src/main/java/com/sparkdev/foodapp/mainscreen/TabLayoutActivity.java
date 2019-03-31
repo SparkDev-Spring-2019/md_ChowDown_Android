@@ -9,14 +9,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.MenuCategory;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesCompletionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TabLayoutActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    private static FirebaseAdapter fireBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +59,31 @@ public class TabLayoutActivity extends AppCompatActivity {
        actionbar.setDisplayHomeAsUpEnabled(true);
        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-       // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MainscreenFragmentPagerAdapter(getSupportFragmentManager(),
-                TabLayoutActivity.this));
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        final ArrayList<MenuCategory> categories = new ArrayList<>();
+        fireBase = FirebaseAdapter.getInstance(TabLayoutActivity.this);
+        fireBase.getMenuCategories(new GetMenuCategoriesCompletionListener() {
+            @Override
+            public synchronized void onSuccess(List<MenuCategory> menuCategories) {
+                for(MenuCategory category: menuCategories)
+                {
+                    categories.add(category);
+                }
+
+                viewPager.setAdapter(new MainscreenFragmentPagerAdapter(getSupportFragmentManager(),
+                        TabLayoutActivity.this, categories) );
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
+
+
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

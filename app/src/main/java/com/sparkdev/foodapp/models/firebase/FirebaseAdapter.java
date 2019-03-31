@@ -286,8 +286,8 @@ public class FirebaseAdapter {
 
                     if(!menuItems.isEmpty())
                         listener.onSuccess(menuItems);
-
-                    listener.onFailure();
+                    else
+                        listener.onFailure();
 
                   } else {
                     listener.onFailure();

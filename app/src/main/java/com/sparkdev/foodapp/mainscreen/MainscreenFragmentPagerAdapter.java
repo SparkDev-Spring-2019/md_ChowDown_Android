@@ -5,12 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.sparkdev.foodapp.models.MenuCategory;
+
+import java.util.ArrayList;
+
 public class MainscreenFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 4;
     private String tabTitles[] = new String[] { "All", "Appetizers", "Breakfast", "Lunch" };
     private Context context;
 
-    public MainscreenFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public MainscreenFragmentPagerAdapter(FragmentManager fm, Context context, ArrayList<MenuCategory> categories) {
         super(fm);
         this.context = context;
     }
