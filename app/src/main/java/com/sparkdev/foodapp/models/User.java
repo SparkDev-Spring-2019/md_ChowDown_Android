@@ -30,6 +30,12 @@ public class User {
         this.fullAddress = address + city + state + zipCode;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+
+    }
+
     public User(){}
 
     public void setEmail(String email){

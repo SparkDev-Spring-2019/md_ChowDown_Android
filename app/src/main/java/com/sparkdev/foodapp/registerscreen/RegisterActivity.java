@@ -46,8 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onSuccess() {
                                         Intent i = new Intent(getApplicationContext(),Login.class);
                                         startActivity(i);
-                                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(getApplicationContext(), pass1.getText().toString(), Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
