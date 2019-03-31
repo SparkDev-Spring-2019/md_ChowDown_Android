@@ -1,6 +1,7 @@
 package com.sparkdev.foodapp.mainscreen;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodMenuFragment extends Fragment {
-    public static final String ARG_PAGE = "ARG_PAGE";
     private RecyclerView foodMenuRecyclerView;
     private FoodMenuAdapter foodMenuAdapter;
 
@@ -30,13 +30,14 @@ public class FoodMenuFragment extends Fragment {
 
     private int mPage;
     private static FirebaseAdapter fireBase;
-    MenuCategory menuCategories = new MenuCategory("Lunch");
+    MenuCategory menuCategories;
     List<SingleMenuItem> newMenuList = new ArrayList<>();
 
 
-    public static FoodMenuFragment newInstance(int page) {
+    public static FoodMenuFragment newInstance(MenuCategory menuCategory) {
+
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
+        args.putParcelable("menu_Category", (Parcelable)menuCategory);
         FoodMenuFragment fragment = new FoodMenuFragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,7 +48,7 @@ public class FoodMenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        menuCategories = getArguments().getParcelable("menu_Category");
     }
 
     @Override

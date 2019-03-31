@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class MenuCategory implements Parcelable {
 
+
   private String categoryId;
   private HashMap<String, Object> menuItemsIds;
 
@@ -18,6 +19,16 @@ public class MenuCategory implements Parcelable {
 
   protected MenuCategory(Parcel in) {
     categoryId = in.readString();
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(categoryId);
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
   }
 
   public static final Creator<MenuCategory> CREATOR = new Creator<MenuCategory>() {
@@ -38,15 +49,5 @@ public class MenuCategory implements Parcelable {
 
   public HashMap<String, Object> getMenuItemsIds() {
     return menuItemsIds;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel parcel, int i) {
-    parcel.writeString(categoryId);
   }
 }
