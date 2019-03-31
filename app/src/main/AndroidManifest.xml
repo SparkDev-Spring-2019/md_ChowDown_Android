@@ -31,6 +31,7 @@
         <activity
             android:name=".mainscreen.TabLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".mainscreen.productpage.ReviewSubmissionPage"></activity>
         <activity
             android:name=".shoppingcartscreen.OrderScreen.OrderScreenActivity"
             android:theme="@style/AppTheme">
