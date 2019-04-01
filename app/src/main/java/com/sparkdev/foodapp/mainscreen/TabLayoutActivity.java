@@ -39,10 +39,7 @@ public class TabLayoutActivity extends AppCompatActivity {
             public void onSuccess(List<MenuCategory> menuCategories) {
 
                 for(int i = 0; i < menuCategories.size(); i++) {
-                    System.out.println(menuCategories.get(i).getCategoryId());
                     categories.add(menuCategories.get(i));
-                    System.out.println(categories.size());
-                    System.out.println(categories.get(i).getCategoryId());
                 }
 
                 MainscreenFragmentPagerAdapter pagerAdapter = new MainscreenFragmentPagerAdapter(getSupportFragmentManager(),
