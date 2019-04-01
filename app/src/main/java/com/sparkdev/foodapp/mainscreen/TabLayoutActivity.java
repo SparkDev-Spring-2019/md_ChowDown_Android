@@ -2,6 +2,7 @@ package com.sparkdev.foodapp.mainscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -11,12 +12,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.MenuCategory;
 import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesCompletionListener;
 import com.sparkdev.foodapp.profileSettings.ProfileSettings;
+import com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +96,15 @@ public class TabLayoutActivity extends AppCompatActivity {
        actionbar.setDisplayHomeAsUpEnabled(true);
        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-
+       //To go to shopping cart Screen
+        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TabLayoutActivity.this, OrderScreenActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
