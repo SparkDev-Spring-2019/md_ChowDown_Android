@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.StackView;
 
+import com.bumptech.glide.Glide;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 
@@ -47,6 +48,7 @@ public class ProductPageActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         ImageView = (android.widget.ImageView) findViewById(R.id.product_stack_view);
+        Glide.with(this).load(current.getFoodImageUrl()).into(ImageView);
 
     }
 
