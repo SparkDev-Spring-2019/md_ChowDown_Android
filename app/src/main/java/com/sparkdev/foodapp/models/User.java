@@ -48,7 +48,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.fullAddress = address;
+        this.address = address;
     }
 
   public void setEmail(String email){

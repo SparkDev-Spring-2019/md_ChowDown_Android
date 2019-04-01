@@ -13,11 +13,13 @@ import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
 import com.sparkdev.foodapp.models.User;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
 public class ThankYouScreen extends AppCompatActivity {
+
 
 
         private ProgressBar mProgressBar;
@@ -37,22 +39,17 @@ public class ThankYouScreen extends AppCompatActivity {
 
             //receive information from previous activity
             Intent intent = getIntent();
-           // String name = intent.getStringExtra("name");
+            String address = intent.getStringExtra("address");
 
-
-
-            //set the user name
-            String name;
+            //get views
             TextView textView = findViewById(R.id.userName);
+            TextView addressText = findViewById(R.id.addressText);
+
+            //set text for user
             if(User.currentUser != null) {
-                name = User.currentUser.getFirstName();
+                String name = User.currentUser.getFirstName();
                 textView.setText(name + ", we received your order.");
             }
-            else{
-                textView.setText("[User], we recieved your order.");
-            }
-
-
 
             //change delivery text based on isDelivery
             Boolean delivery = intent.getBooleanExtra("isDelivery", false);
@@ -62,11 +59,14 @@ public class ThankYouScreen extends AppCompatActivity {
             if (delivery == true){
                 textView2.setText("Delivery Address: ");
                 textView3.setText("Expected Delivery: ");
+                addressText.setText(address);
             }
             else {
                 textView2.setText("Pickup Address: ");
                 textView3.setText("Order is ready for pickup at: ");
             }
+
+
 
 
 

@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class TakeoutFragment extends Fragment  {
 
-    String time ;
-    String address;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,12 +41,6 @@ public class TakeoutFragment extends Fragment  {
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                time  = adapterView.getItemAtPosition(i).toString();
-            }
-        });
     }
 
     public void AddSpinner2(View view)
@@ -60,21 +52,8 @@ public class TakeoutFragment extends Fragment  {
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                address = adapterView.getItemAtPosition(i).toString();
-            }
-        });
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getTime() {
-        return time;
-    }
 
 
 }

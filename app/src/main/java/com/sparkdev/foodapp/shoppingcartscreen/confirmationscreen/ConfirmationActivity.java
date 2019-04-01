@@ -7,12 +7,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.sparkdev.foodapp.R;
 
 public class ConfirmationActivity extends AppCompatActivity  {
     private PriceFragment priceFragment;
-
+    public EditText addressInput;
+    public EditText ASInput;
+    public EditText zipInput;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -20,10 +23,9 @@ public class ConfirmationActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        String name = "Reiner";
 
         //replacing price and place order button container with fragment
-        priceFragment = PriceFragment.newInstance(name);
+        priceFragment = new PriceFragment();
         FragmentManager manager1 = getSupportFragmentManager();
         manager1.beginTransaction()
                 .replace(R.id.priceLayout, priceFragment, priceFragment.getTag())
@@ -45,8 +47,24 @@ public class ConfirmationActivity extends AppCompatActivity  {
 
     }
 
+    public String getDeliveryAddress()
+    {
+        addressInput = findViewById(R.id.addressInput);
+        String address = addressInput.getText().toString();
+
+        zipInput = findViewById(R.id.zipInput);
+        String zip = zipInput.getText().toString();
+
+        ASInput = findViewById(R.id.ASInput);
+        String AS = ASInput.getText().toString();
+
+        return address + ", " + zip + "        Appt/Suite: " + AS;
+    }
 
 
+
+
+    //to change between delivery and takeout
     public void ChangeFragment(View view)
     {
 
