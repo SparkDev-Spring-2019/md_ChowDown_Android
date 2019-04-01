@@ -50,6 +50,11 @@
             android:exported="true">
 
         </activity>
+
+        <activity
+            android:name=".profileSettings.ProfileSettings">
+
+        </activity>
     </application>
 
 </manifest>

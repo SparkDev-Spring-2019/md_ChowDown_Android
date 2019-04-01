@@ -112,4 +112,12 @@ public class User {
     public static void setCurrentOrder(List<OrderItem> orderItems){
         orderItems = currentOrder;
     }
+
+    public String getFullAddress() {
+        return fullAddress;
+    }
+
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
+    }
 }
