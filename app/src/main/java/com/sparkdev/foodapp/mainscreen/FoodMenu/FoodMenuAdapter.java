@@ -34,7 +34,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
 
 
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
-    List<SingleMenuItem> menuItems;
+
 
 
     // FoodMenuAdapter Constructor
@@ -105,6 +105,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         String currentRate = String.format("%.1f", itemsList.get(i).getRating());
         String currentCategory = itemsList.get(i).getCategory().get(0);
         String currentTime = String.valueOf(itemsList.get(i).getCompletionTime());
+        Boolean isVegan = itemsList.get(i).getIsVegan();
 
         foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
         Glide.with(context).load(itemsList.get(i).getFoodImageUrl()).into(foodItemViewHolder.foodImage);
@@ -121,9 +122,12 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
             }
         });
 
-        if(!itemsList.get(i).getIsVegan())
+        if(!isVegan)
         {
             foodItemViewHolder.leafPic.setVisibility(View.INVISIBLE);
+        }
+        else{
+            foodItemViewHolder.leafPic.setVisibility(View.VISIBLE);
         }
     }
 
