@@ -102,7 +102,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         final SingleMenuItem item = itemsList.get(i);
         String currentContact = itemsList.get(i).getName();     // Hold the current contact name
         String currentItemPrice = String.format("%.2f", itemsList.get(i).getPrice());
-        String currentRate = Double.toString(itemsList.get(i).getRating());
+        String currentRate = String.format("%.1f", itemsList.get(i).getRating());
         String currentCategory = itemsList.get(i).getCategory().get(0);
         String currentTime = String.valueOf(itemsList.get(i).getCompletionTime());
 
@@ -120,6 +120,11 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
                 context.startActivity(intent);
             }
         });
+
+        if(!itemsList.get(i).getIsVegan())
+        {
+            foodItemViewHolder.leafPic.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
