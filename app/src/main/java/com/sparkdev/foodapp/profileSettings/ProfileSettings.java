@@ -83,9 +83,9 @@ public class ProfileSettings extends AppCompatActivity   {
             user_input.add("");
         }
 
-        if (u.getFullAddress() != null)
+        if (u.getAddress() != null)
         {
-            user_input.add(u.getFullAddress());
+            user_input.add(u.getAddress());
         }
         else
         {

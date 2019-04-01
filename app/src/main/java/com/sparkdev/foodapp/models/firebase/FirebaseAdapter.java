@@ -344,6 +344,25 @@ public class FirebaseAdapter {
 
   }
 
+  public void updateProfile() {
+
+    //get current user
+    User user = User.currentUser;
+
+    //Get a document reference to the current User
+    final DocumentReference menuItemRef =
+            mFirestore.collection("Users").document(User.currentUID);
+
+    //update user fields
+    menuItemRef.update("firstName", user.getFirstName());
+    menuItemRef.update("lastName", user.getLastName());
+    menuItemRef.update("email", user.getEmail());
+    menuItemRef.update("address", user.getAddress());
+
+  }
+
+
+
   public void menuItemsListener(final SingleMenuItem menuItem) {
 
     DocumentReference menuItemRef =

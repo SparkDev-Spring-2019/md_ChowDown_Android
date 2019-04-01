@@ -56,6 +56,19 @@ public class MainActivity extends Activity {
 
 
 
+        /*
+            Testing updating user profile
+         */
+
+        User user = new User("Vanessa", "Riveros", "vrive072@fiu.edu", "12345 house lane");
+        User.setCurrentUser(user);
+        User.setCurrentUID("jyD8MWtzY8hYRaWeCqvbAaN80yr1");
+
+
+        fb.updateProfile();
+
+
+
 
     }
 
