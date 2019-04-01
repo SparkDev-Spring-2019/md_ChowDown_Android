@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.mainscreen.productpage.ProductPageActivity;
 import com.sparkdev.foodapp.models.SingleMenuItem;
@@ -106,7 +107,7 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
         String currentTime = String.valueOf(itemsList.get(i).getCompletionTime());
 
         foodItemViewHolder.nameTextView.setText(currentContact); // Set contact name at i position to TextView
-        //foodItemViewHolder.foodImage.setImageResource(currentImage);
+        Glide.with(context).load(itemsList.get(i).getFoodImageUrl()).into(foodItemViewHolder.foodImage);
         foodItemViewHolder.itemPrice.setText("$" + currentItemPrice);
         foodItemViewHolder.itemRate.setText(currentRate);
         foodItemViewHolder.itemCategory.setText(currentCategory);

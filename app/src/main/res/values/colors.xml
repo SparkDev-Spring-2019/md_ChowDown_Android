@@ -12,4 +12,5 @@
     <color name="colorPrimaryOrange">#ff3300</color>
     <color name="black">#000</color>
     <color name="Orange">#FF5722</color>
+    <color name="grey">#F2F2F2</color>
 </resources>

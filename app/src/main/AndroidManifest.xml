@@ -22,16 +22,16 @@
 
         <activity android:name=".mainscreen.TabLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".loginscreen.Login"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity android:name="com.sparkdev.foodapp.shoppingcartscreen.OrderScreen.OrderScreenActivity"
@@ -52,7 +52,8 @@
         </activity>
 
         <activity
-            android:name=".profileSettings.ProfileSettings">
+            android:name=".profileSettings.ProfileSettings"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>

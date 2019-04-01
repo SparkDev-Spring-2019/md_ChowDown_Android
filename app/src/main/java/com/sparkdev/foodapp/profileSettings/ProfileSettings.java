@@ -118,6 +118,8 @@ public class ProfileSettings extends AppCompatActivity   {
         profileRecyclerView.setAdapter(profileAdapter);
         // Define the RecyclerView's default layout manager
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //smooth scrolling
+        profileRecyclerView.setNestedScrollingEnabled(false);
 
         //this.profileAdapter = new ProfileSettingsAdapter(this);
 
@@ -146,7 +148,7 @@ public class ProfileSettings extends AppCompatActivity   {
                 Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(this, "ERROR!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information incorrect or missing!", Toast.LENGTH_SHORT).show();
             }
             //do something
             return true;
@@ -159,7 +161,7 @@ public class ProfileSettings extends AppCompatActivity   {
     {
         String firstNameInput = editText.getText().toString().trim();
 
-        if (firstNameInput.isEmpty()) {
+        if (firstNameInput.isEmpty() || firstNameInput.length() == 0) {
             editText.setError("Field cannot be empty");
             return false;
         } else if (!firstNameInput.matches("[a-zA-Z]*")) {
@@ -173,12 +175,12 @@ public class ProfileSettings extends AppCompatActivity   {
 
     public static boolean validateLastName(EditText editText)
     {
-        String firstNameInput = editText.getText().toString().trim();
+        String lastNameInput = editText.getText().toString().trim();
 
-        if (firstNameInput.isEmpty()) {
+        if (lastNameInput.isEmpty() || lastNameInput.length() == 0) {
             editText.setError("Field cannot be empty");
             return false;
-        } else if (!firstNameInput.matches("[a-zA-Z]*")) {
+        } else if (!lastNameInput.matches("[a-zA-Z]*")) {
             editText.setError("Field can only contain letters");
             return false;
         } else {
@@ -191,7 +193,7 @@ public class ProfileSettings extends AppCompatActivity   {
     {
         String addressInput = editText.getText().toString().trim();
 
-        if(addressInput.isEmpty()) {
+        if(addressInput.isEmpty() || addressInput.length() == 0) {
             editText.setError("Field cannot be empty");
             return false;
         } else {
@@ -205,7 +207,7 @@ public class ProfileSettings extends AppCompatActivity   {
     {
         String emailInput = editText.getText().toString().trim();
 
-        if(emailInput.isEmpty()) {
+        if(emailInput.isEmpty() || emailInput.length() == 0) {
             editText.setError("Field cannot be empty");
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
@@ -221,7 +223,7 @@ public class ProfileSettings extends AppCompatActivity   {
     {
         String passwordInput = editText.getText().toString().trim();
 
-        if(passwordInput.isEmpty()) {
+        if(passwordInput.isEmpty() || passwordInput.length() == 0) {
             editText.setError("Password must be at least 6 characters");
             return false;
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {

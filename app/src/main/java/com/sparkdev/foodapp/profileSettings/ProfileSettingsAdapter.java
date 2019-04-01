@@ -83,6 +83,9 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         contactViewHolder.nameTextView.setText(currentInput); // Set text field at i position to TextView
         contactViewHolder.editTextView.getEditText().setText(userInput.get(i)); // previous user input
 
+        //validate rows as they are added
+        validateSingleRow(i,contactViewHolder.editTextView.getEditText());
+
         contactViewHolder.editTextView.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -92,32 +95,9 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                //validate each row
-                if (i == 0) {
+                //validate row that is being changed
+                validateSingleRow(i, contactViewHolder.editTextView.getEditText());
 
-                    //first name
-                    isAllValidated = ProfileSettings.validateFirstName(contactViewHolder.editTextView.getEditText());
-
-                } else if (i == 1) {
-
-                    //last name
-                    isAllValidated =ProfileSettings.validateLastName(contactViewHolder.editTextView.getEditText());
-
-                } else if (i == 2) {
-
-                    //adress
-                    isAllValidated = ProfileSettings.validateAddress(contactViewHolder.editTextView.getEditText());
-
-                } else if (i == 3) {
-
-                    //email
-                    isAllValidated = ProfileSettings.validateEmail(contactViewHolder.editTextView.getEditText());
-
-                } else if (i == 4) {
-
-                    //password
-                    isAllValidated = ProfileSettings.validatePassword(contactViewHolder.editTextView.getEditText());
-                }
             }
 
             @Override
@@ -127,6 +107,35 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         });
 
     }
+
+    public void validateSingleRow(int i, EditText editText){
+        if (i == 0) {
+
+            //first name
+            isAllValidated = ProfileSettings.validateFirstName(editText);
+
+        } else if (i == 1) {
+
+            //last name
+            isAllValidated =ProfileSettings.validateLastName(editText);
+
+        } else if (i == 2) {
+
+            //adress
+            isAllValidated = ProfileSettings.validateAddress(editText);
+
+        } else if (i == 3) {
+
+            //email
+            isAllValidated = ProfileSettings.validateEmail(editText);
+
+        } else if (i == 4) {
+
+            //password
+            isAllValidated = ProfileSettings.validatePassword(editText);
+        }
+    }
+
 
     @Override
     public int getItemCount() {

@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.mainscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,7 @@ import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.MenuCategory;
 import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesCompletionListener;
+import com.sparkdev.foodapp.profileSettings.ProfileSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +73,12 @@ public class TabLayoutActivity extends AppCompatActivity {
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
+                        switch(menuItem.getItemId()){
+                            case R.id.nav_settings:
+                                Intent intent = new Intent(TabLayoutActivity.this, ProfileSettings.class);
+                                startActivity(intent);
+                                return true;
+                        }
 
                         return true;
                     }
@@ -95,6 +103,7 @@ public class TabLayoutActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
