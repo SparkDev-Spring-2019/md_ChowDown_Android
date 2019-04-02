@@ -118,25 +118,24 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
             //last name
             isAllValidated = ProfileSettings.validateLastName(editText);
-            user.setFirstName(String.valueOf(editText.getText()));
+            user.setLastName(String.valueOf(editText.getText()));
 
         } else if (i == 2) {
 
             //address
             isAllValidated = ProfileSettings.validateAddress(editText);
-            user.setFirstName(String.valueOf(editText.getText()));
+            user.setAddress(String.valueOf(editText.getText()));
 
         } else if (i == 3) {
 
             //email
             isAllValidated = ProfileSettings.validateEmail(editText);
-            user.setFirstName(String.valueOf(editText.getText()));
+            user.setEmail(String.valueOf(editText.getText()));
 
         } else if (i == 4) {
 
             //password
             isAllValidated = ProfileSettings.validatePassword(editText);
-            user.setFirstName(String.valueOf(editText.getText()));
         }
     }
 
