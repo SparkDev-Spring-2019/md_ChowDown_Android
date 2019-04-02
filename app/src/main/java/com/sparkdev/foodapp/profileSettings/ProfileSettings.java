@@ -1,9 +1,7 @@
 package com.sparkdev.foodapp.profileSettings;
 
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.util.AdapterListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +14,7 @@ import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.User;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -32,7 +31,7 @@ public class ProfileSettings extends AppCompatActivity   {
     private ProfileSettingsAdapter profileAdapter;
     private ArrayList <String> row_titles = new ArrayList<>();
     private ArrayList <String> user_input = new ArrayList<>();
-
+    FirebaseAdapter fb = FirebaseAdapter.getInstance(this);
 
     private Toolbar myToolbar;
     private CircleImageView circleImageView;
@@ -59,10 +58,7 @@ public class ProfileSettings extends AppCompatActivity   {
         row_titles.add("Email");
         row_titles.add("Password");
 
-
         User u = User.currentUser;
-
-
 
         // add user input
         if (u.getFirstName() != null)
@@ -145,12 +141,13 @@ public class ProfileSettings extends AppCompatActivity   {
         {
             if(profileAdapter.getIsAllValidated())
             {
+                fb.updateProfile();
                 Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this, "Information incorrect or missing!", Toast.LENGTH_SHORT).show();
             }
-            //do something
+
             return true;
         }
 
