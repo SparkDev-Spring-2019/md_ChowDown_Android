@@ -117,7 +117,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         } else if (i == 1) {
 
             //last name
-            isAllValidated =ProfileSettings.validateLastName(editText);
+            isAllValidated = ProfileSettings.validateLastName(editText);
 
         } else if (i == 2) {
 
