@@ -59,4 +59,5 @@ public class OrderFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }

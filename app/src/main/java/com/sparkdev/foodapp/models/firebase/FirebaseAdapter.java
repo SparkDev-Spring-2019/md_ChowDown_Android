@@ -30,6 +30,7 @@ import com.sparkdev.foodapp.models.firebase.foodMenuInterface.GetMenuCategoriesC
 import com.sparkdev.foodapp.models.firebase.loginInterface.GetUserCompletionListener;
 import com.sparkdev.foodapp.models.firebase.loginInterface.LoginCompletionListener;
 import com.sparkdev.foodapp.models.firebase.signupInterface.SignUpCompletionListener;
+import com.sparkdev.foodapp.registerscreen.RegisterActivity;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -409,7 +410,6 @@ public class FirebaseAdapter {
   }
 
 
-  // TODO
   public void newOrder(final Order newOrder, final User currentUser, final NewOrderCompletionListener listener) {
 
     final DocumentReference ordersRef =
@@ -434,6 +434,36 @@ public class FirebaseAdapter {
       }
     });
 
+
+  }
+
+  public void getReviews(final SingleMenuItem menuItem, final GetMenuItemReviewsCompletionListener listener)
+  {
+
+    String refId = menuItem.getReviewsRefId();
+    final DocumentReference reviewsRef =
+            mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
+
+    reviewsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+        if (task.isSuccessful()) {
+
+          ReviewsCollection currReviews = task.getResult().toObject(ReviewsCollection.class);
+
+          if(currReviews != null)
+            listener.onSuccess(currReviews.getReviews());
+          else
+            listener.onFailure();
+
+        } else {
+
+          listener.onFailure();
+        }
+
+      }
+    });
 
   }
 

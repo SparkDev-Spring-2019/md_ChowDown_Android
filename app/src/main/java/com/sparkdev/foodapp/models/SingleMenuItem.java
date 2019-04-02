@@ -27,6 +27,13 @@ public class SingleMenuItem implements Parcelable {
     this.reviewsRefId = reviewsRefId;
   }
 
+  public SingleMenuItem(String foodName, String description, String reviewsRefId)
+  {
+    name = foodName;
+    this.description = description;
+    this.reviewsRefId = reviewsRefId;
+  }
+
   public SingleMenuItem(String foodImageUrl, double price, String name)
   {
     this.foodImageUrl = foodImageUrl;
