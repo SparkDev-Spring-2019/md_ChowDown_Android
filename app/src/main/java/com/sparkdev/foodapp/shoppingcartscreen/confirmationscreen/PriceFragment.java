@@ -36,6 +36,7 @@ public class PriceFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_price, container, false);
 
+        //get all the views
         TextView feesText = view.findViewById(R.id.feenumberTextview);
         orderButton = view.findViewById(R.id.orderButton);
         zeroButton = view.findViewById(R.id.zeroButton);
@@ -58,11 +59,16 @@ public class PriceFragment extends Fragment
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ThankYouScreen.class);
-                Bundle args = getArguments();
 
-                String name = args.getString("name");
+                if(isDelivery){
+                    //get information
+                    String address = ((ConfirmationActivity)getActivity()).getDeliveryAddress();
+
+                    //add intent extras
+                    intent.putExtra("address", address);
+                }
+
                 intent.putExtra("isDelivery", isDelivery);
-                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });
@@ -106,15 +112,6 @@ public class PriceFragment extends Fragment
         this.isDelivery = isDelivery;
     }
 
-    public static PriceFragment newInstance(String name) {
-        PriceFragment f = new PriceFragment();
-        // Supply index input as an argument.
-        Bundle args = new Bundle();
-        args.putString("name", name);
-
-        f.setArguments(args);
-        return f;
-    }
 
     public void AddTaxesAndFees()
     {

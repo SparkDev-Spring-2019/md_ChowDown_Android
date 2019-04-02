@@ -27,6 +27,13 @@ public class SingleMenuItem implements Parcelable {
     this.reviewsRefId = reviewsRefId;
   }
 
+  public SingleMenuItem(String foodName, String description, String reviewsRefId)
+  {
+    name = foodName;
+    this.description = description;
+    this.reviewsRefId = reviewsRefId;
+  }
+
   public SingleMenuItem(String foodImageUrl, double price, String name)
   {
     this.foodImageUrl = foodImageUrl;
@@ -68,8 +75,7 @@ public class SingleMenuItem implements Parcelable {
     } else {
       completionTime = in.readInt();
     }
-    byte tmpIsVegan = in.readByte();
-    isVegan = tmpIsVegan == 0 ? null : tmpIsVegan == 1;
+    isVegan = in.readInt() == 1;
     reviewsRefId = in.readString();
   }
 
@@ -149,13 +155,9 @@ public class SingleMenuItem implements Parcelable {
     this.completionTime = completionTime;
   }
 
-  public Boolean getVegan() {
-    return isVegan;
-  }
+  public Boolean getIsVegan(){return isVegan;}
 
-  public void setVegan(Boolean vegan) {
-    isVegan = vegan;
-  }
+  public void setIsVegan(Boolean isVegan){this.isVegan = isVegan;}
 
   public String getReviewsRefId() {
     return reviewsRefId;
@@ -215,7 +217,7 @@ public class SingleMenuItem implements Parcelable {
       parcel.writeByte((byte) 1);
       parcel.writeInt(completionTime);
     }
-    parcel.writeByte((byte) (isVegan == null ? 0 : isVegan ? 1 : 2));
+    parcel.writeInt(isVegan ? 1 : 0);
     parcel.writeString(reviewsRefId);
   }
 }

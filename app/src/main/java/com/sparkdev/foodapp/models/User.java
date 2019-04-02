@@ -43,6 +43,14 @@ public class User {
       this.ordersRef = ordersRef;
   }
 
+    public User(String firstName, String lastName, String email, String address)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+    }
+
   public void setEmail(String email){
         this.email = email;
     }
@@ -119,5 +127,13 @@ public class User {
 
     public void setFullAddress(String fullAddress) {
         this.fullAddress = fullAddress;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

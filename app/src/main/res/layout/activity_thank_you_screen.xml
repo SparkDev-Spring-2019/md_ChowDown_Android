@@ -63,7 +63,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/postalAddress"
+        android:id="@+id/addressText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

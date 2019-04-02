@@ -6,13 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.StackView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.Review;
 import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.GetMenuItemReviewsCompletionListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProductPageActivity extends AppCompatActivity {
@@ -20,6 +27,7 @@ public class ProductPageActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private LinearLayout linearLayout;
     private ViewPager viewPager;
+
 
     private static ImageView ImageView;
     private static ArrayList list;
@@ -42,7 +50,7 @@ public class ProductPageActivity extends AppCompatActivity {
 
         adapter.AddFragment(new OrderFragment(), "Order");
         adapter.AddFragment(new DescriptionFragment(), "Description");
-        adapter.AddFragment(new ReviewFragment(), "Review");
+        adapter.AddFragment(ReviewFragment.newInstance(current), "Review");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -50,6 +58,17 @@ public class ProductPageActivity extends AppCompatActivity {
         ImageView = (android.widget.ImageView) findViewById(R.id.product_stack_view);
         Glide.with(this).load(current.getFoodImageUrl()).into(ImageView);
 
+
+
     }
+
+    public SingleMenuItem getCurrentItem()
+    {
+        return current;
+    }
+
+
+
+
 
 }

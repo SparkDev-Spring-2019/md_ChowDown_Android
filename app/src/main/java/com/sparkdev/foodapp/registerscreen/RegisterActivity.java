@@ -42,33 +42,37 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                            if(email.getText().toString().contains("@") && (pass1.getText().toString().equals(pass2.getText().toString()))){
-                                firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        firebaseAPI.loginUser(email.getText().toString(), pass1.getText().toString(), new LoginCompletionListener() {
-                                            @Override
-                                            public void onSuccess() {
-                                                Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getApplicationContext(), TabLayoutActivity.class);
-                                                startActivity(i);
-                                            }
+                        if (pass1.length() <= 6) {
+                            Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if(email.getText().toString().contains("@") && (pass1.getText().toString().equals(pass2.getText().toString()))){
+                            firebaseAPI.registerUser(email.getText().toString(), pass1.getText().toString(), new SignUpCompletionListener() {
+                                @Override
+                                public void onSuccess() {
+                                    firebaseAPI.loginUser(email.getText().toString(), pass1.getText().toString(), new LoginCompletionListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(getApplicationContext(), TabLayoutActivity.class);
+                                            startActivity(i);
+                                        }
 
-                                            @Override
-                                            public void onFailure() {
+                                        @Override
+                                        public void onFailure() {
 
-                                            }
-                                        });
+                                        }
+                                    });
 
-                                    }
+                                }
 
-                                    @Override
-                                    public void onFailure() {
-                                        Toast.makeText(getApplicationContext(), "Please verify that you have entered a valid email and password.", Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(getApplicationContext(), pass1.getText().toString(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
+                                @Override
+                                public void onFailure() {
+                                    Toast.makeText(getApplicationContext(), "Please verify that you have entered a valid email and password.", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
 
                     }
                 }

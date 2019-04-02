@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
+import com.sparkdev.foodapp.models.User;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,30 +39,35 @@ public class ThankYouScreen extends AppCompatActivity {
 
             //receive information from previous activity
             Intent intent = getIntent();
-            String name = intent.getStringExtra("name");
+            String address = intent.getStringExtra("address");
+
+            //get views
             TextView textView = findViewById(R.id.userName);
-            textView.setText(name + ", we received your order.");
+            TextView addressText = findViewById(R.id.addressText);
 
+            //set text for user
+            if(User.currentUser != null) {
+                String name = User.currentUser.getFirstName();
+                textView.setText(name + ", we received your order.");
+            }
 
-
+            //change delivery text based on isDelivery
             Boolean delivery = intent.getBooleanExtra("isDelivery", false);
             TextView textView2 = findViewById(R.id.deliveryAddress);
             TextView textView3 = findViewById(R.id.expectedDelivery);
 
             if (delivery == true){
                 textView2.setText("Delivery Address: ");
-
+                textView3.setText("Expected Delivery: ");
+                addressText.setText(address);
             }
             else {
                 textView2.setText("Pickup Address: ");
-            }
-
-            if (delivery == true){
-                textView3.setText("Expected Delivery: ");
-            }
-            else {
                 textView3.setText("Order is ready for pickup at: ");
             }
+
+
+
 
 
 
