@@ -124,7 +124,7 @@ public class PriceFragment extends Fragment
                 intent.putExtra("isDelivery", isDelivery);
 
                 //restart order
-                User.setCurrentOrder(new ArrayList<OrderItem>());
+                User.currentOrder.clear();
                 //go to next activity
                 startActivity(intent);
             }
