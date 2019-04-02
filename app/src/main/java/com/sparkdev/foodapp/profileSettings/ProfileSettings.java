@@ -31,7 +31,7 @@ public class ProfileSettings extends AppCompatActivity   {
     private ProfileSettingsAdapter profileAdapter;
     private ArrayList <String> row_titles = new ArrayList<>();
     private ArrayList <String> user_input = new ArrayList<>();
-    //FirebaseAdapter fb = FirebaseAdapter.getInstance(this);
+    FirebaseAdapter fb = FirebaseAdapter.getInstance(this);
 
     private Toolbar myToolbar;
     private CircleImageView circleImageView;
@@ -141,13 +141,13 @@ public class ProfileSettings extends AppCompatActivity   {
         {
             if(profileAdapter.getIsAllValidated())
             {
-                //fb.updateProfile();
+                fb.updateProfile();
                 Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this, "Information incorrect or missing!", Toast.LENGTH_SHORT).show();
             }
-            //do something
+
             return true;
         }
 

@@ -5,32 +5,30 @@ import com.sparkdev.foodapp.models.User;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.util.AdapterListUpdateCallback;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Patterns;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettingsAdapter.ProfileViewHolder> {
 
     private final ArrayList<String> textInputList;    // This will hold your data
     private LayoutInflater profileInflater;       // This will be the inflater for ContactListAdapter
-    private boolean isAllValidated = true;
+    private boolean isAllValidated = true;        // checks if all rows are validated
     private User user = User.currentUser;
     private final ArrayList<String> userInput;
+    private String newFirstName;
+    private String newLastName;
+    private String newAddress;
+    private String newEmail;
+    private String newPassword;
 
     // ContactListAdapter Constructor
     public ProfileSettingsAdapter(Context context, ArrayList<String> textInputList, ArrayList<String> userInput) {
@@ -62,7 +60,6 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         }
     }
 
-
     // The onCreateViewHolder() method is very similar to the onCreate() method. In this method,
     // the LAYOUT will be inflated and it will return a view holder with the specified layout
     // and the corresponding adapter
@@ -80,11 +77,13 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     public void onBindViewHolder(@NonNull final ProfileViewHolder contactViewHolder, final int i) {
 
         String currentInput = textInputList.get(i);     // Hold the current text field
+        final String previousText = userInput.get(i);         // previous user input
+
         contactViewHolder.nameTextView.setText(currentInput); // Set text field at i position to TextView
-        contactViewHolder.editTextView.getEditText().setText(userInput.get(i)); // previous user input
+        contactViewHolder.editTextView.getEditText().setText(previousText); // previous user input
 
         //validate rows as they are added
-        validateSingleRow(i,contactViewHolder.editTextView.getEditText());
+        validateSingleRow(i, contactViewHolder.editTextView.getEditText());
 
         contactViewHolder.editTextView.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -113,29 +112,58 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
             //first name
             isAllValidated = ProfileSettings.validateFirstName(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 1) {
 
             //last name
             isAllValidated = ProfileSettings.validateLastName(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 2) {
 
-            //adress
+            //address
             isAllValidated = ProfileSettings.validateAddress(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 3) {
 
             //email
             isAllValidated = ProfileSettings.validateEmail(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 4) {
 
             //password
             isAllValidated = ProfileSettings.validatePassword(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
         }
     }
 
+    public String getNewFirstName()
+    {
+        return newFirstName;
+    }
+
+    public String getNewLastName()
+    {
+        return newLastName;
+    }
+
+    public String getNewAddress()
+    {
+        return newAddress;
+    }
+
+    public String getNewEmail()
+    {
+        return newEmail;
+    }
+
+    public String getNewPassword()
+    {
+        return newPassword;
+    }
 
     @Override
     public int getItemCount() {
@@ -146,6 +174,5 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     {
         return isAllValidated;
     }
-
 
 }
