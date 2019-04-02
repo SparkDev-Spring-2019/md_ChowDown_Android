@@ -23,12 +23,12 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     private LayoutInflater profileInflater;       // This will be the inflater for ContactListAdapter
     private boolean isAllValidated = true;        // checks if all rows are validated
     private User user = User.currentUser;
+    private boolean firstNameisValidated;
+    private boolean lastNameisValidate;
+    private boolean emailisValidated;
+    private boolean addressisValidated;
+    private boolean passwordisValidated;
     private final ArrayList<String> userInput;
-    private String newFirstName;
-    private String newLastName;
-    private String newAddress;
-    private String newEmail;
-    private String newPassword;
 
     // ContactListAdapter Constructor
     public ProfileSettingsAdapter(Context context, ArrayList<String> textInputList, ArrayList<String> userInput) {
@@ -111,58 +111,34 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         if (i == 0) {
 
             //first name
-            isAllValidated = ProfileSettings.validateFirstName(editText);
+            firstNameisValidated = ProfileSettings.validateFirstName(editText);
             user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 1) {
 
             //last name
-            isAllValidated = ProfileSettings.validateLastName(editText);
+            lastNameisValidate = ProfileSettings.validateLastName(editText);
             user.setLastName(String.valueOf(editText.getText()));
 
         } else if (i == 2) {
 
             //address
-            isAllValidated = ProfileSettings.validateAddress(editText);
+            addressisValidated = ProfileSettings.validateAddress(editText);
             user.setAddress(String.valueOf(editText.getText()));
 
         } else if (i == 3) {
 
             //email
-            isAllValidated = ProfileSettings.validateEmail(editText);
+            emailisValidated = ProfileSettings.validateEmail(editText);
             user.setEmail(String.valueOf(editText.getText()));
 
         } else if (i == 4) {
 
             //password
-            isAllValidated = ProfileSettings.validatePassword(editText);
+            passwordisValidated = ProfileSettings.validatePassword(editText);
         }
     }
 
-    public String getNewFirstName()
-    {
-        return newFirstName;
-    }
-
-    public String getNewLastName()
-    {
-        return newLastName;
-    }
-
-    public String getNewAddress()
-    {
-        return newAddress;
-    }
-
-    public String getNewEmail()
-    {
-        return newEmail;
-    }
-
-    public String getNewPassword()
-    {
-        return newPassword;
-    }
 
     @Override
     public int getItemCount() {
@@ -171,7 +147,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
     public boolean getIsAllValidated()
     {
-        return isAllValidated;
+        return firstNameisValidated && lastNameisValidate && addressisValidated && emailisValidated && passwordisValidated;
     }
 
 }
