@@ -9,9 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.models.Order;
+import com.sparkdev.foodapp.models.OrderItem;
+import com.sparkdev.foodapp.models.User;
+import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
+import com.sparkdev.foodapp.models.firebase.NewOrderCompletionListener;
 import com.sparkdev.foodapp.shoppingcartscreen.ThankYouScreen.ThankYouScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PriceFragment extends Fragment
@@ -55,21 +64,11 @@ public class PriceFragment extends Fragment
         feesText.setText("$" + String.format("%.2f", fees));
         AddTaxesAndFees();
 
+        //place order button
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ThankYouScreen.class);
-
-                if(isDelivery){
-                    //get information
-                    String address = ((ConfirmationActivity)getActivity()).getDeliveryAddress();
-
-                    //add intent extras
-                    intent.putExtra("address", address);
-                }
-
-                intent.putExtra("isDelivery", isDelivery);
-                startActivity(intent);
+                sendOrderToFirebase();
             }
         });
 
@@ -105,6 +104,36 @@ public class PriceFragment extends Fragment
         return view;
 
 
+    }
+
+    private void sendOrderToFirebase() {
+        FirebaseAdapter fb = FirebaseAdapter.getInstance(getActivity());
+        fb.newOrder(User.getCurrentOrder(), new NewOrderCompletionListener() {
+            @Override
+            public void onSuccess() {
+                Intent intent = new Intent(getActivity(), ThankYouScreen.class);
+
+                if(isDelivery){
+                    //get information
+                    String address = ((ConfirmationActivity)getActivity()).getDeliveryAddress();
+
+                    //add intent extras
+                    intent.putExtra("address", address);
+                }
+
+                intent.putExtra("isDelivery", isDelivery);
+
+                //restart order
+                User.setCurrentOrder(new ArrayList<OrderItem>());
+                //go to next activity
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getActivity(),"Unable to place your order.",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void setDelivery(boolean isDelivery)

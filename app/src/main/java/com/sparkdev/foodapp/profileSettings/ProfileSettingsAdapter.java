@@ -113,6 +113,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
 
             //first name
             isAllValidated = ProfileSettings.validateFirstName(editText);
+            user.setFirstName(String.valueOf(editText.getText()));
 
         } else if (i == 1) {
 

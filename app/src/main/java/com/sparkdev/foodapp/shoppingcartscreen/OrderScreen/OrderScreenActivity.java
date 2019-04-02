@@ -29,10 +29,6 @@ public class OrderScreenActivity extends AppCompatActivity {
     private DividerItemDecoration itemDecoration;
 
 
-    private OrderItem orderItem;
-    private OrderItem orderItem2;
-    private SingleMenuItem menuItem;
-    private SingleMenuItem menuItem2;
     private List<OrderItem> orderItems = User.currentOrder;
 
 
@@ -44,14 +40,6 @@ public class OrderScreenActivity extends AppCompatActivity {
         //Set action bar title
         getSupportActionBar().setTitle("Your Order");
         Button button = findViewById(R.id.reviewButton);
-
-//       //populate data
-//        menuItem = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fcheesecake.jpg?alt=media&token=8f66127f-fe59-4f16-816d-d93af9ffc605",
-//                2.30,"cheescake");
-//        orderItem = new OrderItem(menuItem,5,"medium");
-//        menuItem2 = new SingleMenuItem("https://firebasestorage.googleapis.com/v0/b/foodapp-eeb94.appspot.com/o/Food%2Fpasta.jpg?alt=media&token=8fe8925d-c940-4c8b-8f48-fa3f1bd4f9ce",
-//                1.00,"pasta");
-//        orderItem2 = new OrderItem(menuItem2,5,"large");
 
         //create order list
         if(orderItems.isEmpty()){
@@ -112,8 +100,9 @@ public class OrderScreenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
 
         // Swipe gestures
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+//        ItemTouchHelper itemTouchHelper = new
+//                ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+//        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         // Add the line divider between each row
         itemDecoration = new DividerItemDecoration(recyclerView.getContext()

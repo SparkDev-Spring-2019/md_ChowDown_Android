@@ -1,5 +1,6 @@
 package com.sparkdev.foodapp.mainscreen.productpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
+import com.sparkdev.foodapp.mainscreen.TabLayoutActivity;
 import com.sparkdev.foodapp.models.Order;
 import com.sparkdev.foodapp.models.OrderItem;
 import com.sparkdev.foodapp.models.SingleMenuItem;
@@ -83,6 +85,9 @@ public class OrderFragment extends Fragment {
                 OrderItem item = new OrderItem(food, Integer.parseInt(quantity), size);
                 orderItems.add(item);
                 Toast.makeText(getActivity(), "Added to order!", Toast.LENGTH_SHORT).show();
+                //go back to home screen
+                Intent intent = new Intent(getActivity(), TabLayoutActivity.class);
+                startActivity(intent);
 
             }
         });

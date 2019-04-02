@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sparkdev.foodapp.R;
@@ -22,7 +23,7 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
     private List<OrderItem> orderList;    //holds list of order items
     private LayoutInflater contactInflater;       // This will be the inflater for OrderScreenAdapter
     private Context context;
-    private SingleMenuItem mDeletedItem;
+    private OrderItem mDeletedItem;
     private Integer mDeletedItemPosition;
 
     // OrderScreenAdapter Constructor
@@ -93,12 +94,18 @@ public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.
     }
 
     public void deleteView(int position) {
-      mDeletedItem = orderList.get(position).getFoodItem();
+      mDeletedItem = orderList.get(position);
       mDeletedItemPosition = position;
       orderList.remove(position);
-      notifyDataSetChanged();
-
-      // TODO
-//      showUndoSnackbar();
+      notifyItemRemoved(position);
+      Toast.makeText(context,"Item deleted", Toast.LENGTH_SHORT).show();
     }
+
+    public Context getContext()
+    {
+        return context;
+    }
+
+
+
 }

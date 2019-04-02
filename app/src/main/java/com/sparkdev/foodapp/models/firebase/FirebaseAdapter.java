@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sparkdev.foodapp.models.Order;
+import com.sparkdev.foodapp.models.OrderItem;
 import com.sparkdev.foodapp.models.OrdersCollection;
 import com.sparkdev.foodapp.models.ReviewsCollection;
 import com.sparkdev.foodapp.models.SingleMenuItem;
@@ -36,6 +39,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -410,37 +415,90 @@ public class FirebaseAdapter {
   }
 
 
-  public void newOrder(final Order newOrder, final User currentUser, final NewOrderCompletionListener listener) {
+  public void newOrder(final List<OrderItem> orderItems, final NewOrderCompletionListener listener) {
 
-    final DocumentReference ordersRef =
-            mFirestore.collection("Orders").document(currentUser.getOrdersRef());
+    //if the user doesnt have orderRefId, create a new document and get the id
+    if(User.currentUser.getOrdersRef() == null) {
+        addOrderDocForUser(new CreateNewOrderDocumentCompletionListener() {
+          @Override
+          public void onSuccess() {
+            Log.d(TAG, "new order document created with id: " + User.currentUser.getOrdersRef());
 
-    ordersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-      @Override
-      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-        if (task.isSuccessful()) {
+            //call newOrder again
+            newOrder(orderItems, new NewOrderCompletionListener() {
+              @Override
+              public void onSuccess() {
+                listener.onSuccess();
+              }
 
-          //Add the order to firebase
-          OrdersCollection currOrders = task.getResult().toObject(OrdersCollection.class);
-          currOrders.addOrder(newOrder);
+              @Override
+              public void onFailure() {
+                listener.onFailure();
+              }
+            });
 
-          ordersRef.update("orders", currOrders.convertToMap());
+          }
 
-          listener.onSuccess();
+          @Override
+          public void onFailure() {
+            listener.onFailure();
+          }
+        });
+    }
+    else{
+      final String userOrderRef = User.currentUser.getOrdersRef();
 
-        } else {
-          listener.onFailure();
+      final DocumentReference ordersRef =
+              mFirestore.collection("Orders").document(userOrderRef);
+
+      ordersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+          if (task.isSuccessful()) {
+
+            OrdersCollection currOrders = task.getResult().toObject(OrdersCollection.class);
+            //create an order
+            int orderId = currOrders.getOrders().size();
+            Order newOrder = new Order(User.currentUID, orderItems, String.valueOf(orderId));
+            //add order to user's order collection
+            currOrders.addOrder(newOrder);
+
+            //update on firebase
+            ordersRef.update("orders", currOrders.convertToMap());
+
+            listener.onSuccess();
+
+          } else {
+            listener.onFailure();
+          }
         }
+      });
+    }
+  }
+
+  public void addOrderDocForUser(final CreateNewOrderDocumentCompletionListener listner){
+    Map<String, Object> orders = new HashMap<>();
+    orders.put("orders", new ArrayList<Order>());
+
+    mFirestore.collection("Orders").add(orders).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+      @Override
+      public void onSuccess(DocumentReference documentReference) {
+        Log.d(TAG, "new order document created with id: " + documentReference.getId());
+        //set user order ref
+        User.currentUser.setOrdersRef(documentReference.getId());
+
+        listner.onSuccess();
+      }}).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+        listner.onFailure();
       }
     });
-
-
   }
 
   public void getReviews(final SingleMenuItem menuItem, final GetMenuItemReviewsCompletionListener listener)
   {
 
-    String refId = menuItem.getReviewsRefId();
     final DocumentReference reviewsRef =
             mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
 
