@@ -22,7 +22,7 @@ public class User {
 
     public static User currentUser;
     public static String currentUID;
-    public static List<OrderItem> currentOrder;
+    public static List<OrderItem> currentOrder = new ArrayList<>();
 
 
     public User(String email, String password, String address, String city, String state, String zipCode) {

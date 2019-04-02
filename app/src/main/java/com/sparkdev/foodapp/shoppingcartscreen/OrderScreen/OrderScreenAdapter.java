@@ -15,17 +15,18 @@ import com.sparkdev.foodapp.models.OrderItem;
 import com.sparkdev.foodapp.models.SingleMenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderScreenAdapter extends RecyclerView.Adapter<OrderScreenAdapter.OrderViewHolder>{
 
-    private ArrayList<OrderItem> orderList;    //holds list of order items
+    private List<OrderItem> orderList;    //holds list of order items
     private LayoutInflater contactInflater;       // This will be the inflater for OrderScreenAdapter
     private Context context;
     private SingleMenuItem mDeletedItem;
     private Integer mDeletedItemPosition;
 
     // OrderScreenAdapter Constructor
-    public OrderScreenAdapter(Context context, ArrayList<OrderItem> orderList ){
+    public OrderScreenAdapter(Context context, List<OrderItem> orderList ){
         this.context = context;
         contactInflater = LayoutInflater.from(context); // Initialize the layout inflator
         this.orderList = orderList;
