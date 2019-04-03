@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PriceFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".shoppingcartscreen.confirmationscreen.PriceFragment">
+
+
+    <TextView
+        android:id="@+id/taxnumberTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/feenumberTextview"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="sans-serif"
+        android:text="$0.00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/btColor"
+        android:textSize="20sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="314dp"
+        tools:layout_editor_absoluteY="302dp"
+        tools:text="$0.00" />
+    <TextView
+        android:id="@+id/tipTextView"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/totalTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif"
+        android:text="Tip"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="469dp"
+        tools:text="Tip" />
+    <TextView
+        android:id="@+id/feesTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/tipTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif"
+        android:text="Fees"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="398dp"
+        tools:text="Fees" />
+
+    <TextView
+        android:id="@+id/feenumberTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/tipnumberTextview"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif"
+        android:text="$0.00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/btColor"
+        android:textSize="20sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="405dp"
+        tools:text="$0.00" />
+    <TextView
+        android:id="@+id/tipnumberTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/totalnumberTextview"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif"
+        android:text="$0.00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/btColor"
+        android:textSize="20sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="306dp"
+        tools:layout_editor_absoluteY="476dp"
+        tools:text="$0.00" />
+
+
+    <TextView
+        android:id="@+id/totalTextView"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/orderButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Total"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="540dp"
+        tools:text="Total" />
+
+    <TextView
+        android:id="@+id/totalnumberTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/orderButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="$0.00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/btColor"
+        android:textSize="20sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="540dp"
+        tools:text="$0.00" />
+
+    <TextView
+        android:id="@+id/taxesTextview"
+        android:layout_width="64dp"
+        android:layout_height="27dp"
+        android:layout_above="@id/feesTextview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif"
+        android:text="Taxes"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="301dp"
+        tools:text="Taxes" />
+
+    <Button
+        android:id="@+id/orderButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="175dp"
+        android:background="@drawable/rounded_button"
+        android:text="Place Order"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="627dp" />
+
+    <EditText
+        android:id="@+id/tipAmountNumber"
+        android:layout_width="114dp"
+        android:layout_height="43dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/taxesTextview"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal|numberSigned"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tipAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tipAmountNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:text="Tip Amount"
+        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteY="75dp" />
+
+    <Button
+        android:id="@+id/zeroButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/tipAmountText"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btn_border"
+        android:text="0%"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <Button
+        android:id="@+id/tenButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/tipAmountText"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/zeroButton"
+        android:background="@drawable/btn_border"
+        android:text="10%"
+        tools:layout_editor_absoluteX="114dp" />
+
+    <Button
+        android:id="@+id/fifteenButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/tipAmountText"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/tenButton"
+        android:background="@drawable/btn_border"
+        android:text="15%"
+        tools:layout_editor_absoluteX="114dp" />
+
+    <Button
+        android:id="@+id/twentyButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/tipAmountText"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/fifteenButton"
+        android:background="@drawable/btn_border"
+        android:text="20%"
+        tools:layout_editor_absoluteX="114dp" />
+
+</RelativeLayout>

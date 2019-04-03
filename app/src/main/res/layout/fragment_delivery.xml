@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shoppingcartscreen.confirmationscreen.DeliveryFragment">
+
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:text="Address" />
+
+    <EditText
+        android:id="@+id/addressInput"
+        android:layout_width="345dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressText"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="25dp"
+        android:ems="10"
+        android:inputType="textPostalAddress" />
+
+    <TextView
+        android:id="@+id/ASText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressInput"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:text="Appt/Suite" />
+
+
+
+    <TextView
+        android:id="@+id/zipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressInput"
+        android:layout_toRightOf="@id/ASText"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="115dp"
+        android:text="Zip Code" />
+
+    <EditText
+        android:id="@+id/ASInput"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ASText"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="25dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/zipInput"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ASInput"
+        android:layout_below="@id/zipText"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+
+</RelativeLayout>
