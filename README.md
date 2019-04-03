@@ -19,7 +19,9 @@
 ![Login](https://user-images.githubusercontent.com/36312970/55499711-ab03d300-5614-11e9-8b35-923759f3061c.gif)  |  ![Registration](https://user-images.githubusercontent.com/36312970/55499464-14cfad00-5614-11e9-9b1c-dc3926fde3c5.gif)
 
 ### Food Menu
-
+<p align="left">
+  <img alt="Menu" width="300" src="https://user-images.githubusercontent.com/36312970/55501811-3bdcad80-5619-11e9-9ab4-350c4366697a.gif">
+ </p>
 
 ### Place an order
 <p align="left">
