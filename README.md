@@ -5,10 +5,11 @@
  ---
  
 # ChowDown
-> Browse through a variety of food choices that ChowDown has to offer. Pizza. Salad. Burritos. Burgers. Cheesecake. If you're hungry for it on campus, try ChowDown.
+> Browse through a variety of food choices that ChowDown has to offer. Pizza. Salad. Burritos. Burgers. Cheesecake. Vegan friendly foods as well. If you're hungry for it on campus, try ChowDown.
 
 ## Technologies Used
-
+- Android Studio using Java and XML
+- Firebase
 
 ## Features
 
