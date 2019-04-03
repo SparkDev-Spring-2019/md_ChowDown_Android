@@ -4,6 +4,10 @@
  
  ---
  
+ <p align="center">
+  <img alt="ChowDown Logo" src="https://user-images.githubusercontent.com/36312970/55504319-93314c80-561e-11e9-9f4f-afc9201dd1f8.png">
+ </p>
+ 
 # ChowDown
 > Browse through a variety of food choices that ChowDown has to offer. Pizza. Salad. Burritos. Burgers. Cheesecake. Vegan friendly foods as well. If you're hungry for it on campus, try ChowDown.
 
