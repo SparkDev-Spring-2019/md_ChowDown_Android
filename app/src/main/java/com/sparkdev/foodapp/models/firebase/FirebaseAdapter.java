@@ -2,6 +2,7 @@ package com.sparkdev.foodapp.models.firebase;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sparkdev.foodapp.mainscreen.FoodMenu.FoodMenuAdapter;
+import com.sparkdev.foodapp.mainscreen.productpage.ReviewsAdapter;
 import com.sparkdev.foodapp.models.Order;
 import com.sparkdev.foodapp.models.OrderItem;
 import com.sparkdev.foodapp.models.OrdersCollection;
@@ -158,6 +161,7 @@ public class FirebaseAdapter {
                   user.put("firstName", "");  // create a first name field, user can change it later
                   user.put("lastName", "");   // create a last name field, user can change it later
                   user.put("address", "");    // create an address field, user can change it later
+
 
                   // create the document with the above HashMap
                   usersDocRef.set(user);
@@ -356,14 +360,14 @@ public class FirebaseAdapter {
     User user = User.currentUser;
 
     //Get a document reference to the current User
-    final DocumentReference menuItemRef =
+    final DocumentReference usersRef =
             mFirestore.collection("Users").document(User.currentUID);
 
     //update user fields
-    menuItemRef.update("firstName", user.getFirstName());
-    menuItemRef.update("lastName", user.getLastName());
-    menuItemRef.update("email", user.getEmail());
-    menuItemRef.update("address", user.getAddress());
+    usersRef.update("firstName", user.getFirstName());
+    usersRef.update("lastName", user.getLastName());
+    usersRef.update("email", user.getEmail());
+    usersRef.update("address", user.getAddress());
 
   }
 
@@ -392,7 +396,7 @@ public class FirebaseAdapter {
   }
 
 
-  public void reviewsListener(final SingleMenuItem menuItem) {
+  public void reviewsListener(final SingleMenuItem menuItem, final ReviewsAdapter adapter, final RecyclerView recyclerView) {
 
     DocumentReference menuItemReviewsRef =
             mFirestore.collection("Reviews").document(menuItem.getReviewsRefId());
@@ -406,7 +410,13 @@ public class FirebaseAdapter {
           Log.w(TAG, "Listener error", e);
         }
 
+        ReviewsCollection newReviews = documentSnapshot.toObject(ReviewsCollection.class);
+        adapter.chanegList(newReviews.getReviews());
+        adapter.notifyDataSetChanged();
+        recyclerView.smoothScrollToPosition(adapter.getItemCount());
+
         Log.d(TAG, "Reviews updated: " + documentSnapshot.getData());
+
 
       }
 
@@ -417,7 +427,7 @@ public class FirebaseAdapter {
 
   public void newOrder(final List<OrderItem> orderItems, final NewOrderCompletionListener listener) {
 
-    //if the user doesnt have orderRefId, create a new document and get the id
+    //if the user doesnt have orderRefId, create a new orders document and get the id
     if(User.currentUser.getOrdersRef() == null) {
         addOrderDocForUser(new CreateNewOrderDocumentCompletionListener() {
           @Override
@@ -486,6 +496,9 @@ public class FirebaseAdapter {
         Log.d(TAG, "new order document created with id: " + documentReference.getId());
         //set user order ref
         User.currentUser.setOrdersRef(documentReference.getId());
+        //update ordersRefId in firebase
+        DocumentReference user = mFirestore.collection("Users").document(User.currentUID);
+        user.update("ordersRef", documentReference.getId());
 
         listner.onSuccess();
       }}).addOnFailureListener(new OnFailureListener() {

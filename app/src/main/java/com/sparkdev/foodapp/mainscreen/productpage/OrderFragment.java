@@ -69,11 +69,11 @@ public class OrderFragment extends Fragment {
 
         TextView textView = (TextView) view.findViewById(R.id.top_order_options_tag);
         textView.setText("Order Options");
-        textView.setTextSize(24);
+        textView.setTextSize(20);
 
         TextView textView1 = (TextView) view.findViewById(R.id.bottom_order_quantity_tag);
         textView1.setText("Quantity");
-        textView1.setTextSize(24);
+        textView1.setTextSize(20);
 
 
         //add item to cart

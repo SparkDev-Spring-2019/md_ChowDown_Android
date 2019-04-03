@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.sparkdev.foodapp.R;
@@ -142,6 +143,8 @@ public class ProfileSettings extends AppCompatActivity   {
             if(profileAdapter.getIsAllValidated())
             {
                 fb.updateProfile();
+                ScrollView scrollView = findViewById(R.id.scroll);
+                scrollView.smoothScrollTo(0,0);
                 Toast.makeText(this, "Changes saved!", Toast.LENGTH_SHORT).show();
             }
             else{

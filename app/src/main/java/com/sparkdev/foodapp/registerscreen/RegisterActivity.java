@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                        if (pass1.length() <= 6) {
+                        if (pass1.getText().length() < 6) {
                             Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                             return;
                         }

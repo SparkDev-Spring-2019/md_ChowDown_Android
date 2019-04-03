@@ -25,13 +25,15 @@ public class ReviewFragment extends Fragment {
 
     private SingleMenuItem current ;
     private List<Review> reviewsList;
+    private  FirebaseAdapter fb;
+    private ReviewsAdapter listAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        final  View view = inflater.inflate(R.layout.activity_fragment_list, container, false);
 
-       FirebaseAdapter fb = FirebaseAdapter.getInstance(getActivity());
+       fb = FirebaseAdapter.getInstance(getActivity());
        fb.getReviews(current, new GetMenuItemReviewsCompletionListener() {
            @Override
            public void onSuccess(List<Review> reviews) {
@@ -40,11 +42,16 @@ public class ReviewFragment extends Fragment {
                if(!reviewsList.isEmpty())
                {
                    RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listRecyclerView);
-                   ReviewsAdapter listAdapter = new ReviewsAdapter(getActivity(),reviewsList);
+                   listAdapter = new ReviewsAdapter(getActivity(),reviewsList);
                    recyclerView.setAdapter(listAdapter);
                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                   ((LinearLayoutManager) layoutManager).setStackFromEnd(true);
+                   ((LinearLayoutManager) layoutManager).setReverseLayout(true);
                    recyclerView.setLayoutManager(layoutManager);
+                   fb.reviewsListener(current, listAdapter, recyclerView);
                }
+
+
 
            }
 
@@ -65,12 +72,14 @@ public class ReviewFragment extends Fragment {
         });
 
 
+
         return view;
 
     }
 
     private void openReviewSubmissionPage() {
         Intent intent = new Intent(getActivity(), ReviewSubmissionPage.class);
+        intent.putExtra("food_item", (Parcelable)current);
         startActivity(intent);
     }
 

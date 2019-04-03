@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
                             return;
                         }
 
-                        if (password.length() <= 6) {
+                        if (password.getText().length() < 6) {
                             Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                             return;
                         }

@@ -30,8 +30,8 @@ public class FoodMenuFragment extends Fragment {
 
     private int mPage;
     private static FirebaseAdapter fireBase;
-    MenuCategory menuCategories;
-    List<SingleMenuItem> newMenuList = new ArrayList<>();
+    private MenuCategory menuCategories;
+    private List<SingleMenuItem> newMenuList = new ArrayList<>();
 
 
     public static FoodMenuFragment newInstance(MenuCategory menuCategory) {
@@ -70,6 +70,7 @@ public class FoodMenuFragment extends Fragment {
                 foodMenuRecyclerView.setAdapter(foodMenuAdapter);
                 // Define the RecyclerView's default layout manager
                 foodMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
             }
 
             @Override
@@ -81,6 +82,10 @@ public class FoodMenuFragment extends Fragment {
 
         return view;
     }
+
+
+
+
 
 
 }

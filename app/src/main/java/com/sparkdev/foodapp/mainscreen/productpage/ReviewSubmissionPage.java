@@ -15,20 +15,22 @@ import android.widget.Toast;
 import com.sparkdev.foodapp.R;
 import com.sparkdev.foodapp.models.Review;
 import com.sparkdev.foodapp.models.SingleMenuItem;
+import com.sparkdev.foodapp.models.User;
 import com.sparkdev.foodapp.models.firebase.FirebaseAdapter;
 import com.sparkdev.foodapp.models.firebase.UpdateMenuItemReviewsCompletionListener;
 
 import java.util.Date;
 
 public class ReviewSubmissionPage extends AppCompatActivity implements View.OnClickListener {
-
+    User user = User.currentUser;
     FirebaseAdapter firebaseAdapter;
     Button submit;
     TextView userNameBox;
     EditText userReview;
-    String userName = "Jack";
+    String userName = user.getFirstName();
     RatingBar ratingBar;
     String newReview;
+    SingleMenuItem currentMenuItem ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +53,13 @@ public class ReviewSubmissionPage extends AppCompatActivity implements View.OnCl
                 submitReview();
             }
         });
+
+        currentMenuItem = getIntent().getParcelableExtra("food_item");
     }
 
     Date timeStamp = new Date();
     Review submitReview;
-    SingleMenuItem currentMenuItem = new SingleMenuItem("1IbdZYYiA7llReOqMuxW", "BnOiwQZVvkawpT8aCpSP");
+
 
     private void submitReview() {
         newReview = userReview.getText().toString();
@@ -74,6 +78,8 @@ public class ReviewSubmissionPage extends AppCompatActivity implements View.OnCl
             }
 
         });
+
+
 
     }
 

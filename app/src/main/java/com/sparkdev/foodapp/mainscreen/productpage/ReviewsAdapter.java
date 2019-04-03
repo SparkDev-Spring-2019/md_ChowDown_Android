@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.sparkdev.foodapp.R;
 
@@ -31,12 +32,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         final ReviewsAdapter rowAdapter;
         public final TextView name;
         public final TextView comment;
+        public final RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView, ReviewsAdapter adapter) {
             super(itemView);
 
             name = (TextView) itemView.findViewById(R.id.item_text) ;
             comment = (TextView) itemView.findViewById(R.id.item_review);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
             this.rowAdapter = adapter;
         }
     }
@@ -54,11 +57,16 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.name.setText(reviews.get(i).getReviewerName());
         viewHolder.comment.setText(reviews.get(i).getReviewMsg());
+        viewHolder.ratingBar.setRating((float)reviews.get(i).getRating());
     }
 
     @Override
     public int getItemCount() {
         return reviews.size();
+    }
+
+    public void chanegList(List<Review> reviews){
+        this.reviews = reviews;
     }
 
 

@@ -11,7 +11,7 @@ public class Review {
   private String reviewerId;
   private String reviewerName;
   private String foodId;
-  private Double rating;
+  private double rating;
 
   public Review() {}
 
@@ -44,7 +44,7 @@ public class Review {
     return foodId;
   }
 
-  public Double getRating() {
+  public double getRating() {
     return rating;
   }
 

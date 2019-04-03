@@ -21,16 +21,9 @@ import java.util.List;
 
 public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.ContactViewHolder>{
 
-//    private final ArrayList<String> menuItem;    // This will hold your data
-//    private final ArrayList<Integer>pictures;
-//    private final ArrayList<String> itemPrice;
-//    private final ArrayList<String> categories;
-//    private final ArrayList<Double> ratings;
-    private final List<SingleMenuItem> itemsList;
+    private List<SingleMenuItem> itemsList;
     private final Context context;
-//    private final int clockIcon;
-//    private final int starIcon;
-//    private final int leafIcon;
+
 
 
     private LayoutInflater menuInflater;       // This will be the inflater for FoodMenuAdapter
@@ -135,4 +128,5 @@ public class FoodMenuAdapter extends RecyclerView.Adapter<FoodMenuAdapter.Contac
     public int getItemCount() {
         return itemsList.size();
     }
+
 }
